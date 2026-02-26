@@ -584,11 +584,11 @@
 
 <!-- HERO -->
 <section class="hero">
-    <h1>We live AI.<br>You get it <em>deployed</em>.</h1>
-    <p class="hero-sub">We track every AI development and implement it into our own systems within 24 hours. Your systems get it within 48. 24/7 support. Already running for businesses and individuals.</p>
+    <h1>Your business.<br><em>Automated.</em></h1>
+    <p class="hero-sub">We turn AI into working systems — invoicing, support, scheduling, inventory, anything that drains your time. Deployed in 48 hours. Running 24/7. Already live for businesses like yours.</p>
     <div class="hero-ctas">
-        <a href="#contact" class="btn btn-primary">Talk to Us &rarr;</a>
-        <a href="#feed" class="btn btn-ghost">Watch the Live Feed &darr;</a>
+        <a href="#contact" class="btn btn-primary">Tell us what to automate &rarr;</a>
+        <a href="#examples" class="btn btn-ghost">See it working &darr;</a>
     </div>
 </section>
 
@@ -635,26 +635,26 @@
             <div class="feed-skeleton"></div>
             <div class="feed-skeleton"></div>
         </div>
-        <p class="feed-note">This feed is live. We scan Hacker News, AI research, and industry sources every 5 minutes.<br><strong>This is how we stay 24 hours ahead.</strong> What you see here, we've already deployed.</p>
+        <p class="feed-note">This feed is live — the same system we build for you. We scan sources every 5 minutes.<br><strong>Every breakthrough here is deployed to client systems within 48 hours.</strong></p>
     </div>
 </section>
 
 <!-- LIVE DEMOS -->
 <section id="examples">
     <div class="container">
-        <div class="section-label">Live demos — running right now</div>
-        <h2 class="section-title">Don't take our word for it. Watch it work.</h2>
+        <div class="section-label">These are running. Right now.</div>
+        <h2 class="section-title">Systems we built. Watch them work.</h2>
 
         <div class="demos-nav">
-            <button class="demo-tab active" onclick="switchDemo('graph')">Knowledge Graph</button>
-            <button class="demo-tab" onclick="switchDemo('news')">Multi-Source Intel</button>
-            <button class="demo-tab" onclick="switchDemo('comms')">Comms Hub</button>
-            <button class="demo-tab" onclick="switchDemo('lifeos')">LifeOS</button>
+            <button class="demo-tab active" onclick="switchDemo('graph')">Everything Connected</button>
+            <button class="demo-tab" onclick="switchDemo('news')">AI News Scanner</button>
+            <button class="demo-tab" onclick="switchDemo('comms')">One Inbox, All Channels</button>
+            <button class="demo-tab" onclick="switchDemo('lifeos')">Autopilot Dashboard</button>
         </div>
 
         <!-- DEMO 1: Knowledge Graph -->
         <div class="demo-panel active" id="demo-graph">
-            <div class="demo-label"><span class="dot"></span> Live relationship graph — 40+ entities</div>
+            <div class="demo-label"><span class="dot"></span> Your people, tools, and platforms — one system sees everything</div>
             <canvas id="graphCanvas"></canvas>
             <div class="graph-legend">
                 <div class="graph-legend-item"><div class="graph-legend-dot" style="background:rgb(99,102,241)"></div>Person</div>
@@ -667,7 +667,7 @@
 
         <!-- DEMO 2: Multi-Source News -->
         <div class="demo-panel" id="demo-news">
-            <div class="demo-label"><span class="dot"></span> Scanning 4 sources every 5 minutes</div>
+            <div class="demo-label"><span class="dot"></span> AI reads everything. You get the 3 things that matter.</div>
             <div class="news-sources">
                 <span class="news-src-tag" style="background:rgba(255,102,0,0.12);color:#ff6600;">Hacker News</span>
                 <span class="news-src-tag" style="background:rgba(255,69,0,0.12);color:#ff4500;">Reddit r/artificial</span>
@@ -684,56 +684,56 @@
 
         <!-- DEMO 3: Comms Hub -->
         <div class="demo-panel" id="demo-comms">
-            <div class="demo-label"><span class="dot"></span> Unified comms — 6 channels, 1 AI triage</div>
+            <div class="demo-label"><span class="dot"></span> WhatsApp, email, calls — AI answers first, you step in when it matters</div>
             <div class="comms-grid">
                 <div class="comms-channels" id="commsChannels">
                     <div class="comms-ch active" onclick="switchCommsChannel(0)">
                         <div class="comms-ch-icon" style="background:rgba(37,211,102,0.15);">💬</div>
                         <div class="comms-ch-info">
                             <div class="comms-ch-name">WhatsApp</div>
-                            <div class="comms-ch-preview">Client: "Can you automate our..."</div>
+                            <div class="comms-ch-preview">Customer: "Book a table for 4..."</div>
                         </div>
                         <div class="comms-ch-badge" style="background:rgba(37,211,102,0.2);color:#25d366;">3</div>
                     </div>
                     <div class="comms-ch" onclick="switchCommsChannel(1)">
-                        <div class="comms-ch-icon" style="background:rgba(0,136,204,0.15);">✈️</div>
-                        <div class="comms-ch-info">
-                            <div class="comms-ch-name">Telegram</div>
-                            <div class="comms-ch-preview">Bot alert: BTC crossed $108k</div>
-                        </div>
-                        <div class="comms-ch-badge" style="background:rgba(0,136,204,0.2);color:#0088cc;">1</div>
-                    </div>
-                    <div class="comms-ch" onclick="switchCommsChannel(2)">
-                        <div class="comms-ch-icon" style="background:rgba(88,101,242,0.15);">🎮</div>
-                        <div class="comms-ch-info">
-                            <div class="comms-ch-name">Discord</div>
-                            <div class="comms-ch-preview">Team: "Deploy pushed to prod"</div>
-                        </div>
-                        <div class="comms-ch-badge" style="background:rgba(88,101,242,0.2);color:#5865f2;">2</div>
-                    </div>
-                    <div class="comms-ch" onclick="switchCommsChannel(3)">
                         <div class="comms-ch-icon" style="background:rgba(234,67,53,0.15);">📧</div>
                         <div class="comms-ch-info">
                             <div class="comms-ch-name">Email</div>
-                            <div class="comms-ch-preview">Invoice #847 paid — €5,000</div>
+                            <div class="comms-ch-preview">Invoice #312 paid — €2,400</div>
                         </div>
-                        <div class="comms-ch-badge" style="background:rgba(234,67,53,0.2);color:#ea4335;">5</div>
+                        <div class="comms-ch-badge" style="background:rgba(234,67,53,0.2);color:#ea4335;">2</div>
+                    </div>
+                    <div class="comms-ch" onclick="switchCommsChannel(2)">
+                        <div class="comms-ch-icon" style="background:rgba(225,48,108,0.15);">📸</div>
+                        <div class="comms-ch-info">
+                            <div class="comms-ch-name">Instagram</div>
+                            <div class="comms-ch-preview">DM: "Do you take custom orders?"</div>
+                        </div>
+                        <div class="comms-ch-badge" style="background:rgba(225,48,108,0.2);color:#e1306c;">1</div>
+                    </div>
+                    <div class="comms-ch" onclick="switchCommsChannel(3)">
+                        <div class="comms-ch-icon" style="background:rgba(0,136,204,0.15);">✈️</div>
+                        <div class="comms-ch-info">
+                            <div class="comms-ch-name">Telegram</div>
+                            <div class="comms-ch-preview">Inventory: auto-reorder placed</div>
+                        </div>
+                        <div class="comms-ch-badge" style="background:rgba(0,136,204,0.2);color:#0088cc;">1</div>
                     </div>
                     <div class="comms-ch" onclick="switchCommsChannel(4)">
-                        <div class="comms-ch-icon" style="background:rgba(124,58,237,0.15);">📱</div>
-                        <div class="comms-ch-info">
-                            <div class="comms-ch-name">Viber</div>
-                            <div class="comms-ch-preview">Supplier: "Stock confirmed"</div>
-                        </div>
-                        <div class="comms-ch-badge" style="background:rgba(124,58,237,0.2);color:#7c3aed;">1</div>
-                    </div>
-                    <div class="comms-ch" onclick="switchCommsChannel(5)">
                         <div class="comms-ch-icon" style="background:rgba(99,102,241,0.15);">📞</div>
                         <div class="comms-ch-info">
-                            <div class="comms-ch-name">AI Phone</div>
-                            <div class="comms-ch-preview">Missed call → voicemail transcribed</div>
+                            <div class="comms-ch-name">Phone</div>
+                            <div class="comms-ch-preview">Missed call → AI recovered lead</div>
                         </div>
                         <div class="comms-ch-badge" style="background:rgba(99,102,241,0.2);color:#6366f1;">1</div>
+                    </div>
+                    <div class="comms-ch" onclick="switchCommsChannel(5)">
+                        <div class="comms-ch-icon" style="background:rgba(245,158,11,0.15);">📊</div>
+                        <div class="comms-ch-info">
+                            <div class="comms-ch-name">Daily Report</div>
+                            <div class="comms-ch-preview">€18,200 this week (+12%)</div>
+                        </div>
+                        <div class="comms-ch-badge" style="background:rgba(245,158,11,0.2);color:#f59e0b;">1</div>
                     </div>
                 </div>
                 <div class="comms-thread" id="commsThread">
@@ -750,55 +750,55 @@
 
         <!-- DEMO 4: LifeOS Dashboard -->
         <div class="demo-panel" id="demo-lifeos">
-            <div class="demo-label"><span class="dot"></span> Autonomous operations — last 30 days</div>
+            <div class="demo-label"><span class="dot"></span> Buying, investing, scheduling, ordering — on autopilot</div>
             <div class="lifeos-grid">
                 <div class="lifeos-card reveal">
                     <div class="lifeos-icon">🛒</div>
                     <div class="lifeos-val" data-target="47" data-counter>0</div>
-                    <div class="lifeos-label">Auto Purchases</div>
-                    <div class="lifeos-sublabel">groceries · supplies · subscriptions</div>
+                    <div class="lifeos-label">Orders Placed</div>
+                    <div class="lifeos-sublabel">supplies · inventory · restocks</div>
                 </div>
                 <div class="lifeos-card reveal">
-                    <div class="lifeos-icon">📈</div>
-                    <div class="lifeos-val" data-target="23" data-counter>0</div>
-                    <div class="lifeos-label">Investment Moves</div>
-                    <div class="lifeos-sublabel">BTC · MSTR · rebalances</div>
+                    <div class="lifeos-icon">💰</div>
+                    <div class="lifeos-val">&euro;<span data-target="38" data-counter>0</span>k</div>
+                    <div class="lifeos-label">Revenue Tracked</div>
+                    <div class="lifeos-sublabel">invoiced · collected · reconciled</div>
                 </div>
                 <div class="lifeos-card reveal">
                     <div class="lifeos-icon">💬</div>
                     <div class="lifeos-val" data-target="1284" data-counter>0</div>
-                    <div class="lifeos-label">Messages Triaged</div>
-                    <div class="lifeos-sublabel">6 channels · AI first-response</div>
+                    <div class="lifeos-label">Messages Handled</div>
+                    <div class="lifeos-sublabel">AI answered 89% without you</div>
                 </div>
                 <div class="lifeos-card reveal">
-                    <div class="lifeos-icon">🤖</div>
-                    <div class="lifeos-val" data-target="12" data-counter>0</div>
-                    <div class="lifeos-label">Agents Running</div>
-                    <div class="lifeos-sublabel">news · capital · comms · security</div>
+                    <div class="lifeos-icon">📞</div>
+                    <div class="lifeos-val" data-target="23" data-counter>0</div>
+                    <div class="lifeos-label">Leads Recovered</div>
+                    <div class="lifeos-sublabel">missed calls · DMs · after-hours</div>
                 </div>
                 <div class="lifeos-card reveal">
-                    <div class="lifeos-icon">🍳</div>
-                    <div class="lifeos-val" data-target="89" data-counter>0</div>
-                    <div class="lifeos-label">Meals Planned</div>
-                    <div class="lifeos-sublabel">auto-generated · shopping lists</div>
+                    <div class="lifeos-icon">📋</div>
+                    <div class="lifeos-val" data-target="156" data-counter>0</div>
+                    <div class="lifeos-label">Invoices Sent</div>
+                    <div class="lifeos-sublabel">auto-generated · auto-collected</div>
                 </div>
                 <div class="lifeos-card reveal">
                     <div class="lifeos-icon">📅</div>
-                    <div class="lifeos-val" data-target="156" data-counter>0</div>
-                    <div class="lifeos-label">Events Managed</div>
-                    <div class="lifeos-sublabel">calendar · reminders · logistics</div>
+                    <div class="lifeos-val" data-target="312" data-counter>0</div>
+                    <div class="lifeos-label">Bookings Managed</div>
+                    <div class="lifeos-sublabel">scheduled · confirmed · reminded</div>
                 </div>
                 <div class="lifeos-card reveal">
-                    <div class="lifeos-icon">🏠</div>
-                    <div class="lifeos-val" data-target="34" data-counter>0</div>
-                    <div class="lifeos-label">Smart Home Actions</div>
-                    <div class="lifeos-sublabel">lights · TV · espresso · vacuum</div>
+                    <div class="lifeos-icon">📈</div>
+                    <div class="lifeos-val" data-target="18" data-counter>0</div>
+                    <div class="lifeos-label">Investment Moves</div>
+                    <div class="lifeos-sublabel">portfolio · rebalances · signals</div>
                 </div>
                 <div class="lifeos-card reveal">
-                    <div class="lifeos-icon">📰</div>
-                    <div class="lifeos-val" data-target="4200" data-counter>0</div>
-                    <div class="lifeos-label">News Scanned</div>
-                    <div class="lifeos-sublabel">AI filtered · 18 surfaced as signals</div>
+                    <div class="lifeos-icon">⏱️</div>
+                    <div class="lifeos-val" data-target="340" data-counter>0</div>
+                    <div class="lifeos-label">Hours Saved</div>
+                    <div class="lifeos-sublabel">that's 42 full workdays back</div>
                 </div>
             </div>
             <div class="lifeos-feed reveal">
@@ -812,22 +812,22 @@
 <!-- PRICING -->
 <section id="pricing" class="tiers-section">
     <div class="container">
-        <div class="section-label">Pricing</div>
-        <h2 class="section-title">Choose your path</h2>
+        <div class="section-label">Simple pricing</div>
+        <h2 class="section-title">Learn it. Build it. Keep it running.</h2>
         <div class="tiers">
             <div class="tier reveal">
                 <div class="spotlight"></div>
                 <h3 class="tier-name">Learn</h3>
-                <p class="tier-desc">We teach you to deploy AI yourself. Hands-on — you walk out building.</p>
+                <p class="tier-desc">We show you how. One day together — you leave knowing what to build and how to build it.</p>
                 <div class="tier-price">&euro;1,500</div>
                 <div class="tier-price-note">one-time &middot; 30 days support</div>
                 <ul class="tier-features">
-                    <li>AI readiness assessment</li>
-                    <li>Full-day hands-on workshop</li>
-                    <li>Tool &amp; stack recommendations</li>
-                    <li>Proof of concept (1 workflow)</li>
-                    <li>Playbook &amp; documentation</li>
-                    <li class="x">Full system development</li>
+                    <li>We audit what you do manually today</li>
+                    <li>Full-day workshop at your place</li>
+                    <li>We pick the right tools for you</li>
+                    <li>You build 1 working automation with us</li>
+                    <li>Written playbook you can follow alone</li>
+                    <li class="x">We build the full system</li>
                     <li class="x">Ongoing maintenance</li>
                 </ul>
                 <div class="tier-btns">
@@ -840,16 +840,16 @@
                 <div class="tier-badge">Most Popular</div>
                 <div class="spotlight"></div>
                 <h3 class="tier-name">Build</h3>
-                <p class="tier-desc">We design, build, and deploy your AI system. 48 hours, end-to-end.</p>
+                <p class="tier-desc">We build the whole thing. You tell us what's painful — we deliver a working system in 48 hours.</p>
                 <div class="tier-price">&euro;5,000</div>
                 <div class="tier-price-note">one-time &middot; 48h delivery &middot; 60 days support</div>
                 <ul class="tier-features">
                     <li>Everything in Learn</li>
-                    <li>Custom AI agent development</li>
-                    <li>Full system architecture</li>
-                    <li>API &amp; tool integrations</li>
-                    <li>Testing &amp; deployment</li>
-                    <li>Team training &amp; handover</li>
+                    <li>AI that handles your customers</li>
+                    <li>Connected to your tools &amp; apps</li>
+                    <li>Invoicing, booking, ordering — automated</li>
+                    <li>Tested and deployed on your devices</li>
+                    <li>We train your team to use it</li>
                     <li class="x">24/7 monitoring</li>
                 </ul>
                 <div class="tier-btns">
@@ -861,17 +861,17 @@
             <div class="tier reveal">
                 <div class="spotlight"></div>
                 <h3 class="tier-name">Maintain</h3>
-                <p class="tier-desc">24/7 monitoring, optimisation, retraining. We never stop improving your systems.</p>
+                <p class="tier-desc">We watch it 24/7. When AI gets better, your system gets better — automatically. Cancel anytime.</p>
                 <div class="tier-price">&euro;1,500<small>/mo</small></div>
                 <div class="tier-price-note">monthly &middot; cancel anytime &middot; 24/7</div>
                 <ul class="tier-features">
                     <li>Everything in Build</li>
-                    <li>24/7 system monitoring</li>
-                    <li>Performance optimisation</li>
-                    <li>Model retraining &amp; updates</li>
-                    <li>Priority support (Slack/call)</li>
-                    <li>Monthly strategy reviews</li>
-                    <li>Scaling &amp; new features</li>
+                    <li>We monitor your system 24/7</li>
+                    <li>New AI models deployed automatically</li>
+                    <li>Your system keeps getting smarter</li>
+                    <li>Call or message us anytime</li>
+                    <li>Monthly "what's working" review</li>
+                    <li>New automations as you grow</li>
                 </ul>
                 <div class="tier-btns">
                     <a href="STRIPE_MAINTAIN_LINK" target="_blank"><button class="tier-pay">Subscribe &euro;1,500/mo</button></a>
@@ -886,14 +886,14 @@
 
 <!-- ABOUT (2 lines) -->
 <div class="about-line">
-    <p><strong>Ntemis &amp; Apollo Latsoudis.</strong> Two brothers who implement every AI development into their own systems within 24 hours — not as a job, as a way of life. What we prove on ourselves, we deploy to you in 48. High-trust partners for a high-stakes world.</p>
+    <p><strong>Ntemis &amp; Apollo Latsoudis.</strong> Two brothers. We run our entire lives on AI systems we built ourselves — every message, every purchase, every investment. What works for us, we deploy to you in 48 hours. Your data stays yours. We stake our name on it.</p>
 </div>
 
 <!-- WHATSAPP -->
 <section id="contact" class="wa-section">
-    <div class="section-label">Get in touch</div>
-    <h2 class="section-title">Message us — we reply 24/7</h2>
-    <p class="section-sub" style="margin:0 auto;">AI responds instantly. Human within minutes.</p>
+    <div class="section-label">Ready?</div>
+    <h2 class="section-title">Tell us what drains your time</h2>
+    <p class="section-sub" style="margin:0 auto;">AI responds instantly. Human follows up within minutes. 24/7.</p>
     <div class="wa-phone reveal">
         <div class="wa-header">
             <div class="wa-avatar">L.AI</div>
@@ -983,8 +983,10 @@
 })();
 
 // ── DEMO TABS ──
+const DEMO_MAP = { graph: 0, news: 1, comms: 2, lifeos: 3 };
 function switchDemo(id) {
-    document.querySelectorAll('.demo-tab').forEach((t,i) => t.classList.toggle('active', t.textContent.toLowerCase().includes(id.slice(0,4))));
+    const idx = DEMO_MAP[id];
+    document.querySelectorAll('.demo-tab').forEach((t,i) => t.classList.toggle('active', i === idx));
     document.querySelectorAll('.demo-panel').forEach(p => p.classList.toggle('active', p.id === 'demo-' + id));
     if (id === 'graph') initGraph();
     if (id === 'news') fetchMultiNews();
@@ -996,41 +998,42 @@ function switchDemo(id) {
 const GRAPH_NODES = [
     // People
     { id: 'You', type: 'person', size: 18 },
-    { id: 'Family', type: 'person', size: 12 }, { id: 'Secretary', type: 'person', size: 10 },
-    { id: 'Clients', type: 'person', size: 11 }, { id: 'Team', type: 'person', size: 10 },
-    // Systems
-    { id: 'LifeOS', type: 'system', size: 16 }, { id: 'Knowledge Base', type: 'system', size: 13 },
-    { id: 'AI Council', type: 'system', size: 12 }, { id: 'OODA Loop', type: 'system', size: 11 },
-    { id: 'Macro Timeline', type: 'system', size: 11 }, { id: 'Audit Ledger', type: 'system', size: 10 },
-    // Services
-    { id: 'Calendar', type: 'service', size: 10 }, { id: 'Meal Planner', type: 'service', size: 9 },
-    { id: 'Shopping', type: 'service', size: 9 }, { id: 'Portfolio', type: 'service', size: 11 },
-    { id: 'News Agent', type: 'service', size: 10 }, { id: 'Comms Hub', type: 'service', size: 11 },
-    { id: 'Task Engine', type: 'service', size: 10 }, { id: 'Delegation', type: 'service', size: 9 },
-    { id: 'Photo Archive', type: 'service', size: 9 },
+    { id: 'Customers', type: 'person', size: 13 }, { id: 'Team', type: 'person', size: 12 },
+    { id: 'Suppliers', type: 'person', size: 11 }, { id: 'Accountant', type: 'person', size: 10 },
+    // Systems (the AI layer)
+    { id: 'AI Brain', type: 'system', size: 16 }, { id: 'Knowledge Base', type: 'system', size: 13 },
+    { id: 'Decision Engine', type: 'system', size: 12 }, { id: 'Auto-Responder', type: 'system', size: 11 },
+    { id: 'Analytics', type: 'system', size: 11 }, { id: 'Audit Trail', type: 'system', size: 10 },
+    // Services (what it actually does)
+    { id: 'Invoicing', type: 'service', size: 11 }, { id: 'Scheduling', type: 'service', size: 10 },
+    { id: 'Ordering', type: 'service', size: 10 }, { id: 'Inventory', type: 'service', size: 10 },
+    { id: 'Support Bot', type: 'service', size: 11 }, { id: 'Lead Scoring', type: 'service', size: 10 },
+    { id: 'Bookkeeping', type: 'service', size: 10 }, { id: 'Reports', type: 'service', size: 9 },
+    { id: 'Investments', type: 'service', size: 10 },
     // Devices
-    { id: 'Smart TV', type: 'device', size: 8 }, { id: 'Espresso', type: 'device', size: 8 },
-    { id: 'Vacuum', type: 'device', size: 8 }, { id: 'Lights', type: 'device', size: 8 },
+    { id: 'POS', type: 'device', size: 9 }, { id: 'Smart Display', type: 'device', size: 8 },
     { id: 'Phone', type: 'device', size: 9 }, { id: 'Laptop', type: 'device', size: 9 },
+    { id: 'Printer', type: 'device', size: 8 }, { id: 'Sensors', type: 'device', size: 8 },
     // Platforms
-    { id: 'WhatsApp', type: 'platform', size: 9 }, { id: 'Telegram', type: 'platform', size: 8 },
-    { id: 'Discord', type: 'platform', size: 8 }, { id: 'Gmail', type: 'platform', size: 8 },
-    { id: 'Viber', type: 'platform', size: 8 }, { id: 'Stripe', type: 'platform', size: 8 },
-    { id: 'Google Cal', type: 'platform', size: 8 }, { id: 'Google Photos', type: 'platform', size: 8 },
-    { id: 'Bitcoin', type: 'platform', size: 9 },
+    { id: 'WhatsApp', type: 'platform', size: 9 }, { id: 'Email', type: 'platform', size: 9 },
+    { id: 'Stripe', type: 'platform', size: 9 }, { id: 'Google Cal', type: 'platform', size: 8 },
+    { id: 'Shopify', type: 'platform', size: 8 }, { id: 'Instagram', type: 'platform', size: 8 },
+    { id: 'Excel/Sheets', type: 'platform', size: 8 }, { id: 'Bank API', type: 'platform', size: 8 },
+    { id: 'Telegram', type: 'platform', size: 8 },
 ];
 const GRAPH_LINKS = [
-    ['You','LifeOS'],['You','Family'],['You','Clients'],['You','Team'],['You','Secretary'],
-    ['LifeOS','Knowledge Base'],['LifeOS','AI Council'],['LifeOS','OODA Loop'],['LifeOS','Audit Ledger'],['LifeOS','Macro Timeline'],
-    ['LifeOS','Calendar'],['LifeOS','Meal Planner'],['LifeOS','Shopping'],['LifeOS','Portfolio'],
-    ['LifeOS','News Agent'],['LifeOS','Comms Hub'],['LifeOS','Task Engine'],['LifeOS','Delegation'],['LifeOS','Photo Archive'],
-    ['Comms Hub','WhatsApp'],['Comms Hub','Telegram'],['Comms Hub','Discord'],['Comms Hub','Gmail'],['Comms Hub','Viber'],
-    ['Portfolio','Bitcoin'],['Portfolio','Stripe'],
-    ['Calendar','Google Cal'],['Photo Archive','Google Photos'],
-    ['LifeOS','Smart TV'],['LifeOS','Espresso'],['LifeOS','Vacuum'],['LifeOS','Lights'],
+    ['You','AI Brain'],['You','Customers'],['You','Team'],['You','Suppliers'],['You','Accountant'],
+    ['AI Brain','Knowledge Base'],['AI Brain','Decision Engine'],['AI Brain','Auto-Responder'],['AI Brain','Analytics'],['AI Brain','Audit Trail'],
+    ['AI Brain','Invoicing'],['AI Brain','Scheduling'],['AI Brain','Ordering'],['AI Brain','Inventory'],
+    ['AI Brain','Support Bot'],['AI Brain','Lead Scoring'],['AI Brain','Bookkeeping'],['AI Brain','Reports'],['AI Brain','Investments'],
+    ['Support Bot','WhatsApp'],['Support Bot','Email'],['Support Bot','Telegram'],['Support Bot','Instagram'],
+    ['Invoicing','Stripe'],['Invoicing','Bank API'],['Bookkeeping','Excel/Sheets'],['Bookkeeping','Bank API'],
+    ['Scheduling','Google Cal'],['Ordering','Shopify'],['Inventory','Sensors'],
+    ['AI Brain','POS'],['AI Brain','Smart Display'],['Reports','Smart Display'],
     ['You','Phone'],['You','Laptop'],['Phone','WhatsApp'],['Phone','Telegram'],
-    ['Secretary','Delegation'],['Family','Calendar'],['Clients','Comms Hub'],['Team','Discord'],
-    ['News Agent','Macro Timeline'],['AI Council','Knowledge Base'],['OODA Loop','Portfolio'],
+    ['Accountant','Bookkeeping'],['Customers','Support Bot'],['Team','Scheduling'],['Suppliers','Ordering'],
+    ['Lead Scoring','Customers'],['Analytics','Reports'],['Decision Engine','Investments'],['Investments','Bank API'],
+    ['Printer','Invoicing'],
 ];
 const TYPE_COLORS = { person: 'rgb(99,102,241)', system: 'rgb(34,197,94)', service: 'rgb(245,158,11)', device: 'rgb(239,68,68)', platform: 'rgb(6,182,212)' };
 
@@ -1245,40 +1248,42 @@ async function fetchMultiNews() {
 
 // ── 3. COMMS HUB ──
 const COMMS_DATA = [
-    { icon: '💬', name: 'WhatsApp — Client Lead', msgs: [
-        { type: 'in', label: 'Client', text: 'Can you automate our invoicing? We spend 3 hours/day on it.' },
-        { type: 'ai', label: 'AI Triage', text: 'Absolutely — we can deploy an invoicing automation within 48h. Let me get you specifics. Routing to Ntemis now.' },
-        { type: 'out', label: 'Ntemis', text: 'Hi! I\'ll have a proposal ready in 2 hours. Quick question — what system do you use currently?' },
-        { type: 'in', label: 'Client', text: 'We use Excel + manual emails. It\'s painful.' },
-        { type: 'ai', label: 'AI', text: 'Flagged: high-value lead. Suggested tier: Build (€5,000). Invoice template ready.' },
+    { icon: '💬', name: 'WhatsApp — Customer Orders', msgs: [
+        { type: 'in', label: 'Customer', text: 'Hi, I want to book a table for 4 this Saturday at 8pm.' },
+        { type: 'ai', label: 'AI', text: 'Checking availability... Saturday 8pm is open. Booking confirmed for 4 guests. Sent confirmation to customer.' },
+        { type: 'in', label: 'Customer', text: 'Can we also pre-order the seafood platter?' },
+        { type: 'ai', label: 'AI', text: 'Pre-order logged. Kitchen notified. Ingredients auto-checked against inventory — all in stock.' },
+        { type: 'out', label: 'Owner', text: 'Perfect, I see it in the system. No action needed from me.' },
     ]},
-    { icon: '✈️', name: 'Telegram — Market Alerts', msgs: [
-        { type: 'ai', label: 'Capital Agent', text: 'BTC crossed $108,000 — up 4.2% in 24h. Portfolio impact: +€2,400.' },
-        { type: 'ai', label: 'News Agent', text: 'Related: SEC approved 3 new Bitcoin ETFs. Signal strength: HIGH.' },
-        { type: 'out', label: 'Ntemis', text: 'Hold positions. No action needed.' },
-        { type: 'ai', label: 'OODA Loop', text: 'Confirmed. No rebalance triggered. Next review: 48h.' },
+    { icon: '📧', name: 'Email — Invoicing', msgs: [
+        { type: 'ai', label: 'AI', text: 'Invoice #312 auto-generated for Papadopoulos & Co — €2,400. Payment terms: 30 days.' },
+        { type: 'ai', label: 'AI', text: 'Sent to client. Stripe payment link included. Bookkeeper notified.' },
+        { type: 'in', label: 'Stripe', text: 'Payment received: €2,400. Invoice #312 marked as paid.' },
+        { type: 'ai', label: 'AI', text: 'Payment matched. Bank reconciled. Tax report updated. No action needed.' },
     ]},
-    { icon: '🎮', name: 'Discord — Dev Team', msgs: [
-        { type: 'in', label: 'Apollo', text: 'New model dropped — Claude Opus 4.6. Running benchmarks now.' },
-        { type: 'ai', label: 'Tech Monitor', text: 'Model registered. Benchmark suite queued. ETA: 15 min.' },
-        { type: 'out', label: 'Ntemis', text: 'Deploy to our stack if it passes. 24h window.' },
-        { type: 'ai', label: 'System', text: 'Benchmarks passed. Auto-deploying to council registry. Clients notified in 48h batch.' },
+    { icon: '📸', name: 'Instagram — Lead Capture', msgs: [
+        { type: 'in', label: 'DM', text: 'Love your work! Do you take custom orders?' },
+        { type: 'ai', label: 'AI', text: 'Lead detected. Score: HIGH (repeat visitor, engaged). Auto-responding with catalog link.' },
+        { type: 'ai', label: 'Auto-reply', text: 'Thank you! Here\'s our catalog with pricing: [link]. Want to chat on WhatsApp for a custom quote?' },
+        { type: 'out', label: 'Owner', text: 'Great lead. I\'ll follow up personally on WhatsApp.' },
     ]},
-    { icon: '📧', name: 'Email — Payments', msgs: [
-        { type: 'in', label: 'Stripe', text: 'Payment received: €5,000 from Acme Corp. Invoice #847 marked as paid.' },
-        { type: 'ai', label: 'AI Triage', text: 'Payment matched to Build tier order. Updating CRM. Starting 48h delivery clock.' },
-        { type: 'ai', label: 'Task Engine', text: 'Created: "Acme Corp — AI Invoicing System". Assigned to Ntemis + Apollo. Due: 48h.' },
-        { type: 'out', label: 'Auto-reply', text: 'Thank you! Your project has started. You\'ll receive updates via WhatsApp within 2 hours.' },
+    { icon: '✈️', name: 'Telegram — Supplier Alerts', msgs: [
+        { type: 'ai', label: 'Inventory Bot', text: 'Olive oil stock below threshold (2L remaining). Auto-ordering 20L from preferred supplier.' },
+        { type: 'in', label: 'Supplier', text: 'Order confirmed. Delivery tomorrow before 10am.' },
+        { type: 'ai', label: 'AI', text: 'Delivery logged. Updated inventory forecast. Next reorder in ~18 days.' },
     ]},
-    { icon: '📱', name: 'Viber — Supplier', msgs: [
-        { type: 'in', label: 'Supplier', text: 'Coffee beans order confirmed. Shipping tomorrow.' },
-        { type: 'ai', label: 'AI Triage', text: 'Routine supply confirmation. No action needed. Logged to purchases.' },
+    { icon: '📞', name: 'Phone — Missed Call Recovery', msgs: [
+        { type: 'ai', label: 'AI Phone', text: 'Missed call from +30 694 xxx xxxx. AI answered and transcribed:' },
+        { type: 'ai', label: 'Caller', text: '"I\'m looking for catering for 50 people next month. Can someone call me back?"' },
+        { type: 'ai', label: 'AI', text: 'Lead scored: HIGH (€3,000+ potential). Auto-sent SMS: "We\'ll call you within the hour."' },
+        { type: 'out', label: 'Owner', text: 'Calling them now. The AI saved this lead — I was in the kitchen.' },
     ]},
-    { icon: '📞', name: 'AI Phone — Missed Call', msgs: [
-        { type: 'ai', label: 'Phone Agent', text: 'Missed call from +30 694 xxx xxxx. Voicemail transcribed:' },
-        { type: 'ai', label: 'Transcript', text: '"Hi, I saw your website. I\'m interested in the Build tier for my restaurant. Can you call me back?"' },
-        { type: 'ai', label: 'AI Triage', text: 'Lead scored: HIGH. Industry: hospitality. Suggested: callback within 1h. Draft SMS sent.' },
-        { type: 'out', label: 'Auto-SMS', text: 'Hi! Thanks for calling Latsoudis.AI. We\'ll call you back within the hour. — Ntemis' },
+    { icon: '📊', name: 'Daily Report — Auto-generated', msgs: [
+        { type: 'ai', label: 'AI', text: 'Today: 12 bookings, 3 invoices paid (€4,800), 2 new leads scored, inventory reorder placed.' },
+        { type: 'ai', label: 'AI', text: 'Revenue this week: €18,200 (+12% vs last week). Top channel: WhatsApp (67% of leads).' },
+        { type: 'ai', label: 'AI', text: 'Suggestion: Saturday capacity is 90% full. Consider opening 2 extra tables or extending hours.' },
+        { type: 'out', label: 'Owner', text: 'Open the extra tables. Update the booking system.' },
+        { type: 'ai', label: 'AI', text: 'Done. Capacity updated. WhatsApp auto-replies now show Saturday availability until 10:30pm.' },
     ]},
 ];
 
@@ -1319,18 +1324,18 @@ function animateCounters() {
 }
 
 const LIFEOS_EVENTS = [
-    { icon: '🛒', text: '<strong>Auto-purchase:</strong> Coffee beans from Create Roasters', time: '2m ago' },
-    { icon: '📈', text: '<strong>Portfolio:</strong> BTC position rebalanced — target met', time: '8m ago' },
-    { icon: '💬', text: '<strong>WhatsApp:</strong> AI responded to client inquiry in 1.2s', time: '12m ago' },
-    { icon: '🍳', text: '<strong>Meal plan:</strong> Generated weekly menu + shopping list', time: '15m ago' },
-    { icon: '📅', text: '<strong>Calendar:</strong> Synced 4 events from Google Calendar', time: '18m ago' },
-    { icon: '🏠', text: '<strong>Smart home:</strong> Espresso machine pre-heated for morning', time: '22m ago' },
-    { icon: '📰', text: '<strong>News agent:</strong> 3 new AI signals scored and surfaced', time: '25m ago' },
-    { icon: '🤖', text: '<strong>Security agent:</strong> Scan complete — no anomalies', time: '30m ago' },
-    { icon: '💰', text: '<strong>Stripe:</strong> Payment €5,000 received — task auto-created', time: '35m ago' },
-    { icon: '📱', text: '<strong>Telegram:</strong> Market alert — ETH above €3,200', time: '41m ago' },
-    { icon: '🧹', text: '<strong>Smart home:</strong> Vacuum scheduled — child pickup at 15:30', time: '45m ago' },
-    { icon: '📧', text: '<strong>Email:</strong> AI triaged 12 emails — 2 flagged as important', time: '50m ago' },
+    { icon: '💬', text: '<strong>WhatsApp:</strong> Customer booked table for 4 — AI confirmed in 1.2s', time: '2m ago' },
+    { icon: '💰', text: '<strong>Stripe:</strong> Invoice #312 paid — €2,400 auto-reconciled', time: '5m ago' },
+    { icon: '📞', text: '<strong>Phone:</strong> Missed call recovered — AI sent callback SMS, lead scored HIGH', time: '8m ago' },
+    { icon: '🛒', text: '<strong>Inventory:</strong> Olive oil below threshold — auto-ordered 20L from supplier', time: '12m ago' },
+    { icon: '📸', text: '<strong>Instagram:</strong> DM lead captured — auto-sent catalog + WhatsApp link', time: '15m ago' },
+    { icon: '📋', text: '<strong>Invoicing:</strong> 3 invoices auto-generated for this week\'s completed orders', time: '18m ago' },
+    { icon: '📅', text: '<strong>Booking:</strong> Saturday at 90% capacity — opened 2 extra tables automatically', time: '22m ago' },
+    { icon: '📊', text: '<strong>Report:</strong> Weekly revenue €18,200 (+12%) — sent to owner at 8am', time: '28m ago' },
+    { icon: '📈', text: '<strong>Portfolio:</strong> BTC position rebalanced — target allocation met', time: '35m ago' },
+    { icon: '📧', text: '<strong>Email:</strong> AI triaged 14 emails — 2 flagged, rest auto-handled', time: '41m ago' },
+    { icon: '✈️', text: '<strong>Supplier:</strong> Delivery confirmed for tomorrow 10am — kitchen notified', time: '45m ago' },
+    { icon: '⏱️', text: '<strong>Summary:</strong> 4.5 hours of manual work automated today', time: '50m ago' },
 ];
 
 function startLifeosFeed() {
