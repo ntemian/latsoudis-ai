@@ -3,1849 +3,814 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Latsoudis AI — Automate Your Business. Automate Your Life.</title>
-    <meta name="description" content="AI systems deployed in 48 hours. Business automation, personalised intelligence, 24/7 support. Already trusted by businesses and individuals.">
+    <title>Latsoudis.AI — We monitor AI. You get it deployed.</title>
+    <meta name="description" content="We track every AI development and deploy it within 48 hours. Live AI monitoring, 24/7 support. Already running for businesses and individuals.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --bg: #0a0a0b;
-            --bg-card: #14171D;
-            --bg-card-hover: #1B1E25;
-            --bg-hover: #1e2028;
+            --bg-card: #111318;
+            --bg-hover: #1a1d24;
             --accent: #6366f1;
             --accent-light: #818cf8;
-            --accent-glow: rgba(99, 102, 241, 0.15);
-            --border: #2B3039;
-            --border-hover: #3a4150;
-            --border-accent: rgba(99, 102, 241, 0.4);
-            --text: #e2e8f0;
-            --text-muted: #8C99AD;
-            --text-dim: #4a5568;
-            --text-bright: #f1f5f9;
-            --success: #10b981;
+            --accent-glow: rgba(99, 102, 241, 0.12);
+            --green: #22c55e;
+            --green-dim: rgba(34, 197, 94, 0.15);
+            --border: #1e2028;
+            --border-hover: #2e323c;
+            --border-accent: rgba(99, 102, 241, 0.3);
+            --text: #c9d1d9;
+            --text-muted: #6e7681;
+            --text-bright: #f0f6fc;
+            --mono: 'JetBrains Mono', monospace;
         }
 
         html { scroll-behavior: smooth; }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
         }
-
         a { text-decoration: none; color: inherit; }
 
-        /* ══════════════ GRAIN OVERLAY (global) ══════════════ */
+        /* grain */
         body::after {
-            content: "";
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            opacity: 0.06;
-            pointer-events: none;
+            content: ""; position: fixed; inset: 0; z-index: 9999;
+            opacity: 0.04; pointer-events: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
             background-size: 200px;
         }
 
-        /* ══════════════ NAV ══════════════ */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(24px) saturate(1.4);
-            -webkit-backdrop-filter: blur(24px) saturate(1.4);
-            background: rgba(10, 10, 11, 0.75);
-            border-bottom: 1px solid rgba(43, 48, 57, 0.4);
+        /* ── PARTICLE CANVAS ── */
+        #particles {
+            position: fixed; inset: 0; z-index: 0;
+            pointer-events: none; opacity: 0.4;
         }
 
-        .logo {
-            font-size: 1.2rem;
-            font-weight: 800;
-            letter-spacing: -0.03em;
+        /* ── NAV ── */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 0.8rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            background: rgba(10, 10, 11, 0.8);
+            border-bottom: 1px solid var(--border);
+        }
+        .logo { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text-bright); }
+        .logo span { color: var(--accent-light); }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-links a { font-size: 0.8rem; font-weight: 500; color: var(--text-muted); transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text-bright); }
+        .nav-cta {
+            background: #fff !important; color: #0a0a0b !important;
+            padding: 0.45rem 1.2rem; border-radius: 8px;
+            font-weight: 600 !important; font-size: 0.8rem !important;
+        }
+        .nav-cta:hover { background: #e2e8f0 !important; }
+        .nav-live {
+            display: flex; align-items: center; gap: 6px;
+            font-family: var(--mono); font-size: 0.7rem; color: var(--green);
+        }
+        .nav-live .dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: blink 2s infinite; }
+        @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .mobile-toggle { display: none; background: none; border: none; color: var(--text); font-size: 1.3rem; cursor: pointer; }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative; min-height: 100vh; z-index: 1;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 7rem 2rem 4rem;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 7vw, 4.5rem); font-weight: 900;
+            letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 1.5rem;
             color: var(--text-bright);
         }
-        .logo span { color: var(--accent-light); }
-
-        .nav-links { display: flex; gap: 2rem; align-items: center; }
-
-        .nav-links a {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            transition: color 0.2s;
-        }
-        .nav-links a:hover { color: var(--text-bright); }
-
-        .nav-cta {
-            background: #fff !important;
-            color: #0a0a0b !important;
-            padding: 0.55rem 1.4rem;
-            border-radius: 10px;
-            font-weight: 600 !important;
-            font-size: 0.85rem !important;
-            transition: all 0.2s !important;
-        }
-        .nav-cta:hover {
-            background: #e2e8f0 !important;
-            box-shadow: 0 0 20px rgba(255,255,255,0.1);
-            transform: translateY(-1px);
-        }
-
-        .mobile-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* ══════════════ HERO ══════════════ */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 8rem 2rem 6rem;
-            overflow: hidden;
-        }
-
-        /* Aurora blobs */
-        .aurora { position: absolute; inset: 0; overflow: hidden; z-index: 0; }
-
-        .aurora .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.45;
-            mix-blend-mode: screen;
-        }
-
-        .blob-1 {
-            width: 700px; height: 700px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.55), transparent 70%);
-            top: -250px; left: 5%;
-            animation: drift 14s ease-in-out infinite;
-        }
-        .blob-2 {
-            width: 550px; height: 550px;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.4), transparent 70%);
-            bottom: -150px; right: 10%;
-            animation: drift 18s ease-in-out infinite reverse;
-        }
-        .blob-3 {
-            width: 450px; height: 450px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.35), transparent 70%);
-            top: 35%; left: 45%;
-            animation: drift 12s ease-in-out infinite 3s;
-        }
-
-        @keyframes drift {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(30px, -40px) scale(1.1); }
-            50% { transform: translate(-20px, 20px) scale(0.95); }
-            75% { transform: translate(40px, 30px) scale(1.05); }
-        }
-
-        .hero-content { position: relative; z-index: 2; max-width: 850px; }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 18px;
-            margin-bottom: 2rem;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--accent-light);
-            background: var(--accent-glow);
-            border: 1px solid var(--border-accent);
-            border-radius: 100px;
-            letter-spacing: 0.02em;
-        }
-
-        .hero-badge::before {
-            content: "";
-            width: 6px; height: 6px;
-            background: var(--success);
-            border-radius: 50%;
-            animation: pulse-dot 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(1.6); }
-        }
-
-        .hero h1 {
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            line-height: 1.05;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(180deg, #ffffff 30%, #64748b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
         .hero h1 em {
             font-style: normal;
-            background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            background: linear-gradient(135deg, #6366f1, #a78bfa);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
-
         .hero-sub {
-            font-size: clamp(1rem, 1.3vw, 1.2rem);
-            color: var(--text-muted);
-            max-width: 560px;
-            margin: 0 auto 2.5rem;
-            line-height: 1.7;
+            font-size: 1.1rem; color: var(--text-muted); max-width: 540px;
+            margin: 0 auto 2.5rem; line-height: 1.7;
         }
-
-        .hero-ctas {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
+        .hero-ctas { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
         .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
-            transition: all 0.2s ease;
-        }
-
-        .btn-primary {
-            background: #ffffff;
-            color: #0a0a0b;
-        }
-        .btn-primary:hover {
-            background: #e2e8f0;
-            box-shadow: 0 0 30px rgba(255,255,255,0.15);
-            transform: translateY(-2px);
-        }
-
-        .btn-ghost {
-            background: transparent;
-            color: var(--text-muted);
-            border: 1px solid var(--border);
-        }
-        .btn-ghost:hover {
-            border-color: var(--border-hover);
-            color: var(--text-bright);
-            background: var(--bg-hover);
-        }
-
-        /* ══════════════ SECTIONS ══════════════ */
-        section { padding: 7rem 2rem; }
-        .container { max-width: 1200px; margin: 0 auto; }
-
-        .section-label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--accent-light);
-            margin-bottom: 1rem;
-        }
-
-        .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 800;
-            color: var(--text-bright);
-            letter-spacing: -0.02em;
-            margin-bottom: 0.75rem;
-        }
-
-        .section-sub {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            max-width: 580px;
-            line-height: 1.7;
-        }
-
-        /* ══════════════ BENTO GRID — WHAT WE DO ══════════════ */
-        .bento {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: auto auto;
-            gap: 1rem;
-            margin-top: 3.5rem;
-        }
-
-        .bento { grid-template-areas:
-            "a a b c"
-            "d e e c";
-        }
-
-        .bento-item {
-            padding: 2rem;
-            border-radius: 16px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            min-height: 220px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .bento-item .spotlight {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(
-                400px circle at var(--mx, 50%) var(--my, 50%),
-                var(--accent-glow),
-                transparent 60%
-            );
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-
-        .bento-item:hover .spotlight { opacity: 1; }
-
-        .bento-item:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .bento-a { grid-area: a; }
-        .bento-b { grid-area: b; }
-        .bento-c { grid-area: c; }
-        .bento-d { grid-area: d; }
-        .bento-e { grid-area: e; }
-
-        .bento-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: var(--accent-glow);
-            border: 1px solid var(--border-accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-        }
-
-        .bento-item h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-bright);
-            margin-bottom: 0.5rem;
-            position: relative;
-        }
-
-        .bento-item p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.7;
-            position: relative;
-        }
-
-        .bento-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-            margin-top: 1rem;
-            position: relative;
-        }
-
-        .bento-tags span {
-            padding: 4px 10px;
-            background: rgba(99, 102, 241, 0.08);
-            border: 1px solid rgba(99, 102, 241, 0.15);
-            border-radius: 6px;
-            font-size: 0.75rem;
-            color: var(--accent-light);
-        }
-
-        /* ══════════════ SERVICE TIERS ══════════════ */
-        .tiers {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-            margin-top: 3.5rem;
-            align-items: start;
-        }
-
-        .tier-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 2.5rem 2rem;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tier-card .spotlight {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(
-                400px circle at var(--mx, 50%) var(--my, 50%),
-                var(--accent-glow),
-                transparent 60%
-            );
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-        .tier-card:hover .spotlight { opacity: 1; }
-
-        .tier-card:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-4px);
-        }
-
-        .tier-card.featured {
-            border-color: var(--accent);
-            background: linear-gradient(180deg, rgba(99, 102, 241, 0.08) 0%, var(--bg-card) 50%);
-            box-shadow: 0 0 60px rgba(99, 102, 241, 0.1);
-            transform: scale(1.03);
-        }
-        .tier-card.featured:hover {
-            transform: scale(1.03) translateY(-4px);
-        }
-
-        .tier-badge {
-            position: absolute;
-            top: -13px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent);
-            color: white;
-            padding: 5px 18px;
-            border-radius: 100px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-
-        .tier-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--accent-glow);
-            border: 1px solid var(--border-accent);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tier-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-bright);
-            margin-bottom: 0.5rem;
-        }
-
-        .tier-desc {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .tier-price {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text-bright);
-            margin-bottom: 0.25rem;
-        }
-
-        .tier-price-note {
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            margin-bottom: 1.5rem;
-        }
-
-        .tier-features {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 2rem;
-            flex-grow: 1;
-        }
-
-        .tier-features li {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 9px 0;
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-        }
-
-        .tier-features li .check {
-            width: 18px; height: 18px;
-            border-radius: 50%;
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .tier-features li .check::after {
-            content: "";
-            width: 8px; height: 5px;
-            border-left: 2px solid #10b981;
-            border-bottom: 2px solid #10b981;
-            transform: rotate(-45deg) translateY(-1px);
-        }
-
-        .tier-features li.excluded {
-            opacity: 0.3;
-        }
-        .tier-features li.excluded .check {
-            background: rgba(255,255,255,0.04);
-            border-color: rgba(255,255,255,0.08);
-        }
-        .tier-features li.excluded .check::after {
-            display: none;
-        }
-
-        .tier-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-        }
-
-        .tier-cta {
-            width: 100%;
-            padding: 14px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: none;
-            font-family: inherit;
-            background: transparent;
-            color: var(--text);
-            border: 1px solid var(--border);
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .tier-cta:hover {
-            background: var(--bg-hover);
-            border-color: var(--border-hover);
-        }
-
-        .tier-card.featured .tier-cta {
-            background: #fff;
-            color: #0a0a0b;
-            border: none;
-        }
-        .tier-card.featured .tier-cta:hover {
-            background: #e2e8f0;
-            box-shadow: 0 0 20px rgba(255,255,255,0.1);
-        }
-
-        /* Stripe pay button */
-        .tier-pay {
-            width: 100%;
-            padding: 14px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: none;
-            font-family: inherit;
-            background: #635bff;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-align: center;
-        }
-
-        .tier-pay:hover {
-            background: #7a73ff;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(99, 91, 255, 0.3);
-        }
-
-        .tier-card.featured .tier-pay {
-            background: #635bff;
-            color: #fff;
-        }
-        .tier-card.featured .tier-pay:hover {
-            background: #7a73ff;
-            box-shadow: 0 6px 20px rgba(99, 91, 255, 0.3);
-        }
-
-        .tier-pay svg {
-            width: 18px; height: 18px;
-            fill: currentColor;
-        }
-
-        .tier-or {
-            text-align: center;
-            font-size: 0.7rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        /* Stripe trust badges */
-        .stripe-trust {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            margin-top: 1rem;
-            font-size: 0.7rem;
-            color: var(--text-dim);
-        }
-
-        .stripe-trust svg {
-            width: 14px; height: 14px;
-            fill: var(--text-dim);
-        }
-
-        .payment-note {
-            text-align: center;
-            margin-top: 2rem;
-            padding: 1.25rem;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            background: var(--bg-card);
-        }
-
-        .payment-note p {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        .payment-note .stripe-logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-weight: 700;
-            color: #635bff;
-        }
-
-        /* ══════════════ PROCESS STEPS ══════════════ */
-        .process-track {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0;
-            margin-top: 3.5rem;
-            position: relative;
-        }
-
-        .process-track::before {
-            content: "";
-            position: absolute;
-            top: 24px;
-            left: 12.5%;
-            width: 75%;
-            height: 2px;
-            background: var(--border);
-            z-index: 0;
-        }
-
-        .process-step {
-            text-align: center;
-            position: relative;
-            padding: 0 1rem;
-        }
-
-        .process-num {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--bg-card);
-            border: 2px solid var(--accent);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            font-weight: 800;
-            color: var(--accent-light);
-            margin-bottom: 1.25rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .process-step h3 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: var(--text-bright);
-            margin-bottom: 0.4rem;
-        }
-
-        .process-step p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* ══════════════ ABOUT ══════════════ */
-        .about-layout {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 4rem;
-            margin-top: 3rem;
-            align-items: center;
-        }
-
-        .about-text p {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            line-height: 1.8;
-            margin-bottom: 1.25rem;
-        }
-        .about-text strong { color: var(--text-bright); }
-
-        .about-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.75rem;
-            text-align: center;
-            transition: all 0.3s;
-        }
-        .stat-card:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-2px);
-        }
-
-        .stat-card .number {
-            font-size: 2.25rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-card .label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 0.25rem;
-        }
-
-        /* ══════════════ WHATSAPP CHAT UI ══════════════ */
-        .wa-section { text-align: center; padding: 7rem 2rem; }
-
-        .wa-section .section-title { margin-bottom: 0.5rem; }
-        .wa-section .section-sub { margin: 0 auto 3rem; }
-
-        .wa-phone {
-            max-width: 420px;
-            margin: 0 auto;
-            border-radius: 24px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 60px rgba(37, 211, 102, 0.08);
-        }
-
-        /* WhatsApp header bar */
-        .wa-header {
-            background: #1f2c34;
-            padding: 14px 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-        }
-
-        .wa-avatar {
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 0.85rem;
-            color: #fff;
-            flex-shrink: 0;
-        }
-
-        .wa-header-info { text-align: left; }
-
-        .wa-header-name {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #e9edef;
-        }
-
-        .wa-header-status {
-            font-size: 0.72rem;
-            color: #25d366;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .wa-header-status::before {
-            content: "";
-            width: 6px; height: 6px;
-            background: #25d366;
-            border-radius: 50%;
-            animation: pulse-dot 2s ease-in-out infinite;
-        }
-
-        /* Chat body */
-        .wa-body {
-            background: #0b141a;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-            padding: 20px 14px;
-            min-height: 320px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .wa-msg {
-            max-width: 85%;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            line-height: 1.5;
-            position: relative;
-        }
-
-        .wa-msg-in {
-            background: #1f2c34;
-            color: #e9edef;
-            align-self: flex-start;
-            border-top-left-radius: 0;
-        }
-
-        .wa-msg-out {
-            background: #005c4b;
-            color: #e9edef;
-            align-self: flex-end;
-            border-top-right-radius: 0;
-        }
-
-        .wa-msg-time {
-            font-size: 0.65rem;
-            color: rgba(255,255,255,0.4);
-            text-align: right;
-            margin-top: 4px;
-        }
-
-        .wa-msg-typing {
-            background: #1f2c34;
-            align-self: flex-start;
-            border-top-left-radius: 0;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            padding: 12px 16px;
-        }
-
-        .wa-msg-typing .dot {
-            width: 6px; height: 6px;
-            background: rgba(255,255,255,0.4);
-            border-radius: 50%;
-            animation: typing-bounce 1.4s ease-in-out infinite;
-        }
-        .wa-msg-typing .dot:nth-child(2) { animation-delay: 0.15s; }
-        .wa-msg-typing .dot:nth-child(3) { animation-delay: 0.3s; }
-
-        @keyframes typing-bounce {
-            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-            30% { transform: translateY(-4px); opacity: 1; }
-        }
-
-        /* Chat input bar */
-        .wa-input-bar {
-            background: #1f2c34;
-            padding: 10px 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .wa-input {
-            flex: 1;
-            background: #2a3942;
-            border: none;
-            border-radius: 20px;
-            padding: 10px 16px;
-            color: #e9edef;
-            font-family: inherit;
-            font-size: 0.85rem;
-            outline: none;
-        }
-
-        .wa-input::placeholder { color: #8696a0; }
-
-        .wa-send-btn {
-            width: 42px; height: 42px;
-            border-radius: 50%;
-            background: #25d366;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            flex-shrink: 0;
-        }
-
-        .wa-send-btn:hover {
-            background: #1ebe5d;
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(37, 211, 102, 0.3);
-        }
-
-        .wa-send-btn svg {
-            width: 20px; height: 20px;
-            fill: #fff;
-            transform: rotate(-30deg) translateX(1px);
-        }
-
-        /* Below the phone — direct WA link */
-        .wa-direct {
-            margin-top: 2rem;
-        }
-
-        .wa-direct-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 32px;
-            background: #25d366;
-            color: #fff;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1rem;
-            border: none;
-            cursor: pointer;
-            font-family: inherit;
-            transition: all 0.2s;
-        }
-
-        .wa-direct-btn:hover {
-            background: #1ebe5d;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.3);
-        }
-
-        .wa-direct-btn svg {
-            width: 22px; height: 22px;
-            fill: #fff;
-        }
-
-        .wa-direct-note {
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            margin-top: 0.75rem;
-        }
-
-        /* ══════════════ FLOATING WA BUTTON ══════════════ */
-        .wa-float {
-            position: fixed;
-            bottom: 28px;
-            right: 28px;
-            z-index: 10000;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 10px;
-        }
-
-        .wa-float-tooltip {
-            background: #1f2c34;
-            color: #e9edef;
-            padding: 10px 16px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-            white-space: nowrap;
-            opacity: 0;
-            transform: translateY(8px);
-            transition: all 0.3s;
-            pointer-events: none;
-        }
-
-        .wa-float:hover .wa-float-tooltip {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .wa-float-btn {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: #25d366;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
-            transition: all 0.3s;
-            animation: wa-float-pulse 3s ease-in-out infinite;
-        }
-
-        .wa-float-btn:hover {
-            background: #1ebe5d;
-            transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.5);
-        }
-
-        .wa-float-btn svg {
-            width: 32px; height: 32px;
-            fill: #fff;
-        }
-
-        @keyframes wa-float-pulse {
-            0%, 100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35); }
-            50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.55), 0 0 0 8px rgba(37, 211, 102, 0.08); }
-        }
-
-        .wa-float-badge {
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            width: 18px; height: 18px;
-            background: #ef4444;
-            border-radius: 50%;
-            border: 2px solid var(--bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.6rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        /* ══════════════ FOOTER ══════════════ */
-        footer {
-            padding: 3rem 2rem;
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 24px; border-radius: 10px; font-size: 0.9rem;
+            font-weight: 600; cursor: pointer; border: none; font-family: inherit; transition: all 0.2s;
+        }
+        .btn-primary { background: #fff; color: #0a0a0b; }
+        .btn-primary:hover { background: #e2e8f0; transform: translateY(-2px); box-shadow: 0 0 30px rgba(255,255,255,0.1); }
+        .btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+        .btn-ghost:hover { border-color: var(--border-hover); color: var(--text-bright); }
+
+        /* ── LIVE FEED (the demo) ── */
+        .feed-section {
+            position: relative; z-index: 1;
+            padding: 4rem 2rem;
             border-top: 1px solid var(--border);
-            text-align: center;
+            border-bottom: 1px solid var(--border);
         }
-        footer p {
-            font-size: 0.8rem;
-            color: var(--text-dim);
+        .container { max-width: 1100px; margin: 0 auto; }
+        .feed-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;
         }
+        .feed-title {
+            font-family: var(--mono); font-size: 0.8rem; font-weight: 700;
+            color: var(--green); text-transform: uppercase; letter-spacing: 0.1em;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .feed-title .dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: blink 2s infinite; }
+        .feed-meta {
+            font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted);
+        }
+        .feed-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 0.75rem;
+        }
+        .feed-item {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 10px; padding: 1rem 1.25rem;
+            transition: all 0.2s; cursor: pointer; position: relative;
+            display: flex; flex-direction: column; gap: 6px;
+        }
+        .feed-item:hover { border-color: var(--border-hover); background: var(--bg-hover); }
+        .feed-item-title {
+            font-size: 0.85rem; font-weight: 600; color: var(--text-bright);
+            line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .feed-item-meta {
+            font-family: var(--mono); font-size: 0.65rem; color: var(--text-muted);
+            display: flex; align-items: center; gap: 8px;
+        }
+        .feed-item-meta .score { color: var(--accent-light); }
+        .feed-item.fresh { border-left: 2px solid var(--green); }
+        .feed-item.fresh .feed-item-meta::before {
+            content: "NEW"; font-size: 0.55rem; font-weight: 700;
+            background: var(--green-dim); color: var(--green);
+            padding: 1px 6px; border-radius: 4px;
+        }
+        .feed-skeleton {
+            background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-hover) 50%, var(--bg-card) 75%);
+            background-size: 200% 100%; animation: shimmer 1.5s infinite;
+            border-radius: 10px; height: 70px;
+        }
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
-        /* ══════════════ EXAMPLES GRID ══════════════ */
+        .feed-note {
+            text-align: center; margin-top: 1.5rem;
+            font-size: 0.75rem; color: var(--text-muted);
+        }
+        .feed-note strong { color: var(--text); }
+
+        /* ── TRUST STRIP ── */
+        .trust-strip {
+            position: relative; z-index: 1;
+            padding: 4rem 2rem;
+        }
+        .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .trust-item { text-align: center; }
+        .trust-number {
+            font-size: 2.5rem; font-weight: 900; font-family: var(--mono);
+            color: var(--text-bright); line-height: 1.2; margin-bottom: 0.25rem;
+        }
+        .trust-label {
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.12em; color: var(--accent-light); margin-bottom: 0.35rem;
+        }
+        .trust-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* ── SECTION COMMON ── */
+        section { position: relative; z-index: 1; padding: 5rem 2rem; }
+        .section-label {
+            font-family: var(--mono); font-size: 0.7rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--accent-light); margin-bottom: 0.75rem;
+        }
+        .section-title {
+            font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800;
+            color: var(--text-bright); letter-spacing: -0.02em; margin-bottom: 0.5rem;
+        }
+        .section-sub { font-size: 0.95rem; color: var(--text-muted); max-width: 520px; line-height: 1.6; }
+
+        /* ── EXAMPLES ── */
         .examples-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-top: 3rem;
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem; margin-top: 2.5rem;
         }
-
-        .example-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+        .ex-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 12px; padding: 1.5rem; transition: all 0.25s;
+            position: relative; overflow: hidden;
         }
-
-        .example-card .spotlight {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(
-                400px circle at var(--mx, 50%) var(--my, 50%),
-                var(--accent-glow),
-                transparent 60%
-            );
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
+        .ex-card .spotlight {
+            position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.3s;
+            background: radial-gradient(350px circle at var(--mx,50%) var(--my,50%), var(--accent-glow), transparent 60%);
         }
-        .example-card:hover .spotlight { opacity: 1; }
-
-        .example-card:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .example-featured {
+        .ex-card:hover .spotlight { opacity: 1; }
+        .ex-card:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: 0 16px 32px rgba(0,0,0,0.3); }
+        .ex-featured {
             grid-column: 1 / -1;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.06) 0%, var(--bg-card) 60%);
+            background: linear-gradient(135deg, rgba(99,102,241,0.05), var(--bg-card) 50%);
             border-color: var(--border-accent);
         }
-
-        .example-label {
-            display: inline-block;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--accent-light);
-            background: var(--accent-glow);
-            border: 1px solid var(--border-accent);
-            padding: 3px 10px;
-            border-radius: 6px;
-            margin-bottom: 0.75rem;
+        .ex-label {
+            display: inline-block; font-family: var(--mono); font-size: 0.6rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.1em; color: var(--green);
+            background: var(--green-dim); padding: 2px 8px; border-radius: 4px; margin-bottom: 0.6rem;
+        }
+        .ex-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--text-bright); margin-bottom: 0.35rem; position: relative; }
+        .ex-featured h3 { font-size: 1.25rem; }
+        .ex-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; position: relative; }
+        .ex-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.75rem; position: relative; }
+        .ex-tags span {
+            padding: 2px 8px; font-family: var(--mono); font-size: 0.65rem;
+            background: rgba(99,102,241,0.06); border: 1px solid rgba(99,102,241,0.12);
+            border-radius: 4px; color: var(--accent-light);
         }
 
-        .example-card h3 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--text-bright);
-            margin-bottom: 0.5rem;
-            position: relative;
+        /* ── TIERS ── */
+        .tiers-section { background: rgba(17, 19, 24, 0.6); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.5rem; align-items: start; }
+        .tier {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+            padding: 2rem 1.5rem; display: flex; flex-direction: column; transition: all 0.25s;
+            position: relative; overflow: hidden;
+        }
+        .tier .spotlight {
+            position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.3s;
+            background: radial-gradient(350px circle at var(--mx,50%) var(--my,50%), var(--accent-glow), transparent 60%);
+        }
+        .tier:hover .spotlight { opacity: 1; }
+        .tier:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+        .tier.featured {
+            border-color: var(--accent); transform: scale(1.02);
+            background: linear-gradient(180deg, rgba(99,102,241,0.06), var(--bg-card) 40%);
+        }
+        .tier.featured:hover { transform: scale(1.02) translateY(-3px); }
+        .tier-badge {
+            position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+            background: var(--accent); color: #fff; padding: 3px 14px; border-radius: 100px;
+            font-family: var(--mono); font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+        }
+        .tier-name { font-size: 1.25rem; font-weight: 700; color: var(--text-bright); margin-bottom: 0.35rem; }
+        .tier-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.25rem; line-height: 1.5; }
+        .tier-price { font-size: 2rem; font-weight: 900; color: var(--text-bright); font-family: var(--mono); }
+        .tier-price small { font-size: 0.45em; font-weight: 500; color: var(--text-muted); }
+        .tier-price-note { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 1.25rem; font-family: var(--mono); }
+        .tier-features { list-style: none; padding: 0; margin: 0 0 1.5rem; flex-grow: 1; }
+        .tier-features li {
+            display: flex; align-items: center; gap: 8px;
+            padding: 6px 0; font-size: 0.8rem; color: var(--text-muted);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        .tier-features li::before {
+            content: ""; width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0;
+            background: var(--green-dim); border: 1px solid rgba(34,197,94,0.25);
+            box-shadow: inset 2.5px -2.5px 0 0 var(--green); transform: rotate(-45deg) scale(0.5);
+        }
+        .tier-features li.x { opacity: 0.25; }
+        .tier-features li.x::before { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.06); box-shadow: none; }
+        .tier-btns { display: flex; flex-direction: column; gap: 0.5rem; }
+        .tier-pay {
+            width: 100%; padding: 12px; border-radius: 10px; font-weight: 600; font-size: 0.85rem;
+            cursor: pointer; border: none; font-family: inherit; transition: all 0.2s;
+            background: #635bff; color: #fff; display: flex; align-items: center; justify-content: center; gap: 6px;
+        }
+        .tier-pay:hover { background: #7a73ff; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(99,91,255,0.3); }
+        .tier.featured .tier-pay { background: #fff; color: #0a0a0b; }
+        .tier.featured .tier-pay:hover { background: #e2e8f0; }
+        .tier-or { text-align: center; font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+        .tier-chat {
+            width: 100%; padding: 10px; border-radius: 10px; font-size: 0.8rem;
+            cursor: pointer; border: 1px solid var(--border); font-family: inherit;
+            background: transparent; color: var(--text-muted); transition: all 0.2s; text-align: center;
+        }
+        .tier-chat:hover { border-color: var(--border-hover); color: var(--text-bright); }
+        .stripe-note {
+            text-align: center; margin-top: 1.5rem; font-size: 0.7rem; color: var(--text-muted);
+        }
+        .stripe-note strong { color: #635bff; }
+
+        /* ── ABOUT (minimal) ── */
+        .about-line {
+            text-align: center; padding: 3.5rem 2rem; position: relative; z-index: 1;
+        }
+        .about-line p {
+            font-size: 1.1rem; color: var(--text-muted); max-width: 650px;
+            margin: 0 auto; line-height: 1.8;
+        }
+        .about-line strong { color: var(--text-bright); }
+
+        /* ── WHATSAPP SECTION ── */
+        .wa-section { text-align: center; padding: 5rem 2rem; position: relative; z-index: 1; }
+        .wa-phone {
+            max-width: 400px; margin: 2rem auto 0; border-radius: 20px; overflow: hidden;
+            border: 1px solid var(--border); box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+        }
+        .wa-header {
+            background: #1f2c34; padding: 12px 14px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .wa-avatar {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 0.7rem; color: #fff;
+        }
+        .wa-header-info { text-align: left; }
+        .wa-header-name { font-size: 0.85rem; font-weight: 600; color: #e9edef; }
+        .wa-header-status { font-size: 0.65rem; color: #25d366; display: flex; align-items: center; gap: 4px; }
+        .wa-header-status::before { content: ""; width: 5px; height: 5px; background: #25d366; border-radius: 50%; animation: blink 2s infinite; }
+        .wa-body {
+            background: #0b141a; padding: 16px 12px; min-height: 200px;
+            display: flex; flex-direction: column; gap: 5px;
+        }
+        .wa-msg {
+            max-width: 85%; padding: 7px 10px; border-radius: 7px;
+            font-size: 0.8rem; line-height: 1.45;
+        }
+        .wa-msg-in { background: #1f2c34; color: #e9edef; align-self: flex-start; border-top-left-radius: 0; }
+        .wa-msg-out { background: #005c4b; color: #e9edef; align-self: flex-end; border-top-right-radius: 0; }
+        .wa-msg-time { font-size: 0.6rem; color: rgba(255,255,255,0.35); text-align: right; margin-top: 3px; }
+        .wa-input-bar { background: #1f2c34; padding: 8px 10px; display: flex; align-items: center; gap: 8px; }
+        .wa-input {
+            flex: 1; background: #2a3942; border: none; border-radius: 18px;
+            padding: 8px 14px; color: #e9edef; font-family: inherit; font-size: 0.8rem; outline: none;
+        }
+        .wa-input::placeholder { color: #8696a0; }
+        .wa-send {
+            width: 38px; height: 38px; border-radius: 50%; background: #25d366;
+            border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s; flex-shrink: 0;
+        }
+        .wa-send:hover { background: #1ebe5d; transform: scale(1.05); }
+        .wa-send svg { width: 18px; height: 18px; fill: #fff; transform: rotate(-30deg) translateX(1px); }
+        .wa-direct { margin-top: 1.5rem; }
+        .wa-direct-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 28px; background: #25d366; color: #fff; border-radius: 10px;
+            font-weight: 700; font-size: 0.95rem; border: none; cursor: pointer; font-family: inherit; transition: all 0.2s;
+        }
+        .wa-direct-btn:hover { background: #1ebe5d; transform: translateY(-2px); box-shadow: 0 6px 24px rgba(37,211,102,0.25); }
+        .wa-direct-btn svg { width: 20px; height: 20px; fill: #fff; }
+        .wa-note { font-size: 0.7rem; color: var(--text-muted); margin-top: 0.6rem; }
+
+        /* ── FLOATING WA ── */
+        .wa-float {
+            position: fixed; bottom: 24px; right: 24px; z-index: 10000;
+            display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
+        }
+        .wa-float-tip {
+            background: #1f2c34; color: #e9edef; padding: 8px 14px; border-radius: 8px;
+            font-size: 0.75rem; font-weight: 500; box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+            opacity: 0; transform: translateY(6px); transition: all 0.3s; pointer-events: none;
+        }
+        .wa-float:hover .wa-float-tip { opacity: 1; transform: translateY(0); }
+        .wa-float-btn {
+            width: 56px; height: 56px; border-radius: 50%; background: #25d366;
+            border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 16px rgba(37,211,102,0.3); transition: all 0.2s;
+            animation: wa-pulse 3s ease-in-out infinite;
+        }
+        .wa-float-btn:hover { background: #1ebe5d; transform: scale(1.08); }
+        .wa-float-btn svg { width: 28px; height: 28px; fill: #fff; }
+        .wa-float-badge {
+            position: absolute; top: -2px; right: -2px; width: 16px; height: 16px;
+            background: #ef4444; border-radius: 50%; border: 2px solid var(--bg);
+            font-size: 0.55rem; font-weight: 700; color: #fff;
+            display: flex; align-items: center; justify-content: center;
+        }
+        @keyframes wa-pulse {
+            0%,100% { box-shadow: 0 4px 16px rgba(37,211,102,0.3); }
+            50% { box-shadow: 0 4px 24px rgba(37,211,102,0.5), 0 0 0 6px rgba(37,211,102,0.06); }
         }
 
-        .example-featured h3 {
-            font-size: 1.4rem;
-        }
+        /* ── FOOTER ── */
+        footer { padding: 2rem; border-top: 1px solid var(--border); text-align: center; position: relative; z-index: 1; }
+        footer p { font-size: 0.7rem; color: var(--text-muted); }
 
-        .example-card p {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            line-height: 1.7;
-            position: relative;
-        }
-
-        .example-card .bento-tags {
-            position: relative;
-        }
-
-        /* ══════════════ TRUST STRIP ══════════════ */
-        .trust-strip {
-            padding: 5rem 2rem;
-            background: linear-gradient(180deg, rgba(99, 102, 241, 0.04) 0%, transparent 100%);
-            border-top: 1px solid rgba(99, 102, 241, 0.1);
-            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
-        }
-
-        .trust-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-        }
-
-        .trust-item {
-            text-align: center;
-            padding: 1.5rem 1rem;
-        }
-
-        .trust-number {
-            font-size: 2.75rem;
-            font-weight: 900;
-            background: linear-gradient(180deg, #ffffff 30%, #64748b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.25rem;
-            line-height: 1.2;
-        }
-
-        .trust-shield {
-            font-size: 2.5rem;
-        }
-
-        .trust-label {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--accent-light);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
-        }
-
-        .trust-desc {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* ══════════════ ANIMATIONS ══════════════ */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                        transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
+        /* ── ANIMATIONS ── */
+        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.5s cubic-bezier(0.25,0.46,0.45,0.94); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
-        .reveal:nth-child(2) { transition-delay: 80ms; }
-        .reveal:nth-child(3) { transition-delay: 160ms; }
-        .reveal:nth-child(4) { transition-delay: 240ms; }
-        .reveal:nth-child(5) { transition-delay: 320ms; }
+        .reveal:nth-child(2) { transition-delay: 60ms; }
+        .reveal:nth-child(3) { transition-delay: 120ms; }
+        .reveal:nth-child(4) { transition-delay: 180ms; }
 
-        /* ══════════════ RESPONSIVE ══════════════ */
+        /* ── RESPONSIVE ── */
         @media (max-width: 1024px) {
             .examples-grid { grid-template-columns: 1fr 1fr; }
-            .bento {
-                grid-template-columns: 1fr 1fr;
-                grid-template-areas:
-                    "a a"
-                    "b c"
-                    "d d"
-                    "e e";
-            }
+            .tiers { grid-template-columns: 1fr 1fr; }
         }
-
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .mobile-toggle { display: block; }
             .nav-links.open {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0; right: 0;
-                background: rgba(10, 10, 11, 0.97);
-                backdrop-filter: blur(24px);
-                padding: 1.5rem 2rem;
-                border-bottom: 1px solid var(--border);
-                gap: 1rem;
+                display: flex; flex-direction: column; position: absolute;
+                top: 100%; left: 0; right: 0; background: rgba(10,10,11,0.97);
+                backdrop-filter: blur(20px); padding: 1rem 2rem; border-bottom: 1px solid var(--border); gap: 0.75rem;
             }
-
-            .bento {
-                grid-template-columns: 1fr;
-                grid-template-areas: "a" "b" "c" "d" "e";
-            }
-
-            .process-track {
-                grid-template-columns: 1fr 1fr;
-                gap: 2rem;
-            }
-            .process-track::before { display: none; }
-
-            .tiers { grid-template-columns: 1fr; }
-            .tier-card.featured { transform: none; }
-            .tier-card.featured:hover { transform: translateY(-4px); }
-
-            .examples-grid { grid-template-columns: 1fr; }
-            .trust-grid { grid-template-columns: 1fr 1fr; }
-            .about-layout { grid-template-columns: 1fr; }
-
-            .wa-phone { max-width: 100%; }
-            .wa-float { bottom: 18px; right: 18px; }
-            .wa-float-btn { width: 52px; height: 52px; }
-            .wa-float-btn svg { width: 26px; height: 26px; }
-
-            section { padding: 5rem 1.25rem; }
+            .trust-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+            .examples-grid, .tiers { grid-template-columns: 1fr; }
+            .tier.featured { transform: none; }
+            .tier.featured:hover { transform: translateY(-3px); }
+            .feed-grid { grid-template-columns: 1fr; }
+            .wa-float { bottom: 16px; right: 16px; }
+            .wa-float-btn { width: 48px; height: 48px; }
+            section { padding: 3.5rem 1.25rem; }
         }
     </style>
 </head>
 <body>
 
-<!-- ═══ NAV ═══ -->
+<canvas id="particles"></canvas>
+
+<!-- NAV -->
 <nav>
-    <div class="logo">Latsoudis<span>.AI</span></div>
+    <div class="logo">latsoudis<span>.ai</span></div>
     <div class="nav-links" id="navLinks">
-        <a href="#what">What We Do</a>
-        <a href="#examples">Examples</a>
-        <a href="#tiers">Pricing</a>
-        <a href="#about">About</a>
-        <a href="#contact" class="nav-cta">Get Started</a>
+        <div class="nav-live"><span class="dot"></span>MONITORING</div>
+        <a href="#feed">Live Feed</a>
+        <a href="#examples">Built</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact" class="nav-cta">Talk to Us</a>
     </div>
     <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">&#9776;</button>
 </nav>
 
-<!-- ═══ HERO ═══ -->
+<!-- HERO -->
 <section class="hero">
-    <div class="aurora">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-    </div>
-    <div class="hero-content">
-        <div class="hero-badge">We ship in 48 hours. We support 24/7.</div>
-        <h1>We monitor AI.<br>You get it <em>deployed</em>.</h1>
-        <p class="hero-sub">We track every AI development and implement it into our own systems within 24 hours. Your systems get it within 48. Already running for businesses and individuals.</p>
-        <div class="hero-ctas">
-            <a href="#contact" class="btn btn-primary">Book a Free Call &rarr;</a>
-            <a href="#what" class="btn btn-ghost">See What We Build</a>
-        </div>
+    <h1>We live AI.<br>You get it <em>deployed</em>.</h1>
+    <p class="hero-sub">We track every AI development and implement it into our own systems within 24 hours. Your systems get it within 48. 24/7 support. Already running for businesses and individuals.</p>
+    <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary">Talk to Us &rarr;</a>
+        <a href="#feed" class="btn btn-ghost">Watch the Live Feed &darr;</a>
     </div>
 </section>
 
-<!-- ═══ TRUST STRIP ═══ -->
-<section class="trust-strip">
+<!-- TRUST STRIP -->
+<div class="trust-strip">
     <div class="container">
         <div class="trust-grid">
             <div class="trust-item reveal">
                 <div class="trust-number">24h</div>
                 <div class="trust-label">Our Systems</div>
-                <div class="trust-desc">We monitor every AI development and implement it into our own systems within 24 hours. We are always current.</div>
+                <div class="trust-desc">Every AI development implemented into our own stack within 24 hours.</div>
             </div>
             <div class="trust-item reveal">
                 <div class="trust-number">48h</div>
                 <div class="trust-label">Your Systems</div>
-                <div class="trust-desc">What we prove on ourselves, we deploy to you within 48 hours. From call to working system — two days, not two months.</div>
+                <div class="trust-desc">What we prove on ourselves, deployed to you in 48 hours.</div>
             </div>
             <div class="trust-item reveal">
                 <div class="trust-number">24/7</div>
-                <div class="trust-label">Always Online</div>
-                <div class="trust-desc">AI-powered support responds instantly, day or night. Human follow-up within minutes. We never sleep.</div>
+                <div class="trust-label">Support</div>
+                <div class="trust-desc">AI responds instantly. Human follows up within minutes.</div>
             </div>
             <div class="trust-item reveal">
-                <div class="trust-number trust-shield">&#128274;</div>
-                <div class="trust-label">High Trust</div>
-                <div class="trust-desc">AI touches your data, your workflows, your life. You need people you trust completely. Two brothers, one reputation.</div>
+                <div class="trust-number">&infin;</div>
+                <div class="trust-label">Trust</div>
+                <div class="trust-desc">Two brothers. One reputation. Your data, your life — we take it personally.</div>
             </div>
         </div>
     </div>
-</section>
+</div>
 
-<!-- ═══ BENTO — WHAT WE DO ═══ -->
-<section id="what">
+<!-- LIVE AI FEED -->
+<section class="feed-section" id="feed">
     <div class="container">
-        <div class="section-label">What we do</div>
-        <h2 class="section-title">AI that actually works</h2>
-        <p class="section-sub">From automating repetitive workflows to building your own personal intelligence layer. We handle the full stack.</p>
-
-        <div class="bento">
-            <div class="bento-item bento-a reveal">
-                <div class="spotlight"></div>
-                <div>
-                    <div class="bento-icon">&#9881;&#65039;</div>
-                    <h3>Business Workflow Automation</h3>
-                    <p>We map your operations, find the bottlenecks, and automate them. CRM pipelines, invoice processing, customer onboarding, internal ops — whatever drains your time, we make it run itself.</p>
-                </div>
-                <div class="bento-tags">
-                    <span>Process Automation</span>
-                    <span>Tool Integration</span>
-                    <span>Custom Pipelines</span>
-                </div>
-            </div>
-
-            <div class="bento-item bento-b reveal">
-                <div class="spotlight"></div>
-                <div>
-                    <div class="bento-icon">&#9889;</div>
-                    <h3>AI Deployment</h3>
-                    <p>Production-ready AI models deployed into your infrastructure. Model selection, fine-tuning, API integration, and optimisation — turnkey.</p>
-                </div>
-                <div class="bento-tags">
-                    <span>LLMs</span>
-                    <span>APIs</span>
-                    <span>Fine-tuning</span>
-                </div>
-            </div>
-
-            <div class="bento-item bento-c reveal">
-                <div class="spotlight"></div>
-                <div>
-                    <div class="bento-icon">&#10024;</div>
-                    <h3>Personalised Intelligence</h3>
-                    <p>Your own AI that knows your business, your preferences, your life. Bespoke personal assistants, knowledge bases, and decision-support tools — built around you.</p>
-                </div>
-                <div class="bento-tags">
-                    <span>Personal AI</span>
-                    <span>Knowledge Systems</span>
-                    <span>Decision Support</span>
-                </div>
-            </div>
-
-            <div class="bento-item bento-d reveal">
-                <div class="spotlight"></div>
-                <div>
-                    <div class="bento-icon">&#128218;</div>
-                    <h3>AI Training &amp; Workshops</h3>
-                    <p>Want to do it yourself? We teach your team how to deploy, manage, and iterate on AI systems. Hands-on workshops, not slide decks.</p>
-                </div>
-                <div class="bento-tags">
-                    <span>Workshops</span>
-                    <span>Team Training</span>
-                    <span>DIY Support</span>
-                </div>
-            </div>
-
-            <div class="bento-item bento-e reveal">
-                <div class="spotlight"></div>
-                <div>
-                    <div class="bento-icon">&#128736;&#65039;</div>
-                    <h3>Ongoing Support &amp; Optimisation</h3>
-                    <p>AI gets better with use. We monitor your systems 24/7, retrain models, optimise performance, and evolve your setup as your business grows.</p>
-                </div>
-                <div class="bento-tags">
-                    <span>Monitoring</span>
-                    <span>Retraining</span>
-                    <span>Scaling</span>
-                </div>
-            </div>
+        <div class="feed-header">
+            <div class="feed-title"><span class="dot"></span>LIVE AI INTELLIGENCE FEED</div>
+            <div class="feed-meta" id="feedMeta">Scanning...</div>
         </div>
+        <div class="feed-grid" id="feedGrid">
+            <div class="feed-skeleton"></div>
+            <div class="feed-skeleton"></div>
+            <div class="feed-skeleton"></div>
+            <div class="feed-skeleton"></div>
+            <div class="feed-skeleton"></div>
+            <div class="feed-skeleton"></div>
+        </div>
+        <p class="feed-note">This feed is live. We scan Hacker News, AI research, and industry sources every 5 minutes.<br><strong>This is how we stay 24 hours ahead.</strong> What you see here, we've already deployed.</p>
     </div>
 </section>
 
-<!-- ═══ WHAT YOU COULD BUILD ═══ -->
+<!-- EXAMPLES -->
 <section id="examples">
     <div class="container">
         <div class="section-label">Already built &amp; running</div>
         <h2 class="section-title">Systems like these — in 48 hours</h2>
-        <p class="section-sub">Real examples of what we build. Every one of these is in production, serving businesses and individuals right now.</p>
-
         <div class="examples-grid">
-            <div class="example-card example-featured reveal">
+            <div class="ex-card ex-featured reveal">
                 <div class="spotlight"></div>
-                <div class="example-label">Flagship Build</div>
+                <div class="ex-label">In Production</div>
                 <h3>Life Operating System</h3>
-                <p>A full personal intelligence platform that manages calendar, communications, finances, knowledge base, health data, family logistics, and 20+ connected devices — all through natural language. Runs 24/7 autonomously with AI agents handling monitoring, analysis, and proactive suggestions.</p>
-                <div class="bento-tags">
-                    <span>Personal AI</span>
-                    <span>30+ Integrations</span>
-                    <span>Autonomous Agents</span>
-                    <span>Knowledge Base</span>
-                </div>
+                <p>Personal intelligence platform managing calendar, comms, finances, health, family logistics, and 20+ connected devices through natural language. Autonomous AI agents running 24/7.</p>
+                <div class="ex-tags"><span>Personal AI</span><span>30+ Integrations</span><span>Autonomous Agents</span><span>Knowledge Base</span></div>
             </div>
-
-            <div class="example-card reveal">
+            <div class="ex-card reveal">
                 <div class="spotlight"></div>
                 <h3>Smart Home Orchestration</h3>
-                <p>One AI layer that controls every device — TV, fridge, espresso machine, vacuum, lighting — through conversation. No app-per-device. One interface that knows your schedule, preferences, and habits.</p>
-                <div class="bento-tags">
-                    <span>IoT</span>
-                    <span>Voice Control</span>
-                    <span>Automation</span>
-                </div>
+                <p>One AI layer controlling every device — TV, fridge, espresso machine, vacuum, lighting. One interface, zero apps.</p>
+                <div class="ex-tags"><span>IoT</span><span>Voice</span><span>Automation</span></div>
             </div>
-
-            <div class="example-card reveal">
+            <div class="ex-card reveal">
                 <div class="spotlight"></div>
                 <h3>Business Workflow Engine</h3>
-                <p>Automated CRM pipeline, AI-powered customer support on WhatsApp (24/7), invoice processing, lead scoring, and reporting dashboards — replacing 3 full-time employees worth of manual work.</p>
-                <div class="bento-tags">
-                    <span>CRM</span>
-                    <span>WhatsApp Bot</span>
-                    <span>Invoicing</span>
-                </div>
+                <p>CRM, WhatsApp support bot, invoicing, lead scoring, dashboards — replacing 3 FTEs of manual work.</p>
+                <div class="ex-tags"><span>CRM</span><span>WhatsApp Bot</span><span>Invoicing</span></div>
             </div>
-
-            <div class="example-card reveal">
+            <div class="ex-card reveal">
                 <div class="spotlight"></div>
                 <h3>Investment Intelligence</h3>
-                <p>Real-time portfolio tracking, market signal monitoring, news curation with AI analysis, automated alerts, and decision-support tools. Tracks crypto, stocks, real estate, and macro indicators.</p>
-                <div class="bento-tags">
-                    <span>Portfolio</span>
-                    <span>Market Signals</span>
-                    <span>Alerts</span>
-                </div>
+                <p>Portfolio tracking, market signals, news curation with AI analysis, automated alerts across crypto, stocks, and macro.</p>
+                <div class="ex-tags"><span>Portfolio</span><span>Signals</span><span>Alerts</span></div>
             </div>
-
-            <div class="example-card reveal">
+            <div class="ex-card reveal">
                 <div class="spotlight"></div>
                 <h3>AI Knowledge Base</h3>
-                <p>A searchable, interconnected knowledge system that ingests documents, emails, conversations, and web content — then answers questions, finds connections, and surfaces insights you'd never find manually.</p>
-                <div class="bento-tags">
-                    <span>Search</span>
-                    <span>Documents</span>
-                    <span>Insights</span>
-                </div>
+                <p>Searchable, interconnected knowledge system that ingests everything and surfaces insights you'd never find manually.</p>
+                <div class="ex-tags"><span>Search</span><span>Documents</span><span>Insights</span></div>
             </div>
-
-            <div class="example-card reveal">
+            <div class="ex-card reveal">
                 <div class="spotlight"></div>
                 <h3>Multi-Channel Comms Hub</h3>
-                <p>Unified inbox across WhatsApp, Viber, SMS, Telegram, email, and Discord — with AI triage, auto-responses, and priority routing. Never miss a message, never drown in notifications.</p>
-                <div class="bento-tags">
-                    <span>Messaging</span>
-                    <span>AI Triage</span>
-                    <span>Unified Inbox</span>
-                </div>
+                <p>Unified inbox — WhatsApp, Viber, SMS, Telegram, email, Discord — with AI triage and auto-responses.</p>
+                <div class="ex-tags"><span>Messaging</span><span>AI Triage</span><span>Unified</span></div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ═══ SERVICE TIERS ═══ -->
-<section id="tiers" style="background: rgba(20, 23, 29, 0.5);">
+<!-- PRICING -->
+<section id="pricing" class="tiers-section">
     <div class="container">
-        <div class="section-label">How to work with us</div>
+        <div class="section-label">Pricing</div>
         <h2 class="section-title">Choose your path</h2>
-        <p class="section-sub">Whether you want to learn, have us build, or need ongoing support — we've got you covered.</p>
-
         <div class="tiers">
-            <!-- LEARN -->
-            <div class="tier-card reveal">
+            <div class="tier reveal">
                 <div class="spotlight"></div>
-                <div class="tier-icon">&#128218;</div>
                 <h3 class="tier-name">Learn</h3>
-                <p class="tier-desc">We teach you how to deploy and manage AI systems yourself. Hands-on workshops — you walk out building, not reading slides.</p>
+                <p class="tier-desc">We teach you to deploy AI yourself. Hands-on — you walk out building.</p>
                 <div class="tier-price">&euro;1,500</div>
-                <div class="tier-price-note">One-time &middot; Everything you need to go independent</div>
+                <div class="tier-price-note">one-time &middot; 30 days support</div>
                 <ul class="tier-features">
-                    <li><span class="check"></span>AI readiness assessment</li>
-                    <li><span class="check"></span>Hands-on workshop (full day)</li>
-                    <li><span class="check"></span>Tool &amp; stack recommendations</li>
-                    <li><span class="check"></span>Proof of concept (1 workflow)</li>
-                    <li><span class="check"></span>Playbook &amp; documentation</li>
-                    <li><span class="check"></span>30 days post-workshop support</li>
-                    <li class="excluded"><span class="check"></span>Full system development</li>
-                    <li class="excluded"><span class="check"></span>Ongoing maintenance</li>
+                    <li>AI readiness assessment</li>
+                    <li>Full-day hands-on workshop</li>
+                    <li>Tool &amp; stack recommendations</li>
+                    <li>Proof of concept (1 workflow)</li>
+                    <li>Playbook &amp; documentation</li>
+                    <li class="x">Full system development</li>
+                    <li class="x">Ongoing maintenance</li>
                 </ul>
-                <div class="tier-buttons">
-                    <a href="STRIPE_LEARN_LINK" target="_blank" rel="noopener" class="stripe-link">
-                        <button type="button" class="tier-pay">
-                            <svg viewBox="0 0 24 24"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z"/></svg>
-                            Pay &euro;1,500
-                        </button>
-                    </a>
+                <div class="tier-btns">
+                    <a href="STRIPE_LEARN_LINK" target="_blank"><button class="tier-pay">Pay &euro;1,500</button></a>
                     <div class="tier-or">or</div>
-                    <a href="#contact"><button type="button" class="tier-cta">Chat First on WhatsApp</button></a>
+                    <a href="#contact"><button class="tier-chat">Chat first on WhatsApp</button></a>
                 </div>
             </div>
-
-            <!-- BUILD -->
-            <div class="tier-card featured reveal">
+            <div class="tier featured reveal">
                 <div class="tier-badge">Most Popular</div>
                 <div class="spotlight"></div>
-                <div class="tier-icon">&#9889;</div>
                 <h3 class="tier-name">Build</h3>
-                <p class="tier-desc">We design, develop, and deploy a complete AI system for your business. 48-hour delivery. End-to-end, from architecture to production.</p>
+                <p class="tier-desc">We design, build, and deploy your AI system. 48 hours, end-to-end.</p>
                 <div class="tier-price">&euro;5,000</div>
-                <div class="tier-price-note">One-time &middot; Delivered in 48 hours &middot; Includes training</div>
+                <div class="tier-price-note">one-time &middot; 48h delivery &middot; 60 days support</div>
                 <ul class="tier-features">
-                    <li><span class="check"></span>Everything in Learn</li>
-                    <li><span class="check"></span>Custom AI agent development</li>
-                    <li><span class="check"></span>Full system architecture</li>
-                    <li><span class="check"></span>API &amp; tool integrations</li>
-                    <li><span class="check"></span>Testing &amp; deployment</li>
-                    <li><span class="check"></span>Team training &amp; handover</li>
-                    <li><span class="check"></span>60 days post-launch support</li>
+                    <li>Everything in Learn</li>
+                    <li>Custom AI agent development</li>
+                    <li>Full system architecture</li>
+                    <li>API &amp; tool integrations</li>
+                    <li>Testing &amp; deployment</li>
+                    <li>Team training &amp; handover</li>
+                    <li class="x">24/7 monitoring</li>
                 </ul>
-                <div class="tier-buttons">
-                    <a href="STRIPE_BUILD_LINK" target="_blank" rel="noopener" class="stripe-link">
-                        <button type="button" class="tier-pay">
-                            <svg viewBox="0 0 24 24"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z"/></svg>
-                            Pay &euro;5,000 &amp; Start
-                        </button>
-                    </a>
+                <div class="tier-btns">
+                    <a href="STRIPE_BUILD_LINK" target="_blank"><button class="tier-pay">Pay &euro;5,000 &amp; Start</button></a>
                     <div class="tier-or">or</div>
-                    <a href="#contact"><button type="button" class="tier-cta">Chat First on WhatsApp</button></a>
+                    <a href="#contact"><button class="tier-chat">Chat first on WhatsApp</button></a>
                 </div>
             </div>
-
-            <!-- MAINTAIN & SUPPORT -->
-            <div class="tier-card reveal">
+            <div class="tier reveal">
                 <div class="spotlight"></div>
-                <div class="tier-icon">&#128736;&#65039;</div>
-                <h3 class="tier-name">Maintain &amp; Support</h3>
-                <p class="tier-desc">We keep your AI systems running, improving, and scaling. 24/7 online support — message us anytime, get answers instantly.</p>
-                <div class="tier-price">&euro;1,500<span style="font-size:0.5em;font-weight:500;color:var(--text-muted)">/month</span></div>
-                <div class="tier-price-note">Monthly &middot; Cancel anytime &middot; 24/7 support included</div>
+                <h3 class="tier-name">Maintain</h3>
+                <p class="tier-desc">24/7 monitoring, optimisation, retraining. We never stop improving your systems.</p>
+                <div class="tier-price">&euro;1,500<small>/mo</small></div>
+                <div class="tier-price-note">monthly &middot; cancel anytime &middot; 24/7</div>
                 <ul class="tier-features">
-                    <li><span class="check"></span>Everything in Build</li>
-                    <li><span class="check"></span>24/7 system monitoring</li>
-                    <li><span class="check"></span>Performance optimisation</li>
-                    <li><span class="check"></span>Model retraining &amp; updates</li>
-                    <li><span class="check"></span>Priority support (Slack/call)</li>
-                    <li><span class="check"></span>Monthly strategy reviews</li>
-                    <li><span class="check"></span>Scaling &amp; new feature builds</li>
+                    <li>Everything in Build</li>
+                    <li>24/7 system monitoring</li>
+                    <li>Performance optimisation</li>
+                    <li>Model retraining &amp; updates</li>
+                    <li>Priority support (Slack/call)</li>
+                    <li>Monthly strategy reviews</li>
+                    <li>Scaling &amp; new features</li>
                 </ul>
-                <div class="tier-buttons">
-                    <a href="STRIPE_MAINTAIN_LINK" target="_blank" rel="noopener" class="stripe-link">
-                        <button type="button" class="tier-pay">
-                            <svg viewBox="0 0 24 24"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z"/></svg>
-                            Subscribe &euro;1,500/mo
-                        </button>
-                    </a>
+                <div class="tier-btns">
+                    <a href="STRIPE_MAINTAIN_LINK" target="_blank"><button class="tier-pay">Subscribe &euro;1,500/mo</button></a>
                     <div class="tier-or">or</div>
-                    <a href="#contact"><button type="button" class="tier-cta">Chat First on WhatsApp</button></a>
+                    <a href="#contact"><button class="tier-chat">Chat first on WhatsApp</button></a>
                 </div>
             </div>
         </div>
-
-        <!-- Stripe trust note -->
-        <div class="payment-note reveal">
-            <p>
-                <span class="stripe-logo">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="#635bff"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z"/></svg>
-                    Stripe
-                </span>
-                &mdash; All payments are processed securely via Stripe. Your card details never touch our servers. Refund guaranteed if we don't deliver.
-            </p>
-        </div>
+        <p class="stripe-note">All payments via <strong>Stripe</strong>. Secure. Refund guaranteed if we don't deliver.</p>
     </div>
 </section>
 
-<!-- ═══ PROCESS ═══ -->
-<section id="process">
-    <div class="container">
-        <div class="section-label">How it works</div>
-        <h2 class="section-title">From conversation to deployment</h2>
-        <p class="section-sub">A proven process refined through real-world AI implementations.</p>
+<!-- ABOUT (2 lines) -->
+<div class="about-line">
+    <p><strong>Ntemis &amp; Apollo Latsoudis.</strong> Two brothers who implement every AI development into their own systems within 24 hours — not as a job, as a way of life. What we prove on ourselves, we deploy to you in 48. High-trust partners for a high-stakes world.</p>
+</div>
 
-        <div class="process-track">
-            <div class="process-step reveal">
-                <div class="process-num">1</div>
-                <h3>Discovery Call</h3>
-                <p>We map your workflows, pain points, and goals. Free, no-commitment.</p>
-            </div>
-            <div class="process-step reveal">
-                <div class="process-num">2</div>
-                <h3>Architecture</h3>
-                <p>We design the solution — tools, data flows, integration points. You approve before we build.</p>
-            </div>
-            <div class="process-step reveal">
-                <div class="process-num">3</div>
-                <h3>Build &amp; Deploy</h3>
-                <p>We build, test, and deploy. You get a working system with docs and training.</p>
-            </div>
-            <div class="process-step reveal">
-                <div class="process-num">4</div>
-                <h3>Optimise &amp; Scale</h3>
-                <p>We monitor, refine, and scale your systems as your needs evolve.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ═══ ABOUT ═══ -->
-<section id="about">
-    <div class="container">
-        <div class="section-label">About us</div>
-        <h2 class="section-title">Built by practitioners, not consultants</h2>
-
-        <div class="about-layout">
-            <div class="about-text reveal">
-                <p>We're <strong>Ntemis &amp; Apollo Latsoudis</strong> — two brothers who monitor every AI development and implement it into our own systems within <strong>24 hours</strong>. Not as a job. As a way of life. We run AI systems that manage our businesses, automate our workflows, and act as personal intelligence platforms.</p>
-                <p>What we prove on ourselves, we deploy to clients within <strong>48 hours</strong>. This is why we're fast — we're not researching solutions for you. We've already built and tested them on ourselves. You get battle-hardened systems, not prototypes.</p>
-                <p><strong>AI touches everything</strong> — your data, your workflows, your decisions. You need people you trust completely. Not a faceless agency. Two brothers, one reputation, <strong>24/7 support</strong>. Already running for businesses and individuals.</p>
-            </div>
-            <div class="about-stats reveal">
-                <div class="stat-card">
-                    <div class="number">AI</div>
-                    <div class="label">Native Builders</div>
-                </div>
-                <div class="stat-card">
-                    <div class="number">24/7</div>
-                    <div class="label">Systems Running</div>
-                </div>
-                <div class="stat-card">
-                    <div class="number">E2E</div>
-                    <div class="label">Full-Stack Delivery</div>
-                </div>
-                <div class="stat-card">
-                    <div class="number">100%</div>
-                    <div class="label">Hands-On</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ═══ WHATSAPP CONTACT ═══ -->
+<!-- WHATSAPP -->
 <section id="contact" class="wa-section">
-    <div class="container">
-        <div class="section-label">Get in touch</div>
-        <h2 class="section-title">Message us — we reply 24/7</h2>
-        <p class="section-sub">Our AI assistant responds instantly. A human follows up within minutes, not days.</p>
-
-        <!-- WhatsApp phone mockup -->
-        <div class="wa-phone reveal">
-            <div class="wa-header">
-                <div class="wa-avatar">L.AI</div>
-                <div class="wa-header-info">
-                    <div class="wa-header-name">Latsoudis.AI</div>
-                    <div class="wa-header-status">online now</div>
-                </div>
+    <div class="section-label">Get in touch</div>
+    <h2 class="section-title">Message us — we reply 24/7</h2>
+    <p class="section-sub" style="margin:0 auto;">AI responds instantly. Human within minutes.</p>
+    <div class="wa-phone reveal">
+        <div class="wa-header">
+            <div class="wa-avatar">L.AI</div>
+            <div class="wa-header-info">
+                <div class="wa-header-name">Latsoudis.AI</div>
+                <div class="wa-header-status">online now</div>
             </div>
-            <div class="wa-body" id="waBody">
-                <div class="wa-msg wa-msg-in">
-                    Hey! I'm the Latsoudis.AI assistant. Tell me what you want to automate and I'll get you an answer right away.
-                    <div class="wa-msg-time">now</div>
-                </div>
-                <div class="wa-msg wa-msg-in">
-                    Businesses or personal — we handle both. What can we build for you?
-                    <div class="wa-msg-time">now</div>
-                </div>
-            </div>
-            <form class="wa-input-bar" onsubmit="sendWaChat(event)">
-                <input type="text" class="wa-input" id="waInput" placeholder="Type your message...">
-                <button type="submit" class="wa-send-btn" aria-label="Send">
-                    <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-                </button>
-            </form>
         </div>
-
-        <!-- Direct WhatsApp button -->
-        <div class="wa-direct reveal">
-            <a href="https://wa.me/306979088738?text=Hi%20Latsoudis.AI!%20I'm%20interested%20in%20your%20AI%20services." target="_blank" rel="noopener">
-                <button type="button" class="wa-direct-btn">
-                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                    Open WhatsApp Chat
-                </button>
-            </a>
-            <p class="wa-direct-note">Or message +30 697 908 8738 directly. We respond 24/7.</p>
+        <div class="wa-body" id="waBody">
+            <div class="wa-msg wa-msg-in">Hey! Tell me what you want to automate and I'll get you an answer right away.<div class="wa-msg-time">now</div></div>
         </div>
+        <form class="wa-input-bar" onsubmit="sendWa(event)">
+            <input type="text" class="wa-input" id="waInput" placeholder="Type your message...">
+            <button type="submit" class="wa-send"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
+        </form>
+    </div>
+    <div class="wa-direct reveal">
+        <a href="https://wa.me/306979088738?text=Hi%20Latsoudis.AI!%20I'm%20interested%20in%20your%20AI%20services." target="_blank" rel="noopener">
+            <button type="button" class="wa-direct-btn">
+                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Open WhatsApp
+            </button>
+        </a>
+        <p class="wa-note">+30 697 908 8738 &middot; 24/7</p>
     </div>
 </section>
 
-<!-- ═══ FLOATING WHATSAPP BUTTON ═══ -->
+<!-- FLOATING WA -->
 <div class="wa-float">
-    <div class="wa-float-tooltip">Chat with us on WhatsApp</div>
-    <a href="https://wa.me/306979088738?text=Hi%20Latsoudis.AI!%20I'm%20interested%20in%20your%20AI%20services." target="_blank" rel="noopener">
-        <button type="button" class="wa-float-btn" aria-label="Chat on WhatsApp">
+    <div class="wa-float-tip">Chat on WhatsApp</div>
+    <a href="https://wa.me/306979088738?text=Hi%20Latsoudis.AI!" target="_blank" rel="noopener">
+        <button type="button" class="wa-float-btn" aria-label="WhatsApp">
             <span class="wa-float-badge">1</span>
             <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         </button>
     </a>
 </div>
 
-<!-- ═══ FOOTER ═══ -->
-<footer>
-    <div class="container">
-        <p>&copy; 2026 Latsoudis.AI — Ntemis &amp; Apollo Latsoudis</p>
-    </div>
-</footer>
+<footer><div class="container"><p>&copy; 2026 latsoudis.ai &mdash; Ntemis &amp; Apollo Latsoudis</p></div></footer>
 
-<!-- ═══ JS ═══ -->
 <script>
-    // ── Scroll reveal ──
-    const revealObs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) e.target.classList.add('visible');
+// ── PARTICLE NETWORK ──
+(function() {
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let w, h, particles = [];
+    const COUNT = 60, CONNECT_DIST = 150;
+
+    function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize); resize();
+
+    for (let i = 0; i < COUNT; i++) {
+        particles.push({
+            x: Math.random() * w, y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
+            r: Math.random() * 1.5 + 0.5
         });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
-
-    // ── Spotlight follow (bento + tier cards) ──
-    document.querySelectorAll('.bento-item, .tier-card, .example-card').forEach(card => {
-        card.addEventListener('mousemove', e => {
-            const rect = card.getBoundingClientRect();
-            card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
-            card.style.setProperty('--my', `${e.clientY - rect.top}px`);
-        });
-    });
-
-    // ── Mobile nav close on link click ──
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            document.getElementById('navLinks').classList.remove('open');
-        });
-    });
-
-    // ── WhatsApp inline chat ──
-    function sendWaChat(e) {
-        e.preventDefault();
-        const input = document.getElementById('waInput');
-        const body = document.getElementById('waBody');
-        const msg = input.value.trim();
-        if (!msg) return;
-
-        // Add user message bubble
-        const userBubble = document.createElement('div');
-        userBubble.className = 'wa-msg wa-msg-out';
-        userBubble.innerHTML = msg + '<div class="wa-msg-time">just now</div>';
-        body.appendChild(userBubble);
-        input.value = '';
-        body.scrollTop = body.scrollHeight;
-
-        // Show typing indicator
-        const typing = document.createElement('div');
-        typing.className = 'wa-msg wa-msg-typing';
-        typing.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
-        body.appendChild(typing);
-        body.scrollTop = body.scrollHeight;
-
-        // After a beat, redirect to WhatsApp with their message
-        setTimeout(() => {
-            typing.remove();
-            const reply = document.createElement('div');
-            reply.className = 'wa-msg wa-msg-in';
-            reply.innerHTML = 'Opening WhatsApp to continue our conversation...<div class="wa-msg-time">now</div>';
-            body.appendChild(reply);
-            body.scrollTop = body.scrollHeight;
-
-            setTimeout(() => {
-                const encoded = encodeURIComponent(msg);
-                window.open(`https://wa.me/306979088738?text=${encoded}`, '_blank');
-            }, 600);
-        }, 1200);
     }
 
-    // ── Text scramble on hero headline ──
-    class TextScramble {
-        constructor(el) {
-            this.el = el;
-            this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            this.originalHTML = el.innerHTML;
-            this.originalText = el.textContent;
-        }
-        play() {
-            const text = this.originalText;
-            let frame = 0;
-            const total = 25;
-            const tick = () => {
-                let out = '';
-                for (let i = 0; i < text.length; i++) {
-                    if (text[i] === ' ' || text[i] === '\n') { out += text[i]; continue; }
-                    if (frame / total > i / text.length) {
-                        out += text[i];
-                    } else {
-                        out += this.chars[Math.floor(Math.random() * this.chars.length)];
-                    }
+    function draw() {
+        ctx.clearRect(0, 0, w, h);
+        for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            p.x += p.vx; p.y += p.vy;
+            if (p.x < 0 || p.x > w) p.vx *= -1;
+            if (p.y < 0 || p.y > h) p.vy *= -1;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(99, 102, 241, 0.5)';
+            ctx.fill();
+            for (let j = i + 1; j < particles.length; j++) {
+                const q = particles[j];
+                const dx = p.x - q.x, dy = p.y - q.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < CONNECT_DIST) {
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
+                    ctx.strokeStyle = `rgba(99, 102, 241, ${0.15 * (1 - dist / CONNECT_DIST)})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
                 }
-                this.el.textContent = out;
-                frame++;
-                if (frame <= total + text.length * 0.5) {
-                    requestAnimationFrame(tick);
-                } else {
-                    this.el.innerHTML = this.originalHTML;
-                }
-            };
-            tick();
+            }
         }
+        requestAnimationFrame(draw);
     }
+    draw();
+})();
 
-    // Play scramble once on load
-    const heroH1 = document.querySelector('.hero h1');
-    if (heroH1) {
-        const scramble = new TextScramble(heroH1);
-        setTimeout(() => scramble.play(), 300);
+// ── LIVE AI FEED (Hacker News) ──
+const AI_KEYWORDS = /\bai\b|artificial intelligence|llm|gpt|claude|openai|anthropic|gemini|machine learning|neural|transformer|deep learning|automation|chatbot|agent|model|diffusion|robot/i;
+
+async function fetchFeed() {
+    try {
+        const meta = document.getElementById('feedMeta');
+        const grid = document.getElementById('feedGrid');
+        meta.textContent = 'Fetching...';
+
+        const topRes = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json');
+        const topIds = await topRes.json();
+
+        // Fetch top 80 stories, filter for AI
+        const storyPromises = topIds.slice(0, 80).map(id =>
+            fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then(r => r.json())
+        );
+        const stories = await Promise.all(storyPromises);
+        const aiStories = stories.filter(s => s && s.title && AI_KEYWORDS.test(s.title)).slice(0, 9);
+
+        if (aiStories.length === 0) {
+            // Fallback: show top tech stories
+            const fallback = stories.filter(s => s && s.title).slice(0, 6);
+            renderFeed(fallback, grid, meta);
+        } else {
+            renderFeed(aiStories, grid, meta);
+        }
+    } catch (e) {
+        document.getElementById('feedMeta').textContent = 'Feed temporarily unavailable';
     }
+}
+
+function renderFeed(stories, grid, meta) {
+    const now = Date.now() / 1000;
+    grid.innerHTML = stories.map(s => {
+        const age = now - s.time;
+        const ageStr = age < 3600 ? Math.floor(age / 60) + 'm' : Math.floor(age / 3600) + 'h';
+        const fresh = age < 7200; // < 2 hours
+        return `<a href="${s.url || `https://news.ycombinator.com/item?id=${s.id}`}" target="_blank" rel="noopener" class="feed-item${fresh ? ' fresh' : ''}">
+            <div class="feed-item-title">${s.title}</div>
+            <div class="feed-item-meta">
+                <span class="score">${s.score} pts</span>
+                <span>${ageStr} ago</span>
+                <span>${s.descendants || 0} comments</span>
+            </div>
+        </a>`;
+    }).join('');
+    const time = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    meta.textContent = `${stories.length} signals · last scan ${time} · refreshes every 5 min`;
+}
+
+fetchFeed();
+setInterval(fetchFeed, 5 * 60 * 1000);
+
+// ── SCROLL REVEAL ──
+const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── SPOTLIGHT ──
+document.querySelectorAll('.ex-card, .tier').forEach(card => {
+    card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+        card.style.setProperty('--my', `${e.clientY - r.top}px`);
+    });
+});
+
+// ── MOBILE NAV ──
+document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+});
+
+// ── WHATSAPP CHAT ──
+function sendWa(e) {
+    e.preventDefault();
+    const input = document.getElementById('waInput');
+    const body = document.getElementById('waBody');
+    const msg = input.value.trim();
+    if (!msg) return;
+    body.innerHTML += `<div class="wa-msg wa-msg-out">${msg}<div class="wa-msg-time">just now</div></div>`;
+    input.value = '';
+    body.scrollTop = body.scrollHeight;
+    body.innerHTML += `<div class="wa-msg wa-msg-in" style="opacity:0.5">Opening WhatsApp...<div class="wa-msg-time">now</div></div>`;
+    setTimeout(() => window.open(`https://wa.me/306979088738?text=${encodeURIComponent(msg)}`, '_blank'), 800);
+}
 </script>
 
 </body>
