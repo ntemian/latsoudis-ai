@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Latsoudis.AI — Your own AI system. State of the art. 24/7.</title>
-    <meta name="description" content="Personalised AI systems for you and your business. Built with the latest models, integrated within 24 hours, deployed to you within 48. State of the art support, 24/7.">
+    <title>Latsoudis.AI — Personalised Intelligence. The latest AI working for you in 48 hours.</title>
+    <meta name="description" content="Personalised intelligence for you and your business. We integrate every new AI development within 24 hours — yours gets it within 48. Your own knowledge graph, comms automation, and AI system.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -395,6 +395,56 @@
             .stats-grid { grid-template-columns: 1fr 1fr; }
         }
 
+        /* ── KNOWLEDGE GRAPH ── */
+        .graph-section {
+            position: relative; z-index: 1;
+            padding: 5rem 2rem;
+            border-top: 1px solid var(--border);
+        }
+        .graph-layout {
+            display: grid; grid-template-columns: 1fr 1.3fr; gap: 2.5rem;
+            align-items: center; margin-top: 2rem;
+        }
+        .graph-copy { }
+        .graph-copy h3 {
+            font-size: 1.5rem; font-weight: 800; color: var(--text-bright);
+            margin-bottom: 0.75rem; letter-spacing: -0.02em;
+        }
+        .graph-copy p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem; }
+        .graph-copy .graph-features { list-style: none; padding: 0; }
+        .graph-copy .graph-features li {
+            font-size: 0.8rem; color: var(--text-muted); padding: 5px 0;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .graph-copy .graph-features li::before {
+            content: ""; width: 6px; height: 6px; border-radius: 50%;
+            background: var(--accent-light); flex-shrink: 0;
+        }
+        .graph-canvas-wrap {
+            position: relative; border-radius: 14px; overflow: hidden;
+            border: 1px solid var(--border); background: var(--bg-card);
+            aspect-ratio: 4/3;
+        }
+        #graphCanvas { width: 100%; height: 100%; display: block; }
+        .graph-badge {
+            position: absolute; top: 12px; left: 12px;
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: var(--mono); font-size: 0.6rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-light);
+            background: rgba(99,102,241,0.12); padding: 4px 10px; border-radius: 4px;
+        }
+        .graph-badge .dot { width: 6px; height: 6px; background: var(--accent-light); border-radius: 50%; animation: blink 2s infinite; }
+        .graph-legend {
+            position: absolute; bottom: 12px; right: 12px;
+            display: flex; gap: 10px;
+            font-family: var(--mono); font-size: 0.55rem; color: var(--text-muted);
+        }
+        .graph-legend span { display: flex; align-items: center; gap: 4px; }
+        .graph-legend .ldot { width: 8px; height: 8px; border-radius: 50%; }
+        @media (max-width: 1024px) {
+            .graph-layout { grid-template-columns: 1fr; }
+        }
+
         /* ── TIERS ── */
         .tiers-section { background: rgba(17, 19, 24, 0.6); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
         .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.5rem; align-items: start; }
@@ -618,6 +668,7 @@
         <div class="nav-live"><span class="dot"></span>LIVE <span id="navUptime"></span></div>
         <a href="#feed">Feed</a>
         <a href="#examples">Demo</a>
+        <a href="#graph">Graph</a>
         <a href="#pricing">Pricing</a>
         <a href="#contact" class="nav-cta">Get Your System</a>
     </div>
@@ -628,8 +679,8 @@
 <section class="hero">
     <div class="aurora"></div>
     <div class="aurora-2"></div>
-    <h1 id="heroTitle">Your own <em>AI system</em>.<br>State of the art. 24/7.</h1>
-    <p class="hero-sub" id="heroSub">Personalised AI for you and your business. Built with the latest models. Supported around the clock. We integrate every new AI development within 24 hours — yours gets it within 48.</p>
+    <h1 id="heroTitle"><em>Personalised Intelligence</em>.<br>The latest AI working for you in 48 hours.</h1>
+    <p class="hero-sub" id="heroSub">We integrate every new AI development within 24 hours. Yours gets it within 48. Your own knowledge graph, automated comms, smart ordering — a complete AI system, personalised to you and your business.</p>
     <div class="hero-ctas">
         <a href="#contact" class="btn btn-primary">Get your system &rarr;</a>
         <a href="#examples" class="btn btn-ghost">See it working &darr;</a>
@@ -782,6 +833,37 @@
     </div>
 </div>
 
+<!-- KNOWLEDGE GRAPH -->
+<section class="graph-section" id="graph">
+    <div class="container">
+        <div class="section-label">Your personalised LinkedIn</div>
+        <h2 class="section-title">Every person, business, and connection — mapped.</h2>
+        <div class="graph-layout">
+            <div class="graph-copy reveal">
+                <h3>A living map of your world</h3>
+                <p>Your AI builds a knowledge graph from every interaction — calls, messages, invoices, meetings. It knows who you talked to, what you discussed, and what needs follow-up. Like LinkedIn, but private, personalised, and actually useful.</p>
+                <ul class="graph-features">
+                    <li>Auto-builds from your emails, calls, and messages</li>
+                    <li>Maps relationships between people, companies, and deals</li>
+                    <li>Surfaces connections you didn't know existed</li>
+                    <li>Reminds you before meetings who they are and what you discussed</li>
+                    <li>Private — runs on your devices, not someone else's cloud</li>
+                </ul>
+            </div>
+            <div class="graph-canvas-wrap reveal">
+                <canvas id="graphCanvas"></canvas>
+                <div class="graph-badge"><span class="dot"></span> Live graph — your data</div>
+                <div class="graph-legend">
+                    <span><span class="ldot" style="background:#6366f1;"></span> You</span>
+                    <span><span class="ldot" style="background:#22c55e;"></span> People</span>
+                    <span><span class="ldot" style="background:#f59e0b;"></span> Companies</span>
+                    <span><span class="ldot" style="background:#e1306c;"></span> Deals</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- PRICING -->
 <section id="pricing" class="tiers-section">
     <div class="container">
@@ -859,7 +941,7 @@
 
 <!-- ABOUT (2 lines) -->
 <div class="about-line">
-    <p><strong>Latsoudis.AI</strong> — Your own personalised AI system, built with the latest models, improving every day. We integrate new AI developments within 24 hours. Your system gets them within 48. State of the art support, 24/7.</p>
+    <p><strong>Latsoudis.AI</strong> — Personalised intelligence for you and your business. We integrate every new AI development within 24 hours. Your system gets it within 48. Knowledge graphs, automated comms, smart operations — all private, all yours.</p>
 </div>
 
 <!-- WHATSAPP -->
@@ -1206,6 +1288,194 @@ const obs = new IntersectionObserver(entries => {
     });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── KNOWLEDGE GRAPH (force-directed) ──
+(function() {
+    const canvas = document.getElementById('graphCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H;
+
+    function resize() {
+        const r = canvas.parentElement.getBoundingClientRect();
+        W = canvas.width = r.width * 2; H = canvas.height = r.height * 2;
+        ctx.scale(2, 2); // retina
+    }
+    resize();
+    window.addEventListener('resize', () => { ctx.setTransform(1,0,0,1,0,0); resize(); });
+
+    const COLORS = { you: '#6366f1', person: '#22c55e', company: '#f59e0b', deal: '#e1306c' };
+
+    const nodes = [
+        // You (center)
+        { id: 'you', label: 'You', type: 'you', r: 22, x: 0, y: 0, vx: 0, vy: 0 },
+        // People
+        { id: 'maria', label: 'Maria K.', type: 'person', r: 14, x: 0, y: 0, vx: 0, vy: 0 },
+        { id: 'nikos', label: 'Nikos P.', type: 'person', r: 14, x: 0, y: 0, vx: 0, vy: 0 },
+        { id: 'elena', label: 'Elena D.', type: 'person', r: 12, x: 0, y: 0, vx: 0, vy: 0 },
+        { id: 'giorgos', label: 'Giorgos T.', type: 'person', r: 13, x: 0, y: 0, vx: 0, vy: 0 },
+        { id: 'anna', label: 'Anna M.', type: 'person', r: 11, x: 0, y: 0, vx: 0, vy: 0 },
+        { id: 'dimitris', label: 'Dimitris R.', type: 'person', r: 12, x: 0, y: 0, vx: 0, vy: 0 },
+        { id: 'sofia', label: 'Sofia L.', type: 'person', r: 10, x: 0, y: 0, vx: 0, vy: 0 },
+        // Companies
+        { id: 'techco', label: 'TechCo SA', type: 'company', r: 16, x: 0, y: 0, vx: 0, vy: 0 },
+        { id: 'oliveoil', label: 'Olive Gold', type: 'company', r: 14, x: 0, y: 0, vx: 0, vy: 0 },
+        { id: 'shipco', label: 'AegeanShip', type: 'company', r: 13, x: 0, y: 0, vx: 0, vy: 0 },
+        { id: 'cafe', label: 'Cafe Thema', type: 'company', r: 11, x: 0, y: 0, vx: 0, vy: 0 },
+        { id: 'lawfirm', label: 'Lexis Legal', type: 'company', r: 12, x: 0, y: 0, vx: 0, vy: 0 },
+        // Deals
+        { id: 'deal1', label: '€12k Project', type: 'deal', r: 10, x: 0, y: 0, vx: 0, vy: 0 },
+        { id: 'deal2', label: '€5k Retainer', type: 'deal', r: 9, x: 0, y: 0, vx: 0, vy: 0 },
+        { id: 'deal3', label: '€28k Contract', type: 'deal', r: 12, x: 0, y: 0, vx: 0, vy: 0 },
+        { id: 'deal4', label: '€3.5k Order', type: 'deal', r: 8, x: 0, y: 0, vx: 0, vy: 0 },
+    ];
+
+    // Place nodes in a rough circle
+    const cw = W/4, ch = H/4;
+    nodes.forEach((n, i) => {
+        if (i === 0) { n.x = cw; n.y = ch; return; }
+        const angle = (i / (nodes.length - 1)) * Math.PI * 2 + Math.random() * 0.5;
+        const dist = 80 + Math.random() * 60;
+        n.x = cw + Math.cos(angle) * dist;
+        n.y = ch + Math.sin(angle) * dist;
+    });
+
+    const edges = [
+        // You → People
+        ['you','maria'], ['you','nikos'], ['you','elena'], ['you','giorgos'], ['you','anna'], ['you','dimitris'],
+        // You → Companies
+        ['you','techco'], ['you','oliveoil'], ['you','shipco'],
+        // People → Companies
+        ['maria','techco'], ['nikos','oliveoil'], ['elena','shipco'], ['giorgos','techco'],
+        ['anna','cafe'], ['dimitris','lawfirm'], ['sofia','oliveoil'],
+        // People → People
+        ['maria','nikos'], ['elena','giorgos'], ['anna','sofia'],
+        // Deals
+        ['deal1','techco'], ['deal1','maria'], ['deal2','oliveoil'], ['deal2','nikos'],
+        ['deal3','shipco'], ['deal3','elena'], ['deal3','giorgos'],
+        ['deal4','cafe'], ['deal4','anna'],
+        // Cross connections
+        ['lawfirm','deal3'], ['sofia','cafe'], ['dimitris','deal1'],
+    ];
+
+    const idxMap = {};
+    nodes.forEach((n, i) => idxMap[n.id] = i);
+    const edgeIdx = edges.map(([a,b]) => [idxMap[a], idxMap[b]]);
+
+    // Mouse interaction
+    let mouse = { x: -1000, y: -1000 };
+    canvas.parentElement.addEventListener('mousemove', e => {
+        const r = canvas.getBoundingClientRect();
+        mouse.x = (e.clientX - r.left) * (W / r.width) / 2;
+        mouse.y = (e.clientY - r.top) * (H / r.height) / 2;
+    });
+    canvas.parentElement.addEventListener('mouseleave', () => { mouse.x = -1000; mouse.y = -1000; });
+
+    let hovered = -1;
+
+    function simulate() {
+        const w2 = W/4, h2 = H/4;
+        // Center gravity
+        nodes.forEach(n => {
+            n.vx += (w2 - n.x) * 0.001;
+            n.vy += (h2 - n.y) * 0.001;
+        });
+        // Repulsion
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+                const dist = Math.sqrt(dx*dx + dy*dy) || 1;
+                const force = 800 / (dist * dist);
+                const fx = (dx/dist) * force, fy = (dy/dist) * force;
+                nodes[i].vx += fx; nodes[i].vy += fy;
+                nodes[j].vx -= fx; nodes[j].vy -= fy;
+            }
+        }
+        // Edge attraction
+        edgeIdx.forEach(([a,b]) => {
+            const dx = nodes[b].x - nodes[a].x, dy = nodes[b].y - nodes[a].y;
+            const dist = Math.sqrt(dx*dx + dy*dy) || 1;
+            const force = (dist - 90) * 0.003;
+            const fx = (dx/dist) * force, fy = (dy/dist) * force;
+            nodes[a].vx += fx; nodes[a].vy += fy;
+            nodes[b].vx -= fx; nodes[b].vy -= fy;
+        });
+        // Mouse hover attraction
+        hovered = -1;
+        nodes.forEach((n, i) => {
+            const dx = mouse.x - n.x, dy = mouse.y - n.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < n.r + 10 && (hovered === -1 || dist < Math.sqrt((mouse.x-nodes[hovered].x)**2+(mouse.y-nodes[hovered].y)**2))) {
+                hovered = i;
+            }
+        });
+        // Apply velocity
+        nodes.forEach((n, i) => {
+            if (i === 0) { // pin "You" near center with slight drift
+                n.x = w2 + Math.sin(Date.now() * 0.0005) * 8;
+                n.y = h2 + Math.cos(Date.now() * 0.0007) * 6;
+                n.vx = 0; n.vy = 0;
+                return;
+            }
+            n.vx *= 0.85; n.vy *= 0.85;
+            n.x += n.vx; n.y += n.vy;
+            // Bounds
+            n.x = Math.max(n.r + 5, Math.min(w2 * 2 - n.r - 5, n.x));
+            n.y = Math.max(n.r + 5, Math.min(h2 * 2 - n.r - 5, n.y));
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, W/2, H/2);
+
+        // Draw edges
+        edgeIdx.forEach(([a, b]) => {
+            const na = nodes[a], nb = nodes[b];
+            const isHovered = hovered === a || hovered === b;
+            ctx.beginPath();
+            ctx.moveTo(na.x, na.y); ctx.lineTo(nb.x, nb.y);
+            ctx.strokeStyle = isHovered ? 'rgba(129,140,248,0.4)' : 'rgba(99,102,241,0.12)';
+            ctx.lineWidth = isHovered ? 1.5 : 0.7;
+            ctx.stroke();
+        });
+
+        // Draw nodes
+        nodes.forEach((n, i) => {
+            const isH = hovered === i;
+            const color = COLORS[n.type];
+
+            // Glow
+            if (isH || n.type === 'you') {
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.r + (isH ? 12 : 6), 0, Math.PI * 2);
+                const grad = ctx.createRadialGradient(n.x, n.y, n.r, n.x, n.y, n.r + (isH ? 12 : 6));
+                grad.addColorStop(0, color + '30');
+                grad.addColorStop(1, 'transparent');
+                ctx.fillStyle = grad;
+                ctx.fill();
+            }
+
+            // Circle
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+            ctx.fillStyle = isH ? color : color + '90';
+            ctx.fill();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = isH ? 2 : 1;
+            ctx.stroke();
+
+            // Label
+            ctx.font = `${isH ? '600' : '500'} ${n.type === 'you' ? 10 : 8}px Inter, sans-serif`;
+            ctx.fillStyle = isH ? '#f0f6fc' : '#c9d1d9';
+            ctx.textAlign = 'center';
+            ctx.fillText(n.label, n.x, n.y + n.r + 13);
+        });
+
+        simulate();
+        requestAnimationFrame(draw);
+    }
+    draw();
+})();
 
 // ── 3D TILT on comms thread ──
 const commsThread = document.getElementById('commsThread');
