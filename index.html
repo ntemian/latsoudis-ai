@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Latsoudis AI — Automate Your Business. Automate Your Life.</title>
-    <meta name="description" content="AI deployment, business workflow automation, and personalised intelligence systems. We teach you, build for you, or run it for you.">
+    <meta name="description" content="AI systems deployed in 48 hours. Business automation, personalised intelligence, 24/7 support. Already trusted by businesses and individuals.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -780,6 +780,13 @@
             transform: translateY(-2px);
         }
 
+        .form-note {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-top: 0.75rem;
+            text-align: center;
+        }
+
         /* ══════════════ FOOTER ══════════════ */
         footer {
             padding: 3rem 2rem;
@@ -789,6 +796,55 @@
         footer p {
             font-size: 0.8rem;
             color: var(--text-dim);
+        }
+
+        /* ══════════════ TRUST STRIP ══════════════ */
+        .trust-strip {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.04) 0%, transparent 100%);
+            border-top: 1px solid rgba(99, 102, 241, 0.1);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .trust-item {
+            text-align: center;
+            padding: 1.5rem 1rem;
+        }
+
+        .trust-number {
+            font-size: 2.75rem;
+            font-weight: 900;
+            background: linear-gradient(180deg, #ffffff 30%, #64748b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.25rem;
+            line-height: 1.2;
+        }
+
+        .trust-shield {
+            font-size: 2.5rem;
+        }
+
+        .trust-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .trust-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
         }
 
         /* ══════════════ ANIMATIONS ══════════════ */
@@ -847,6 +903,7 @@
             .tier-card.featured { transform: none; }
             .tier-card.featured:hover { transform: translateY(-4px); }
 
+            .trust-grid { grid-template-columns: 1fr 1fr; }
             .about-layout { grid-template-columns: 1fr; }
 
             .form-row { flex-direction: column; gap: 0.75rem; }
@@ -878,12 +935,40 @@
         <div class="blob blob-3"></div>
     </div>
     <div class="hero-content">
-        <div class="hero-badge">Now Accepting Clients</div>
-        <h1>We build <em>AI systems</em><br>that run your business</h1>
-        <p class="hero-sub">Deploy AI agents, automate workflows, and build personalised intelligence systems. We teach you, build it for you, or run it — your call.</p>
+        <div class="hero-badge">Deployed in 48 Hours</div>
+        <h1>Your <em>AI systems</em><br>delivered in 2 days</h1>
+        <p class="hero-sub">We deploy AI agents, automate workflows, and build personalised intelligence systems — fast. Already used by businesses and individuals. 24/7 support from day one.</p>
         <div class="hero-ctas">
             <a href="#contact" class="btn btn-primary">Book a Free Call &rarr;</a>
             <a href="#what" class="btn btn-ghost">See What We Build</a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ TRUST STRIP ═══ -->
+<section class="trust-strip">
+    <div class="container">
+        <div class="trust-grid">
+            <div class="trust-item reveal">
+                <div class="trust-number">48h</div>
+                <div class="trust-label">Delivery Time</div>
+                <div class="trust-desc">From call to working system — two days, not two months.</div>
+            </div>
+            <div class="trust-item reveal">
+                <div class="trust-number">24/7</div>
+                <div class="trust-label">Online Support</div>
+                <div class="trust-desc">Message us anytime. Our AI-powered support responds instantly, backed by human follow-up.</div>
+            </div>
+            <div class="trust-item reveal">
+                <div class="trust-number trust-shield">&#128274;</div>
+                <div class="trust-label">High-Trust Partners</div>
+                <div class="trust-desc">AI touches your data, your workflows, your life. You need people you can trust completely. That's us.</div>
+            </div>
+            <div class="trust-item reveal">
+                <div class="trust-number">&#10003;</div>
+                <div class="trust-label">Proven &amp; Running</div>
+                <div class="trust-desc">Already used by businesses and individuals. Real systems, in production, delivering results today.</div>
+            </div>
         </div>
     </div>
 </section>
@@ -982,7 +1067,7 @@
                 <div class="spotlight"></div>
                 <div class="tier-icon">&#128218;</div>
                 <h3 class="tier-name">Learn</h3>
-                <p class="tier-desc">We teach you how to deploy and manage AI systems yourself. Perfect for founders and technical teams ready to go independent.</p>
+                <p class="tier-desc">We teach you how to deploy and manage AI systems yourself. Hands-on workshops — you walk out building, not reading slides.</p>
                 <div class="tier-price">Custom</div>
                 <div class="tier-price-note">Workshops &amp; advisory engagements</div>
                 <ul class="tier-features">
@@ -1003,8 +1088,8 @@
                 <div class="spotlight"></div>
                 <div class="tier-icon">&#9889;</div>
                 <h3 class="tier-name">Build</h3>
-                <p class="tier-desc">We design, develop, and deploy a complete AI system for your business. End-to-end, from architecture to production.</p>
-                <div class="tier-price">Custom</div>
+                <p class="tier-desc">We design, develop, and deploy a complete AI system for your business. 48-hour delivery. End-to-end, from architecture to production.</p>
+                <div class="tier-price">48h Delivery</div>
                 <div class="tier-price-note">Per-project or monthly retainer</div>
                 <ul class="tier-features">
                     <li><span class="check"></span>Everything in Learn</li>
@@ -1023,8 +1108,8 @@
                 <div class="spotlight"></div>
                 <div class="tier-icon">&#128736;&#65039;</div>
                 <h3 class="tier-name">Maintain &amp; Support</h3>
-                <p class="tier-desc">We keep your AI systems running, improving, and scaling. Continuous monitoring, optimisation, and evolution.</p>
-                <div class="tier-price">Custom</div>
+                <p class="tier-desc">We keep your AI systems running, improving, and scaling. 24/7 online support — message us anytime, get answers instantly.</p>
+                <div class="tier-price">24/7 Support</div>
                 <div class="tier-price-note">Ongoing monthly retainer</div>
                 <ul class="tier-features">
                     <li><span class="check"></span>Everything in Build</li>
@@ -1081,9 +1166,9 @@
 
         <div class="about-layout">
             <div class="about-text reveal">
-                <p>We're <strong>Ntemis &amp; Apollo Latsoudis</strong> — two brothers who don't just advise on AI, we live it. We've built and deployed AI systems that run real businesses, automate real workflows, and serve as genuine personal intelligence platforms.</p>
-                <p>Our approach is hands-on and pragmatic. We don't sell slide decks or strategy documents. We build <strong>working systems</strong> and teach you how to own them.</p>
-                <p>Whether you're a solo founder looking to 10x your output, a team wanting to learn AI, or an established business ready to modernise operations — we have the expertise and the battle scars to make it work.</p>
+                <p>We're <strong>Ntemis &amp; Apollo Latsoudis</strong> — two brothers who don't just advise on AI, we live it. We run AI systems that manage our own businesses, automate our own workflows, and act as genuine personal intelligence platforms — every single day.</p>
+                <p><strong>AI touches everything</strong> — your data, your operations, your decisions. Building these systems requires absolute trust. We're not a faceless agency. We're two people who stake our names and reputation on every system we deliver.</p>
+                <p>Our clients — businesses and individuals — choose us because we deliver <strong>fast</strong> (48 hours, not 48 days), we stay <strong>available</strong> (24/7 online support), and we build things that <strong>actually work</strong> in the real world.</p>
             </div>
             <div class="about-stats reveal">
                 <div class="stat-card">
@@ -1110,31 +1195,32 @@
 <!-- ═══ CTA / CONTACT ═══ -->
 <section id="contact" class="cta-section">
     <div class="cta-box">
-        <h2>Ready to put AI to work?</h2>
-        <p>Tell us what you're trying to automate. We'll tell you exactly how — for free.</p>
+        <h2>Message us now — we reply 24/7</h2>
+        <p>Tell us what you want to automate. You'll hear back within minutes, not days.</p>
 
-        <form class="contact-form" action="https://formspree.io/f/REPLACE_ME" method="POST">
+        <form class="contact-form" id="contactForm" onsubmit="sendToWhatsApp(event)">
             <div class="form-row">
                 <div class="form-group">
-                    <input type="text" name="name" placeholder="Your name" required>
+                    <input type="text" name="name" id="formName" placeholder="Your name" required>
                 </div>
                 <div class="form-group">
-                    <input type="email" name="email" placeholder="Email address" required>
+                    <input type="email" name="email" id="formEmail" placeholder="Email address" required>
                 </div>
             </div>
             <div class="form-group">
-                <select name="interest" required>
+                <select name="interest" id="formInterest" required>
                     <option value="" disabled selected>I'm interested in...</option>
-                    <option value="learn">Learn — Teach me / my team</option>
-                    <option value="build">Build — Design &amp; deploy for me</option>
-                    <option value="maintain">Maintain — Ongoing support &amp; ops</option>
-                    <option value="unsure">Not sure yet — let's talk</option>
+                    <option value="Learn — Teach me / my team">Learn — Teach me / my team</option>
+                    <option value="Build — Design &amp; deploy for me">Build — Design &amp; deploy for me</option>
+                    <option value="Maintain — Ongoing support">Maintain — Ongoing support &amp; ops</option>
+                    <option value="Not sure yet">Not sure yet — let's talk</option>
                 </select>
             </div>
             <div class="form-group">
-                <textarea name="message" placeholder="What do you want to automate? Tell us briefly..." required></textarea>
+                <textarea name="message" id="formMessage" placeholder="What do you want to automate? Tell us briefly..." required></textarea>
             </div>
-            <button type="submit" class="form-submit">Send Message &rarr;</button>
+            <button type="submit" class="form-submit">Send via WhatsApp &rarr;</button>
+            <p class="form-note">Opens WhatsApp — we respond 24/7 via our AI-powered support line.</p>
         </form>
     </div>
 </section>
@@ -1171,6 +1257,24 @@
             document.getElementById('navLinks').classList.remove('open');
         });
     });
+
+    // ── WhatsApp form submission ──
+    function sendToWhatsApp(e) {
+        e.preventDefault();
+        const name = document.getElementById('formName').value.trim();
+        const email = document.getElementById('formEmail').value.trim();
+        const interest = document.getElementById('formInterest').value;
+        const message = document.getElementById('formMessage').value.trim();
+
+        const text = `*New enquiry from Latsoudis.AI*\n\n` +
+            `*Name:* ${name}\n` +
+            `*Email:* ${email}\n` +
+            `*Interested in:* ${interest}\n` +
+            `*Message:* ${message}`;
+
+        const encoded = encodeURIComponent(text);
+        window.open(`https://wa.me/306979088738?text=${encoded}`, '_blank');
+    }
 
     // ── Text scramble on hero headline ──
     class TextScramble {
