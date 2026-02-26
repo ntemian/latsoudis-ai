@@ -50,7 +50,67 @@
         /* ── PARTICLE CANVAS ── */
         #particles {
             position: fixed; inset: 0; z-index: 0;
-            pointer-events: none; opacity: 0.4;
+            pointer-events: none; opacity: 0.5;
+        }
+
+        /* ── GLOBAL CURSOR SPOTLIGHT ── */
+        .cursor-glow {
+            position: fixed; width: 600px; height: 600px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 70%);
+            pointer-events: none; z-index: 0;
+            transform: translate(-50%, -50%);
+            transition: left 0.15s ease-out, top 0.15s ease-out;
+        }
+
+        /* ── AURORA ORB (hero) ── */
+        .aurora {
+            position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%);
+            width: 500px; height: 500px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, rgba(139,92,246,0.08) 40%, transparent 70%);
+            filter: blur(80px); animation: aurora-drift 8s ease-in-out infinite;
+            pointer-events: none; z-index: 0;
+        }
+        @keyframes aurora-drift {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+            33% { transform: translate(-45%, -55%) scale(1.1); opacity: 0.8; }
+            66% { transform: translate(-55%, -45%) scale(0.95); opacity: 0.5; }
+        }
+
+        /* ── TEXT SCRAMBLE ── */
+        .scramble-char {
+            display: inline-block;
+            transition: opacity 0.1s;
+        }
+        .scramble-char.resolving {
+            animation: charPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes charPop {
+            0% { transform: translateY(4px) scale(0.8); opacity: 0.3; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        /* ── MAGNETIC BTN ── */
+        .btn { position: relative; }
+
+        /* ── ANIMATED GRADIENT BORDERS ── */
+        .glow-border {
+            position: relative;
+        }
+        .glow-border::before {
+            content: ""; position: absolute; inset: -1px; border-radius: inherit; z-index: -1;
+            background: conic-gradient(from var(--angle, 0deg), transparent 60%, rgba(99,102,241,0.4) 75%, transparent 90%);
+            animation: border-spin 4s linear infinite;
+            opacity: 0; transition: opacity 0.4s;
+        }
+        .glow-border:hover::before { opacity: 1; }
+        @property --angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+        @keyframes border-spin { to { --angle: 360deg; } }
+
+        /* ── COUNTER GLOW ── */
+        .stat-val { position: relative; }
+        .stat-val.counting {
+            text-shadow: 0 0 20px rgba(99,102,241,0.4), 0 0 40px rgba(99,102,241,0.2);
+            transition: text-shadow 0.5s;
         }
 
         /* ── NAV ── */
@@ -224,7 +284,7 @@
             padding: 10px 14px; display: flex; align-items: center; gap: 10px;
             transition: all 0.2s; cursor: pointer;
         }
-        .comms-ch:hover, .comms-ch.active { border-color: var(--border-hover); background: var(--bg-hover); }
+        .comms-ch:hover, .comms-ch.active { border-color: var(--border-accent); background: var(--bg-hover); }
         .comms-ch-icon {
             width: 32px; height: 32px; border-radius: 8px; display: flex;
             align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0;
@@ -240,6 +300,10 @@
         .comms-thread {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
             display: flex; flex-direction: column; overflow: hidden;
+            transition: transform 0.15s ease-out, box-shadow 0.3s;
+        }
+        .comms-thread:hover {
+            box-shadow: 0 20px 60px rgba(99,102,241,0.08), 0 0 0 1px rgba(99,102,241,0.15);
         }
         .comms-thread-header {
             padding: 10px 14px; border-bottom: 1px solid var(--border);
@@ -491,6 +555,7 @@
 <body>
 
 <canvas id="particles"></canvas>
+<div class="cursor-glow" id="cursorGlow"></div>
 
 <!-- NAV -->
 <nav>
@@ -507,8 +572,9 @@
 
 <!-- HERO -->
 <section class="hero">
-    <h1>We make AI<br><em>work for you</em>.</h1>
-    <p class="hero-sub">New AI drops every day. We integrate it into our own systems within 24 hours. Yours get it within 48. Invoicing, support, scheduling, ordering — if you're doing it manually, we automate it.</p>
+    <div class="aurora"></div>
+    <h1 id="heroTitle">We make AI<br><em>work for you</em>.</h1>
+    <p class="hero-sub">New AI drops every day. We integrate it into our own systems within 24 hours. Yours get it within 48.</p>
     <div class="hero-ctas">
         <a href="#contact" class="btn btn-primary">Tell us what's manual &rarr;</a>
         <a href="#examples" class="btn btn-ghost">Watch it work &darr;</a>
@@ -667,7 +733,7 @@
         <div class="section-label">Simple pricing</div>
         <h2 class="section-title">Learn it. Build it. Keep it running.</h2>
         <div class="tiers">
-            <div class="tier reveal">
+            <div class="tier glow-border reveal">
                 <div class="spotlight"></div>
                 <h3 class="tier-name">Learn</h3>
                 <p class="tier-desc">We show you how. One day together — you leave knowing what to build and how to build it.</p>
@@ -688,7 +754,7 @@
                     <a href="#contact"><button class="tier-chat">Chat first on WhatsApp</button></a>
                 </div>
             </div>
-            <div class="tier featured reveal">
+            <div class="tier featured glow-border reveal">
                 <div class="tier-badge">Most Popular</div>
                 <div class="spotlight"></div>
                 <h3 class="tier-name">Build</h3>
@@ -710,7 +776,7 @@
                     <a href="#contact"><button class="tier-chat">Chat first on WhatsApp</button></a>
                 </div>
             </div>
-            <div class="tier reveal">
+            <div class="tier glow-border reveal">
                 <div class="spotlight"></div>
                 <h3 class="tier-name">Maintain</h3>
                 <p class="tier-desc">We watch it 24/7. When AI gets better, your system gets better — automatically. Cancel anytime.</p>
@@ -787,34 +853,48 @@
 <footer><div class="container"><p>&copy; 2026 latsoudis.ai</p></div></footer>
 
 <script>
-// ── PARTICLE NETWORK ──
+// ── PARTICLE NETWORK (enhanced — mouse attraction) ──
 (function() {
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
-    let w, h, particles = [];
-    const COUNT = 60, CONNECT_DIST = 150;
+    let w, h, particles = [], mouse = { x: -1000, y: -1000 };
+    const COUNT = 90, CONNECT_DIST = 160, MOUSE_RADIUS = 200;
 
     function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
     window.addEventListener('resize', resize); resize();
+    document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
 
     for (let i = 0; i < COUNT; i++) {
         particles.push({
             x: Math.random() * w, y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
-            r: Math.random() * 1.5 + 0.5
+            vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+            r: Math.random() * 1.8 + 0.5, baseR: 0
         });
+        particles[i].baseR = particles[i].r;
     }
 
     function draw() {
         ctx.clearRect(0, 0, w, h);
         for (let i = 0; i < particles.length; i++) {
             const p = particles[i];
+            // Mouse attraction
+            const dmx = mouse.x - p.x, dmy = mouse.y - p.y;
+            const dm = Math.sqrt(dmx*dmx + dmy*dmy);
+            if (dm < MOUSE_RADIUS && dm > 1) {
+                const force = (MOUSE_RADIUS - dm) / MOUSE_RADIUS * 0.015;
+                p.vx += (dmx / dm) * force;
+                p.vy += (dmy / dm) * force;
+                p.r = p.baseR + (1 - dm / MOUSE_RADIUS) * 2; // grow near cursor
+            } else {
+                p.r += (p.baseR - p.r) * 0.1;
+            }
+            p.vx *= 0.99; p.vy *= 0.99;
             p.x += p.vx; p.y += p.vy;
             if (p.x < 0 || p.x > w) p.vx *= -1;
             if (p.y < 0 || p.y > h) p.vy *= -1;
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(99, 102, 241, 0.5)';
+            ctx.fillStyle = dm < MOUSE_RADIUS ? `rgba(129, 140, 248, ${0.4 + (1-dm/MOUSE_RADIUS)*0.5})` : 'rgba(99, 102, 241, 0.4)';
             ctx.fill();
             for (let j = i + 1; j < particles.length; j++) {
                 const q = particles[j];
@@ -823,8 +903,9 @@
                 if (dist < CONNECT_DIST) {
                     ctx.beginPath();
                     ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
-                    ctx.strokeStyle = `rgba(99, 102, 241, ${0.15 * (1 - dist / CONNECT_DIST)})`;
-                    ctx.lineWidth = 0.5;
+                    const alpha = 0.18 * (1 - dist / CONNECT_DIST);
+                    ctx.strokeStyle = `rgba(99, 102, 241, ${alpha})`;
+                    ctx.lineWidth = 0.6;
                     ctx.stroke();
                 }
             }
@@ -833,6 +914,89 @@
     }
     draw();
 })();
+
+// ── CURSOR GLOW ──
+(function() {
+    const glow = document.getElementById('cursorGlow');
+    document.addEventListener('mousemove', e => {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+    });
+})();
+
+// ── TEXT SCRAMBLE ──
+(function() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*';
+    const el = document.getElementById('heroTitle');
+    if (!el) return;
+    const original = el.innerHTML;
+    // Extract text nodes only (preserve <br> and <em>)
+    const textContent = el.textContent;
+    const scrambleDuration = 1500;
+    const startDelay = 300;
+
+    // Scramble phase: replace text chars with random chars
+    let frame = 0;
+    const totalFrames = 40;
+
+    function getScrambled(progress) {
+        let result = '';
+        let charIdx = 0;
+        for (let i = 0; i < original.length; i++) {
+            if (original[i] === '<') {
+                // Skip tags
+                const end = original.indexOf('>', i);
+                result += original.slice(i, end + 1);
+                i = end;
+            } else if (original[i] === '&') {
+                const end = original.indexOf(';', i);
+                result += original.slice(i, end + 1);
+                i = end;
+                charIdx++;
+            } else {
+                const threshold = charIdx / textContent.length;
+                if (original[i] === ' ' || original[i] === '\n') {
+                    result += original[i];
+                } else if (progress > threshold) {
+                    result += original[i];
+                } else {
+                    result += chars[Math.floor(Math.random() * chars.length)];
+                }
+                charIdx++;
+            }
+        }
+        return result;
+    }
+
+    setTimeout(() => {
+        function step() {
+            frame++;
+            const progress = frame / totalFrames;
+            el.innerHTML = getScrambled(progress);
+            if (frame < totalFrames) {
+                requestAnimationFrame(step);
+            } else {
+                el.innerHTML = original;
+            }
+        }
+        // Start with scrambled
+        el.innerHTML = getScrambled(0);
+        requestAnimationFrame(step);
+    }, startDelay);
+})();
+
+// ── MAGNETIC BUTTONS ──
+document.querySelectorAll('.btn-primary, .wa-direct-btn, .tier-pay').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+        const r = btn.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width / 2;
+        const y = e.clientY - r.top - r.height / 2;
+        btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+    });
+});
 
 // ── COMMS DEMO ──
 const COMMS_DATA = [
@@ -890,20 +1054,26 @@ function switchCommsChannel(idx) {
     });
 }
 
-// ── STATS COUNTERS ──
+// ── STATS COUNTERS (with glow) ──
 let countersAnimated = false;
 function animateCounters() {
     if (countersAnimated) return;
     countersAnimated = true;
     document.querySelectorAll('[data-counter]').forEach(el => {
         const target = parseInt(el.dataset.target);
-        const duration = 2000;
+        const duration = 2200;
         const start = performance.now();
+        const parent = el.closest('.stat-val');
+        if (parent) parent.classList.add('counting');
         function step(now) {
             const progress = Math.min((now - start) / duration, 1);
             const eased = 1 - Math.pow(1 - progress, 3);
             el.textContent = Math.floor(target * eased).toLocaleString();
-            if (progress < 1) requestAnimationFrame(step);
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            } else {
+                setTimeout(() => { if (parent) parent.classList.remove('counting'); }, 500);
+            }
         }
         requestAnimationFrame(step);
     });
@@ -954,6 +1124,20 @@ const obs = new IntersectionObserver(entries => {
     });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── 3D TILT on comms thread ──
+const commsThread = document.getElementById('commsThread');
+if (commsThread) {
+    commsThread.addEventListener('mousemove', e => {
+        const r = commsThread.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        commsThread.style.transform = `perspective(800px) rotateY(${x * 4}deg) rotateX(${-y * 4}deg)`;
+    });
+    commsThread.addEventListener('mouseleave', () => {
+        commsThread.style.transform = '';
+    });
+}
 
 // ── SPOTLIGHT ──
 document.querySelectorAll('.tier').forEach(card => {
