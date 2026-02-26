@@ -541,6 +541,12 @@
             display: none;
         }
 
+        .tier-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
         .tier-cta {
             width: 100%;
             padding: 14px;
@@ -554,6 +560,11 @@
             background: transparent;
             color: var(--text);
             border: 1px solid var(--border);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         .tier-cta:hover {
             background: var(--bg-hover);
@@ -568,6 +579,93 @@
         .tier-card.featured .tier-cta:hover {
             background: #e2e8f0;
             box-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+
+        /* Stripe pay button */
+        .tier-pay {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-family: inherit;
+            background: #635bff;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-align: center;
+        }
+
+        .tier-pay:hover {
+            background: #7a73ff;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(99, 91, 255, 0.3);
+        }
+
+        .tier-card.featured .tier-pay {
+            background: #635bff;
+            color: #fff;
+        }
+        .tier-card.featured .tier-pay:hover {
+            background: #7a73ff;
+            box-shadow: 0 6px 20px rgba(99, 91, 255, 0.3);
+        }
+
+        .tier-pay svg {
+            width: 18px; height: 18px;
+            fill: currentColor;
+        }
+
+        .tier-or {
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Stripe trust badges */
+        .stripe-trust {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 1rem;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+        }
+
+        .stripe-trust svg {
+            width: 14px; height: 14px;
+            fill: var(--text-dim);
+        }
+
+        .payment-note {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.25rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg-card);
+        }
+
+        .payment-note p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .payment-note .stripe-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 700;
+            color: #635bff;
         }
 
         /* ══════════════ PROCESS STEPS ══════════════ */
@@ -1264,7 +1362,16 @@
                     <li class="excluded"><span class="check"></span>Full system development</li>
                     <li class="excluded"><span class="check"></span>Ongoing maintenance</li>
                 </ul>
-                <a href="#contact"><button class="tier-cta">Book a Workshop</button></a>
+                <div class="tier-buttons">
+                    <a href="STRIPE_LEARN_LINK" target="_blank" rel="noopener" class="stripe-link">
+                        <button type="button" class="tier-pay">
+                            <svg viewBox="0 0 24 24"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z"/></svg>
+                            Pay Deposit
+                        </button>
+                    </a>
+                    <div class="tier-or">or</div>
+                    <a href="#contact"><button type="button" class="tier-cta">Chat First on WhatsApp</button></a>
+                </div>
             </div>
 
             <!-- BUILD -->
@@ -1285,7 +1392,16 @@
                     <li><span class="check"></span>Team training &amp; handover</li>
                     <li class="excluded"><span class="check"></span>24/7 monitoring</li>
                 </ul>
-                <a href="#contact"><button class="tier-cta">Start Building</button></a>
+                <div class="tier-buttons">
+                    <a href="STRIPE_BUILD_LINK" target="_blank" rel="noopener" class="stripe-link">
+                        <button type="button" class="tier-pay">
+                            <svg viewBox="0 0 24 24"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z"/></svg>
+                            Pay &amp; Start Building
+                        </button>
+                    </a>
+                    <div class="tier-or">or</div>
+                    <a href="#contact"><button type="button" class="tier-cta">Chat First on WhatsApp</button></a>
+                </div>
             </div>
 
             <!-- MAINTAIN & SUPPORT -->
@@ -1305,8 +1421,28 @@
                     <li><span class="check"></span>Monthly strategy reviews</li>
                     <li><span class="check"></span>Scaling &amp; new feature builds</li>
                 </ul>
-                <a href="#contact"><button class="tier-cta">Contact Us</button></a>
+                <div class="tier-buttons">
+                    <a href="STRIPE_MAINTAIN_LINK" target="_blank" rel="noopener" class="stripe-link">
+                        <button type="button" class="tier-pay">
+                            <svg viewBox="0 0 24 24"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z"/></svg>
+                            Subscribe Monthly
+                        </button>
+                    </a>
+                    <div class="tier-or">or</div>
+                    <a href="#contact"><button type="button" class="tier-cta">Chat First on WhatsApp</button></a>
+                </div>
             </div>
+        </div>
+
+        <!-- Stripe trust note -->
+        <div class="payment-note reveal">
+            <p>
+                <span class="stripe-logo">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="#635bff"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z"/></svg>
+                    Stripe
+                </span>
+                &mdash; All payments are processed securely via Stripe. Your card details never touch our servers. Refund guaranteed if we don't deliver.
+            </p>
         </div>
     </div>
 </section>
