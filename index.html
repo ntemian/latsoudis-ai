@@ -203,40 +203,174 @@
         }
         .section-sub { font-size: 0.95rem; color: var(--text-muted); max-width: 520px; line-height: 1.6; }
 
-        /* ── EXAMPLES ── */
-        .examples-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 0.75rem; margin-top: 2.5rem;
+        /* ── DEMOS SECTION ── */
+        .demos-nav {
+            display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap;
         }
-        .ex-card {
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 12px; padding: 1.5rem; transition: all 0.25s;
-            position: relative; overflow: hidden;
+        .demo-tab {
+            padding: 8px 16px; border-radius: 8px; font-family: var(--mono);
+            font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+            background: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted);
+            cursor: pointer; transition: all 0.2s;
         }
-        .ex-card .spotlight {
-            position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.3s;
-            background: radial-gradient(350px circle at var(--mx,50%) var(--my,50%), var(--accent-glow), transparent 60%);
-        }
-        .ex-card:hover .spotlight { opacity: 1; }
-        .ex-card:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: 0 16px 32px rgba(0,0,0,0.3); }
-        .ex-featured {
-            grid-column: 1 / -1;
-            background: linear-gradient(135deg, rgba(99,102,241,0.05), var(--bg-card) 50%);
-            border-color: var(--border-accent);
-        }
-        .ex-label {
-            display: inline-block; font-family: var(--mono); font-size: 0.6rem; font-weight: 700;
+        .demo-tab:hover { border-color: var(--border-hover); color: var(--text-bright); }
+        .demo-tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+        .demo-panel { display: none; }
+        .demo-panel.active { display: block; }
+        .demo-label {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: var(--mono); font-size: 0.6rem; font-weight: 700;
             text-transform: uppercase; letter-spacing: 0.1em; color: var(--green);
-            background: var(--green-dim); padding: 2px 8px; border-radius: 4px; margin-bottom: 0.6rem;
+            background: var(--green-dim); padding: 3px 10px; border-radius: 4px; margin-bottom: 1rem;
         }
-        .ex-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--text-bright); margin-bottom: 0.35rem; position: relative; }
-        .ex-featured h3 { font-size: 1.25rem; }
-        .ex-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; position: relative; }
-        .ex-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.75rem; position: relative; }
-        .ex-tags span {
-            padding: 2px 8px; font-family: var(--mono); font-size: 0.65rem;
-            background: rgba(99,102,241,0.06); border: 1px solid rgba(99,102,241,0.12);
-            border-radius: 4px; color: var(--accent-light);
+        .demo-label .dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: blink 2s infinite; }
+
+        /* ── KNOWLEDGE GRAPH ── */
+        #graphCanvas {
+            width: 100%; height: 450px; border-radius: 12px;
+            border: 1px solid var(--border); background: var(--bg-card);
+        }
+        .graph-legend {
+            display: flex; gap: 1.25rem; margin-top: 0.75rem; flex-wrap: wrap;
+        }
+        .graph-legend-item {
+            display: flex; align-items: center; gap: 6px;
+            font-family: var(--mono); font-size: 0.65rem; color: var(--text-muted);
+        }
+        .graph-legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+        /* ── MULTI-SOURCE NEWS ── */
+        .news-sources {
+            display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;
+        }
+        .news-src-tag {
+            font-family: var(--mono); font-size: 0.6rem; font-weight: 600;
+            padding: 3px 10px; border-radius: 4px;
+            text-transform: uppercase; letter-spacing: 0.08em;
+        }
+        .news-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 0.6rem;
+        }
+        .news-item {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 10px; padding: 0.9rem 1.1rem; transition: all 0.2s;
+            cursor: pointer; display: flex; flex-direction: column; gap: 5px;
+        }
+        .news-item:hover { border-color: var(--border-hover); background: var(--bg-hover); }
+        .news-item-src {
+            font-family: var(--mono); font-size: 0.55rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.08em;
+        }
+        .news-item-title { font-size: 0.82rem; font-weight: 600; color: var(--text-bright); line-height: 1.4; }
+        .news-item-meta { font-family: var(--mono); font-size: 0.6rem; color: var(--text-muted); }
+
+        /* ── COMMS HUB ── */
+        .comms-grid {
+            display: grid; grid-template-columns: 280px 1fr; gap: 1rem; margin-top: 1rem;
+        }
+        .comms-channels {
+            display: flex; flex-direction: column; gap: 0.5rem;
+        }
+        .comms-ch {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+            padding: 10px 14px; display: flex; align-items: center; gap: 10px;
+            transition: all 0.2s; cursor: pointer;
+        }
+        .comms-ch:hover, .comms-ch.active { border-color: var(--border-hover); background: var(--bg-hover); }
+        .comms-ch-icon {
+            width: 32px; height: 32px; border-radius: 8px; display: flex;
+            align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0;
+        }
+        .comms-ch-info { flex: 1; min-width: 0; }
+        .comms-ch-name { font-size: 0.8rem; font-weight: 600; color: var(--text-bright); }
+        .comms-ch-preview { font-size: 0.7rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .comms-ch-badge {
+            min-width: 18px; height: 18px; border-radius: 9px; font-size: 0.6rem;
+            font-weight: 700; display: flex; align-items: center; justify-content: center;
+            padding: 0 5px;
+        }
+        .comms-thread {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+            display: flex; flex-direction: column; overflow: hidden;
+        }
+        .comms-thread-header {
+            padding: 10px 14px; border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; gap: 8px;
+        }
+        .comms-thread-name { font-size: 0.8rem; font-weight: 600; color: var(--text-bright); }
+        .comms-thread-ai {
+            font-family: var(--mono); font-size: 0.55rem; padding: 2px 6px;
+            background: var(--green-dim); color: var(--green); border-radius: 3px; font-weight: 700;
+        }
+        .comms-msgs {
+            flex: 1; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px;
+            min-height: 240px; max-height: 320px; overflow-y: auto;
+        }
+        .comms-msg {
+            max-width: 80%; padding: 8px 12px; border-radius: 10px; font-size: 0.78rem; line-height: 1.45;
+        }
+        .comms-msg-in { background: rgba(99,102,241,0.08); color: var(--text); align-self: flex-start; border-bottom-left-radius: 2px; }
+        .comms-msg-out { background: rgba(34,197,94,0.1); color: var(--text); align-self: flex-end; border-bottom-right-radius: 2px; }
+        .comms-msg-ai { background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.2); }
+        .comms-msg-label { font-family: var(--mono); font-size: 0.55rem; font-weight: 700; margin-bottom: 3px; }
+        .comms-status-bar {
+            padding: 8px 14px; border-top: 1px solid var(--border);
+            font-family: var(--mono); font-size: 0.6rem; color: var(--text-muted);
+            display: flex; align-items: center; gap: 6px;
+        }
+        .comms-status-bar .dot { width: 5px; height: 5px; background: var(--green); border-radius: 50%; animation: blink 2s infinite; }
+
+        /* ── LIFEOS DASHBOARD ── */
+        .lifeos-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-top: 1rem;
+        }
+        .lifeos-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+            padding: 1.2rem; text-align: center; transition: all 0.2s; position: relative; overflow: hidden;
+        }
+        .lifeos-card:hover { border-color: var(--border-hover); }
+        .lifeos-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .lifeos-val {
+            font-family: var(--mono); font-size: 1.8rem; font-weight: 900;
+            color: var(--text-bright); line-height: 1.2;
+        }
+        .lifeos-unit { font-size: 0.45em; font-weight: 500; color: var(--text-muted); }
+        .lifeos-label {
+            font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.1em; color: var(--text-muted); margin-top: 0.3rem;
+        }
+        .lifeos-sublabel {
+            font-family: var(--mono); font-size: 0.6rem; color: var(--green); margin-top: 0.2rem;
+        }
+        .lifeos-feed {
+            margin-top: 1rem; background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 12px; overflow: hidden;
+        }
+        .lifeos-feed-header {
+            padding: 10px 14px; border-bottom: 1px solid var(--border);
+            font-family: var(--mono); font-size: 0.7rem; font-weight: 700; color: var(--green);
+            display: flex; align-items: center; gap: 6px;
+        }
+        .lifeos-feed-header .dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: blink 2s infinite; }
+        .lifeos-feed-items { max-height: 220px; overflow-y: auto; }
+        .lifeos-feed-item {
+            padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.02);
+            display: flex; align-items: center; gap: 10px; font-size: 0.75rem;
+            animation: feedSlide 0.4s ease-out;
+        }
+        @keyframes feedSlide { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+        .lifeos-feed-icon { font-size: 0.9rem; width: 24px; text-align: center; }
+        .lifeos-feed-text { color: var(--text); flex: 1; }
+        .lifeos-feed-text strong { color: var(--text-bright); }
+        .lifeos-feed-time { font-family: var(--mono); font-size: 0.6rem; color: var(--text-muted); white-space: nowrap; }
+
+        @media (max-width: 1024px) {
+            .lifeos-grid { grid-template-columns: repeat(2, 1fr); }
+            .comms-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .lifeos-grid { grid-template-columns: 1fr 1fr; }
+            .news-grid { grid-template-columns: 1fr; }
         }
 
         /* ── TIERS ── */
@@ -409,7 +543,6 @@
 
         /* ── RESPONSIVE ── */
         @media (max-width: 1024px) {
-            .examples-grid { grid-template-columns: 1fr 1fr; }
             .tiers { grid-template-columns: 1fr 1fr; }
         }
         @media (max-width: 768px) {
@@ -421,13 +554,14 @@
                 backdrop-filter: blur(20px); padding: 1rem 2rem; border-bottom: 1px solid var(--border); gap: 0.75rem;
             }
             .trust-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
-            .examples-grid, .tiers { grid-template-columns: 1fr; }
+            .tiers { grid-template-columns: 1fr; }
             .tier.featured { transform: none; }
             .tier.featured:hover { transform: translateY(-3px); }
             .feed-grid { grid-template-columns: 1fr; }
             .wa-float { bottom: 16px; right: 16px; }
             .wa-float-btn { width: 48px; height: 48px; }
             section { padding: 3.5rem 1.25rem; }
+            #graphCanvas { height: 300px; }
         }
     </style>
 </head>
@@ -441,7 +575,7 @@
     <div class="nav-links" id="navLinks">
         <div class="nav-live"><span class="dot"></span>MONITORING</div>
         <a href="#feed">Live Feed</a>
-        <a href="#examples">Built</a>
+        <a href="#examples">Demos</a>
         <a href="#pricing">Pricing</a>
         <a href="#contact" class="nav-cta">Talk to Us</a>
     </div>
@@ -505,48 +639,171 @@
     </div>
 </section>
 
-<!-- EXAMPLES -->
+<!-- LIVE DEMOS -->
 <section id="examples">
     <div class="container">
-        <div class="section-label">Already built &amp; running</div>
-        <h2 class="section-title">Systems like these — in 48 hours</h2>
-        <div class="examples-grid">
-            <div class="ex-card ex-featured reveal">
-                <div class="spotlight"></div>
-                <div class="ex-label">In Production</div>
-                <h3>Life Operating System</h3>
-                <p>Personal intelligence platform managing calendar, comms, finances, health, family logistics, and 20+ connected devices through natural language. Autonomous AI agents running 24/7.</p>
-                <div class="ex-tags"><span>Personal AI</span><span>30+ Integrations</span><span>Autonomous Agents</span><span>Knowledge Base</span></div>
+        <div class="section-label">Live demos — running right now</div>
+        <h2 class="section-title">Don't take our word for it. Watch it work.</h2>
+
+        <div class="demos-nav">
+            <button class="demo-tab active" onclick="switchDemo('graph')">Knowledge Graph</button>
+            <button class="demo-tab" onclick="switchDemo('news')">Multi-Source Intel</button>
+            <button class="demo-tab" onclick="switchDemo('comms')">Comms Hub</button>
+            <button class="demo-tab" onclick="switchDemo('lifeos')">LifeOS</button>
+        </div>
+
+        <!-- DEMO 1: Knowledge Graph -->
+        <div class="demo-panel active" id="demo-graph">
+            <div class="demo-label"><span class="dot"></span> Live relationship graph — 40+ entities</div>
+            <canvas id="graphCanvas"></canvas>
+            <div class="graph-legend">
+                <div class="graph-legend-item"><div class="graph-legend-dot" style="background:rgb(99,102,241)"></div>Person</div>
+                <div class="graph-legend-item"><div class="graph-legend-dot" style="background:rgb(34,197,94)"></div>System</div>
+                <div class="graph-legend-item"><div class="graph-legend-dot" style="background:rgb(245,158,11)"></div>Service</div>
+                <div class="graph-legend-item"><div class="graph-legend-dot" style="background:rgb(239,68,68)"></div>Device</div>
+                <div class="graph-legend-item"><div class="graph-legend-dot" style="background:rgb(6,182,212)"></div>Platform</div>
             </div>
-            <div class="ex-card reveal">
-                <div class="spotlight"></div>
-                <h3>Smart Home Orchestration</h3>
-                <p>One AI layer controlling every device — TV, fridge, espresso machine, vacuum, lighting. One interface, zero apps.</p>
-                <div class="ex-tags"><span>IoT</span><span>Voice</span><span>Automation</span></div>
+        </div>
+
+        <!-- DEMO 2: Multi-Source News -->
+        <div class="demo-panel" id="demo-news">
+            <div class="demo-label"><span class="dot"></span> Scanning 4 sources every 5 minutes</div>
+            <div class="news-sources">
+                <span class="news-src-tag" style="background:rgba(255,102,0,0.12);color:#ff6600;">Hacker News</span>
+                <span class="news-src-tag" style="background:rgba(255,69,0,0.12);color:#ff4500;">Reddit r/artificial</span>
+                <span class="news-src-tag" style="background:rgba(0,166,107,0.12);color:#00a66b;">TechCrunch</span>
+                <span class="news-src-tag" style="background:rgba(99,102,241,0.12);color:#818cf8;">ArsTechnica</span>
             </div>
-            <div class="ex-card reveal">
-                <div class="spotlight"></div>
-                <h3>Business Workflow Engine</h3>
-                <p>CRM, WhatsApp support bot, invoicing, lead scoring, dashboards — replacing 3 FTEs of manual work.</p>
-                <div class="ex-tags"><span>CRM</span><span>WhatsApp Bot</span><span>Invoicing</span></div>
+            <div class="news-grid" id="newsGrid">
+                <div class="feed-skeleton"></div><div class="feed-skeleton"></div>
+                <div class="feed-skeleton"></div><div class="feed-skeleton"></div>
+                <div class="feed-skeleton"></div><div class="feed-skeleton"></div>
             </div>
-            <div class="ex-card reveal">
-                <div class="spotlight"></div>
-                <h3>Investment Intelligence</h3>
-                <p>Portfolio tracking, market signals, news curation with AI analysis, automated alerts across crypto, stocks, and macro.</p>
-                <div class="ex-tags"><span>Portfolio</span><span>Signals</span><span>Alerts</span></div>
+            <p class="feed-note" style="margin-top:1rem;">We aggregate, deduplicate, and score across sources. <strong>What surfaces here, we've already deployed.</strong></p>
+        </div>
+
+        <!-- DEMO 3: Comms Hub -->
+        <div class="demo-panel" id="demo-comms">
+            <div class="demo-label"><span class="dot"></span> Unified comms — 6 channels, 1 AI triage</div>
+            <div class="comms-grid">
+                <div class="comms-channels" id="commsChannels">
+                    <div class="comms-ch active" onclick="switchCommsChannel(0)">
+                        <div class="comms-ch-icon" style="background:rgba(37,211,102,0.15);">💬</div>
+                        <div class="comms-ch-info">
+                            <div class="comms-ch-name">WhatsApp</div>
+                            <div class="comms-ch-preview">Client: "Can you automate our..."</div>
+                        </div>
+                        <div class="comms-ch-badge" style="background:rgba(37,211,102,0.2);color:#25d366;">3</div>
+                    </div>
+                    <div class="comms-ch" onclick="switchCommsChannel(1)">
+                        <div class="comms-ch-icon" style="background:rgba(0,136,204,0.15);">✈️</div>
+                        <div class="comms-ch-info">
+                            <div class="comms-ch-name">Telegram</div>
+                            <div class="comms-ch-preview">Bot alert: BTC crossed $108k</div>
+                        </div>
+                        <div class="comms-ch-badge" style="background:rgba(0,136,204,0.2);color:#0088cc;">1</div>
+                    </div>
+                    <div class="comms-ch" onclick="switchCommsChannel(2)">
+                        <div class="comms-ch-icon" style="background:rgba(88,101,242,0.15);">🎮</div>
+                        <div class="comms-ch-info">
+                            <div class="comms-ch-name">Discord</div>
+                            <div class="comms-ch-preview">Team: "Deploy pushed to prod"</div>
+                        </div>
+                        <div class="comms-ch-badge" style="background:rgba(88,101,242,0.2);color:#5865f2;">2</div>
+                    </div>
+                    <div class="comms-ch" onclick="switchCommsChannel(3)">
+                        <div class="comms-ch-icon" style="background:rgba(234,67,53,0.15);">📧</div>
+                        <div class="comms-ch-info">
+                            <div class="comms-ch-name">Email</div>
+                            <div class="comms-ch-preview">Invoice #847 paid — €5,000</div>
+                        </div>
+                        <div class="comms-ch-badge" style="background:rgba(234,67,53,0.2);color:#ea4335;">5</div>
+                    </div>
+                    <div class="comms-ch" onclick="switchCommsChannel(4)">
+                        <div class="comms-ch-icon" style="background:rgba(124,58,237,0.15);">📱</div>
+                        <div class="comms-ch-info">
+                            <div class="comms-ch-name">Viber</div>
+                            <div class="comms-ch-preview">Supplier: "Stock confirmed"</div>
+                        </div>
+                        <div class="comms-ch-badge" style="background:rgba(124,58,237,0.2);color:#7c3aed;">1</div>
+                    </div>
+                    <div class="comms-ch" onclick="switchCommsChannel(5)">
+                        <div class="comms-ch-icon" style="background:rgba(99,102,241,0.15);">📞</div>
+                        <div class="comms-ch-info">
+                            <div class="comms-ch-name">AI Phone</div>
+                            <div class="comms-ch-preview">Missed call → voicemail transcribed</div>
+                        </div>
+                        <div class="comms-ch-badge" style="background:rgba(99,102,241,0.2);color:#6366f1;">1</div>
+                    </div>
+                </div>
+                <div class="comms-thread" id="commsThread">
+                    <div class="comms-thread-header">
+                        <span>💬</span>
+                        <span class="comms-thread-name">WhatsApp — Client Lead</span>
+                        <span class="comms-thread-ai">AI TRIAGE</span>
+                    </div>
+                    <div class="comms-msgs" id="commsMsgs"></div>
+                    <div class="comms-status-bar"><span class="dot"></span> AI monitoring all 6 channels · auto-responding to routine queries</div>
+                </div>
             </div>
-            <div class="ex-card reveal">
-                <div class="spotlight"></div>
-                <h3>AI Knowledge Base</h3>
-                <p>Searchable, interconnected knowledge system that ingests everything and surfaces insights you'd never find manually.</p>
-                <div class="ex-tags"><span>Search</span><span>Documents</span><span>Insights</span></div>
+        </div>
+
+        <!-- DEMO 4: LifeOS Dashboard -->
+        <div class="demo-panel" id="demo-lifeos">
+            <div class="demo-label"><span class="dot"></span> Autonomous operations — last 30 days</div>
+            <div class="lifeos-grid">
+                <div class="lifeos-card reveal">
+                    <div class="lifeos-icon">🛒</div>
+                    <div class="lifeos-val" data-target="47" data-counter>0</div>
+                    <div class="lifeos-label">Auto Purchases</div>
+                    <div class="lifeos-sublabel">groceries · supplies · subscriptions</div>
+                </div>
+                <div class="lifeos-card reveal">
+                    <div class="lifeos-icon">📈</div>
+                    <div class="lifeos-val" data-target="23" data-counter>0</div>
+                    <div class="lifeos-label">Investment Moves</div>
+                    <div class="lifeos-sublabel">BTC · MSTR · rebalances</div>
+                </div>
+                <div class="lifeos-card reveal">
+                    <div class="lifeos-icon">💬</div>
+                    <div class="lifeos-val" data-target="1284" data-counter>0</div>
+                    <div class="lifeos-label">Messages Triaged</div>
+                    <div class="lifeos-sublabel">6 channels · AI first-response</div>
+                </div>
+                <div class="lifeos-card reveal">
+                    <div class="lifeos-icon">🤖</div>
+                    <div class="lifeos-val" data-target="12" data-counter>0</div>
+                    <div class="lifeos-label">Agents Running</div>
+                    <div class="lifeos-sublabel">news · capital · comms · security</div>
+                </div>
+                <div class="lifeos-card reveal">
+                    <div class="lifeos-icon">🍳</div>
+                    <div class="lifeos-val" data-target="89" data-counter>0</div>
+                    <div class="lifeos-label">Meals Planned</div>
+                    <div class="lifeos-sublabel">auto-generated · shopping lists</div>
+                </div>
+                <div class="lifeos-card reveal">
+                    <div class="lifeos-icon">📅</div>
+                    <div class="lifeos-val" data-target="156" data-counter>0</div>
+                    <div class="lifeos-label">Events Managed</div>
+                    <div class="lifeos-sublabel">calendar · reminders · logistics</div>
+                </div>
+                <div class="lifeos-card reveal">
+                    <div class="lifeos-icon">🏠</div>
+                    <div class="lifeos-val" data-target="34" data-counter>0</div>
+                    <div class="lifeos-label">Smart Home Actions</div>
+                    <div class="lifeos-sublabel">lights · TV · espresso · vacuum</div>
+                </div>
+                <div class="lifeos-card reveal">
+                    <div class="lifeos-icon">📰</div>
+                    <div class="lifeos-val" data-target="4200" data-counter>0</div>
+                    <div class="lifeos-label">News Scanned</div>
+                    <div class="lifeos-sublabel">AI filtered · 18 surfaced as signals</div>
+                </div>
             </div>
-            <div class="ex-card reveal">
-                <div class="spotlight"></div>
-                <h3>Multi-Channel Comms Hub</h3>
-                <p>Unified inbox — WhatsApp, Viber, SMS, Telegram, email, Discord — with AI triage and auto-responses.</p>
-                <div class="ex-tags"><span>Messaging</span><span>AI Triage</span><span>Unified</span></div>
+            <div class="lifeos-feed reveal">
+                <div class="lifeos-feed-header"><span class="dot"></span> LIVE AUTOMATION FEED</div>
+                <div class="lifeos-feed-items" id="lifeosFeed"></div>
             </div>
         </div>
     </div>
@@ -725,7 +982,365 @@
     draw();
 })();
 
-// ── LIVE AI FEED (Hacker News) ──
+// ── DEMO TABS ──
+function switchDemo(id) {
+    document.querySelectorAll('.demo-tab').forEach((t,i) => t.classList.toggle('active', t.textContent.toLowerCase().includes(id.slice(0,4))));
+    document.querySelectorAll('.demo-panel').forEach(p => p.classList.toggle('active', p.id === 'demo-' + id));
+    if (id === 'graph') initGraph();
+    if (id === 'news') fetchMultiNews();
+    if (id === 'lifeos') animateCounters();
+    if (id === 'comms') switchCommsChannel(0);
+}
+
+// ── 1. KNOWLEDGE GRAPH (Force-directed Canvas) ──
+const GRAPH_NODES = [
+    // People
+    { id: 'You', type: 'person', size: 18 },
+    { id: 'Family', type: 'person', size: 12 }, { id: 'Secretary', type: 'person', size: 10 },
+    { id: 'Clients', type: 'person', size: 11 }, { id: 'Team', type: 'person', size: 10 },
+    // Systems
+    { id: 'LifeOS', type: 'system', size: 16 }, { id: 'Knowledge Base', type: 'system', size: 13 },
+    { id: 'AI Council', type: 'system', size: 12 }, { id: 'OODA Loop', type: 'system', size: 11 },
+    { id: 'Macro Timeline', type: 'system', size: 11 }, { id: 'Audit Ledger', type: 'system', size: 10 },
+    // Services
+    { id: 'Calendar', type: 'service', size: 10 }, { id: 'Meal Planner', type: 'service', size: 9 },
+    { id: 'Shopping', type: 'service', size: 9 }, { id: 'Portfolio', type: 'service', size: 11 },
+    { id: 'News Agent', type: 'service', size: 10 }, { id: 'Comms Hub', type: 'service', size: 11 },
+    { id: 'Task Engine', type: 'service', size: 10 }, { id: 'Delegation', type: 'service', size: 9 },
+    { id: 'Photo Archive', type: 'service', size: 9 },
+    // Devices
+    { id: 'Smart TV', type: 'device', size: 8 }, { id: 'Espresso', type: 'device', size: 8 },
+    { id: 'Vacuum', type: 'device', size: 8 }, { id: 'Lights', type: 'device', size: 8 },
+    { id: 'Phone', type: 'device', size: 9 }, { id: 'Laptop', type: 'device', size: 9 },
+    // Platforms
+    { id: 'WhatsApp', type: 'platform', size: 9 }, { id: 'Telegram', type: 'platform', size: 8 },
+    { id: 'Discord', type: 'platform', size: 8 }, { id: 'Gmail', type: 'platform', size: 8 },
+    { id: 'Viber', type: 'platform', size: 8 }, { id: 'Stripe', type: 'platform', size: 8 },
+    { id: 'Google Cal', type: 'platform', size: 8 }, { id: 'Google Photos', type: 'platform', size: 8 },
+    { id: 'Bitcoin', type: 'platform', size: 9 },
+];
+const GRAPH_LINKS = [
+    ['You','LifeOS'],['You','Family'],['You','Clients'],['You','Team'],['You','Secretary'],
+    ['LifeOS','Knowledge Base'],['LifeOS','AI Council'],['LifeOS','OODA Loop'],['LifeOS','Audit Ledger'],['LifeOS','Macro Timeline'],
+    ['LifeOS','Calendar'],['LifeOS','Meal Planner'],['LifeOS','Shopping'],['LifeOS','Portfolio'],
+    ['LifeOS','News Agent'],['LifeOS','Comms Hub'],['LifeOS','Task Engine'],['LifeOS','Delegation'],['LifeOS','Photo Archive'],
+    ['Comms Hub','WhatsApp'],['Comms Hub','Telegram'],['Comms Hub','Discord'],['Comms Hub','Gmail'],['Comms Hub','Viber'],
+    ['Portfolio','Bitcoin'],['Portfolio','Stripe'],
+    ['Calendar','Google Cal'],['Photo Archive','Google Photos'],
+    ['LifeOS','Smart TV'],['LifeOS','Espresso'],['LifeOS','Vacuum'],['LifeOS','Lights'],
+    ['You','Phone'],['You','Laptop'],['Phone','WhatsApp'],['Phone','Telegram'],
+    ['Secretary','Delegation'],['Family','Calendar'],['Clients','Comms Hub'],['Team','Discord'],
+    ['News Agent','Macro Timeline'],['AI Council','Knowledge Base'],['OODA Loop','Portfolio'],
+];
+const TYPE_COLORS = { person: 'rgb(99,102,241)', system: 'rgb(34,197,94)', service: 'rgb(245,158,11)', device: 'rgb(239,68,68)', platform: 'rgb(6,182,212)' };
+
+let graphInited = false;
+function initGraph() {
+    if (graphInited) return;
+    graphInited = true;
+    const canvas = document.getElementById('graphCanvas');
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    let W, H;
+
+    function resize() {
+        const rect = canvas.getBoundingClientRect();
+        W = rect.width; H = rect.height;
+        canvas.width = W * dpr; canvas.height = H * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Initialize positions
+    const nodes = GRAPH_NODES.map((n, i) => ({
+        ...n, x: W/2 + (Math.random()-0.5)*W*0.6, y: H/2 + (Math.random()-0.5)*H*0.6, vx: 0, vy: 0
+    }));
+    // Center "You" and "LifeOS"
+    nodes[0].x = W * 0.4; nodes[0].y = H * 0.5;
+    nodes[5].x = W * 0.6; nodes[5].y = H * 0.5;
+
+    const nodeMap = {}; nodes.forEach(n => nodeMap[n.id] = n);
+    const links = GRAPH_LINKS.map(([s,t]) => ({ source: nodeMap[s], target: nodeMap[t] }));
+
+    // Mouse interaction
+    let mx = -1000, my = -1000, dragging = null;
+    canvas.addEventListener('mousemove', e => {
+        const r = canvas.getBoundingClientRect();
+        mx = e.clientX - r.left; my = e.clientY - r.top;
+        if (dragging) { dragging.x = mx; dragging.y = my; dragging.vx = 0; dragging.vy = 0; }
+    });
+    canvas.addEventListener('mousedown', e => {
+        const r = canvas.getBoundingClientRect();
+        const cx = e.clientX - r.left, cy = e.clientY - r.top;
+        for (const n of nodes) {
+            if (Math.hypot(n.x-cx, n.y-cy) < n.size + 4) { dragging = n; break; }
+        }
+    });
+    canvas.addEventListener('mouseup', () => dragging = null);
+    canvas.addEventListener('mouseleave', () => { mx = -1000; my = -1000; dragging = null; });
+
+    function tick() {
+        // Forces
+        const k = 0.0004, repulse = 2000, damp = 0.92, centerPull = 0.001;
+        for (const n of nodes) {
+            // Center gravity
+            n.vx += (W/2 - n.x) * centerPull;
+            n.vy += (H/2 - n.y) * centerPull;
+            // Repulsion
+            for (const m of nodes) {
+                if (m === n) continue;
+                let dx = n.x - m.x, dy = n.y - m.y;
+                let d = Math.sqrt(dx*dx + dy*dy) || 1;
+                let f = repulse / (d * d);
+                n.vx += (dx/d) * f; n.vy += (dy/d) * f;
+            }
+            // Mouse repel (gentle)
+            let dmx = n.x - mx, dmy = n.y - my, dm = Math.sqrt(dmx*dmx + dmy*dmy) || 1;
+            if (dm < 100 && n !== dragging) { n.vx += (dmx/dm) * 0.8; n.vy += (dmy/dm) * 0.8; }
+        }
+        // Spring (links)
+        for (const l of links) {
+            let dx = l.target.x - l.source.x, dy = l.target.y - l.source.y;
+            let d = Math.sqrt(dx*dx + dy*dy) || 1;
+            let f = (d - 80) * k;
+            let fx = (dx/d)*f, fy = (dy/d)*f;
+            l.source.vx += fx; l.source.vy += fy;
+            l.target.vx -= fx; l.target.vy -= fy;
+        }
+        for (const n of nodes) {
+            if (n === dragging) continue;
+            n.vx *= damp; n.vy *= damp;
+            n.x += n.vx; n.y += n.vy;
+            n.x = Math.max(n.size, Math.min(W - n.size, n.x));
+            n.y = Math.max(n.size, Math.min(H - n.size, n.y));
+        }
+
+        // Draw
+        ctx.clearRect(0, 0, W, H);
+        // Links
+        for (const l of links) {
+            ctx.beginPath(); ctx.moveTo(l.source.x, l.source.y); ctx.lineTo(l.target.x, l.target.y);
+            ctx.strokeStyle = 'rgba(99,102,241,0.08)'; ctx.lineWidth = 1; ctx.stroke();
+        }
+        // Nodes
+        for (const n of nodes) {
+            const col = TYPE_COLORS[n.type];
+            // Glow
+            ctx.beginPath(); ctx.arc(n.x, n.y, n.size + 4, 0, Math.PI*2);
+            ctx.fillStyle = col.replace(')', ',0.08)').replace('rgb', 'rgba'); ctx.fill();
+            // Circle
+            ctx.beginPath(); ctx.arc(n.x, n.y, n.size, 0, Math.PI*2);
+            ctx.fillStyle = col.replace(')', ',0.25)').replace('rgb', 'rgba');
+            ctx.strokeStyle = col; ctx.lineWidth = 1.5;
+            ctx.fill(); ctx.stroke();
+            // Label
+            ctx.font = `${n.size > 12 ? '600 11' : '500 9'}px Inter, sans-serif`;
+            ctx.textAlign = 'center'; ctx.fillStyle = '#c9d1d9';
+            ctx.fillText(n.id, n.x, n.y + n.size + 14);
+        }
+        // Hover highlight
+        let hovered = null;
+        for (const n of nodes) {
+            if (Math.hypot(n.x-mx, n.y-my) < n.size + 4) { hovered = n; break; }
+        }
+        if (hovered) {
+            canvas.style.cursor = 'grab';
+            // Highlight connected links
+            for (const l of links) {
+                if (l.source === hovered || l.target === hovered) {
+                    ctx.beginPath(); ctx.moveTo(l.source.x, l.source.y); ctx.lineTo(l.target.x, l.target.y);
+                    ctx.strokeStyle = TYPE_COLORS[hovered.type].replace(')', ',0.5)').replace('rgb', 'rgba');
+                    ctx.lineWidth = 2; ctx.stroke();
+                }
+            }
+        } else { canvas.style.cursor = 'default'; }
+
+        requestAnimationFrame(tick);
+    }
+    tick();
+}
+// Auto-init on load since it's the default tab
+setTimeout(initGraph, 300);
+
+// ── 2. MULTI-SOURCE NEWS ──
+const AI_KW = /\bai\b|artificial intelligence|llm|gpt|claude|openai|anthropic|gemini|machine learning|neural|transformer|deep learning|automation|chatbot|agent|model|diffusion|robot/i;
+
+async function fetchMultiNews() {
+    const grid = document.getElementById('newsGrid');
+    const allItems = [];
+
+    // Source 1: Hacker News (direct API)
+    try {
+        const topRes = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json');
+        const topIds = await topRes.json();
+        const proms = topIds.slice(0, 60).map(id =>
+            fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then(r => r.json()).catch(() => null)
+        );
+        const stories = (await Promise.all(proms)).filter(s => s && s.title && AI_KW.test(s.title));
+        stories.slice(0, 4).forEach(s => allItems.push({
+            title: s.title, url: s.url || `https://news.ycombinator.com/item?id=${s.id}`,
+            source: 'Hacker News', color: '#ff6600', score: s.score, age: s.time
+        }));
+    } catch(e) {}
+
+    // Source 2: Reddit r/artificial (public JSON)
+    try {
+        const r = await fetch('https://www.reddit.com/r/artificial/hot.json?limit=15');
+        const data = await r.json();
+        data.data.children.filter(c => !c.data.stickied).slice(0, 4).forEach(c => {
+            const d = c.data;
+            allItems.push({
+                title: d.title, url: `https://reddit.com${d.permalink}`,
+                source: 'Reddit', color: '#ff4500', score: d.score, age: d.created_utc
+            });
+        });
+    } catch(e) {}
+
+    // Source 3: TechCrunch via RSS2JSON
+    try {
+        const r = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://techcrunch.com/feed/');
+        const data = await r.json();
+        if (data.items) {
+            data.items.filter(i => AI_KW.test(i.title)).slice(0, 3).forEach(i => {
+                allItems.push({
+                    title: i.title, url: i.link,
+                    source: 'TechCrunch', color: '#00a66b', score: 0, age: new Date(i.pubDate).getTime()/1000
+                });
+            });
+        }
+    } catch(e) {}
+
+    // Source 4: Ars Technica via RSS2JSON
+    try {
+        const r = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://feeds.arstechnica.com/arstechnica/index');
+        const data = await r.json();
+        if (data.items) {
+            data.items.filter(i => AI_KW.test(i.title)).slice(0, 3).forEach(i => {
+                allItems.push({
+                    title: i.title, url: i.link,
+                    source: 'ArsTechnica', color: '#818cf8', score: 0, age: new Date(i.pubDate).getTime()/1000
+                });
+            });
+        }
+    } catch(e) {}
+
+    // Sort by recency, render
+    allItems.sort((a,b) => (b.age||0) - (a.age||0));
+    const now = Date.now()/1000;
+    if (allItems.length === 0) {
+        grid.innerHTML = '<p style="color:var(--text-muted);font-size:0.8rem;">Feed loading — try refreshing in a moment.</p>';
+        return;
+    }
+    grid.innerHTML = allItems.slice(0, 12).map(item => {
+        const age = now - (item.age||now);
+        const ageStr = age < 3600 ? Math.floor(age/60)+'m' : age < 86400 ? Math.floor(age/3600)+'h' : Math.floor(age/86400)+'d';
+        return `<a href="${item.url}" target="_blank" rel="noopener" class="news-item">
+            <div class="news-item-src" style="color:${item.color}">${item.source}${item.score ? ' · '+item.score+' pts' : ''}</div>
+            <div class="news-item-title">${item.title}</div>
+            <div class="news-item-meta">${ageStr} ago</div>
+        </a>`;
+    }).join('');
+}
+
+// ── 3. COMMS HUB ──
+const COMMS_DATA = [
+    { icon: '💬', name: 'WhatsApp — Client Lead', msgs: [
+        { type: 'in', label: 'Client', text: 'Can you automate our invoicing? We spend 3 hours/day on it.' },
+        { type: 'ai', label: 'AI Triage', text: 'Absolutely — we can deploy an invoicing automation within 48h. Let me get you specifics. Routing to Ntemis now.' },
+        { type: 'out', label: 'Ntemis', text: 'Hi! I\'ll have a proposal ready in 2 hours. Quick question — what system do you use currently?' },
+        { type: 'in', label: 'Client', text: 'We use Excel + manual emails. It\'s painful.' },
+        { type: 'ai', label: 'AI', text: 'Flagged: high-value lead. Suggested tier: Build (€5,000). Invoice template ready.' },
+    ]},
+    { icon: '✈️', name: 'Telegram — Market Alerts', msgs: [
+        { type: 'ai', label: 'Capital Agent', text: 'BTC crossed $108,000 — up 4.2% in 24h. Portfolio impact: +€2,400.' },
+        { type: 'ai', label: 'News Agent', text: 'Related: SEC approved 3 new Bitcoin ETFs. Signal strength: HIGH.' },
+        { type: 'out', label: 'Ntemis', text: 'Hold positions. No action needed.' },
+        { type: 'ai', label: 'OODA Loop', text: 'Confirmed. No rebalance triggered. Next review: 48h.' },
+    ]},
+    { icon: '🎮', name: 'Discord — Dev Team', msgs: [
+        { type: 'in', label: 'Apollo', text: 'New model dropped — Claude Opus 4.6. Running benchmarks now.' },
+        { type: 'ai', label: 'Tech Monitor', text: 'Model registered. Benchmark suite queued. ETA: 15 min.' },
+        { type: 'out', label: 'Ntemis', text: 'Deploy to our stack if it passes. 24h window.' },
+        { type: 'ai', label: 'System', text: 'Benchmarks passed. Auto-deploying to council registry. Clients notified in 48h batch.' },
+    ]},
+    { icon: '📧', name: 'Email — Payments', msgs: [
+        { type: 'in', label: 'Stripe', text: 'Payment received: €5,000 from Acme Corp. Invoice #847 marked as paid.' },
+        { type: 'ai', label: 'AI Triage', text: 'Payment matched to Build tier order. Updating CRM. Starting 48h delivery clock.' },
+        { type: 'ai', label: 'Task Engine', text: 'Created: "Acme Corp — AI Invoicing System". Assigned to Ntemis + Apollo. Due: 48h.' },
+        { type: 'out', label: 'Auto-reply', text: 'Thank you! Your project has started. You\'ll receive updates via WhatsApp within 2 hours.' },
+    ]},
+    { icon: '📱', name: 'Viber — Supplier', msgs: [
+        { type: 'in', label: 'Supplier', text: 'Coffee beans order confirmed. Shipping tomorrow.' },
+        { type: 'ai', label: 'AI Triage', text: 'Routine supply confirmation. No action needed. Logged to purchases.' },
+    ]},
+    { icon: '📞', name: 'AI Phone — Missed Call', msgs: [
+        { type: 'ai', label: 'Phone Agent', text: 'Missed call from +30 694 xxx xxxx. Voicemail transcribed:' },
+        { type: 'ai', label: 'Transcript', text: '"Hi, I saw your website. I\'m interested in the Build tier for my restaurant. Can you call me back?"' },
+        { type: 'ai', label: 'AI Triage', text: 'Lead scored: HIGH. Industry: hospitality. Suggested: callback within 1h. Draft SMS sent.' },
+        { type: 'out', label: 'Auto-SMS', text: 'Hi! Thanks for calling Latsoudis.AI. We\'ll call you back within the hour. — Ntemis' },
+    ]},
+];
+
+function switchCommsChannel(idx) {
+    document.querySelectorAll('.comms-ch').forEach((ch, i) => ch.classList.toggle('active', i === idx));
+    const d = COMMS_DATA[idx];
+    document.querySelector('.comms-thread-header').innerHTML = `<span>${d.icon}</span><span class="comms-thread-name">${d.name}</span><span class="comms-thread-ai">AI TRIAGE</span>`;
+    const msgsEl = document.getElementById('commsMsgs');
+    msgsEl.innerHTML = '';
+    d.msgs.forEach((m, i) => {
+        setTimeout(() => {
+            const cls = m.type === 'in' ? 'comms-msg-in' : m.type === 'ai' ? 'comms-msg-in comms-msg-ai' : 'comms-msg-out';
+            msgsEl.innerHTML += `<div class="comms-msg ${cls}" style="animation:feedSlide 0.3s ease-out"><div class="comms-msg-label" style="color:${m.type==='ai'?'var(--accent-light)':m.type==='in'?'var(--text-muted)':'var(--green)'}">${m.label}</div>${m.text}</div>`;
+            msgsEl.scrollTop = msgsEl.scrollHeight;
+        }, i * 400);
+    });
+}
+
+// ── 4. LIFEOS DASHBOARD ──
+let countersAnimated = false;
+function animateCounters() {
+    if (countersAnimated) return;
+    countersAnimated = true;
+    document.querySelectorAll('[data-counter]').forEach(el => {
+        const target = parseInt(el.dataset.target);
+        const duration = 2000;
+        const start = performance.now();
+        function step(now) {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+            el.textContent = Math.floor(target * eased).toLocaleString();
+            if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+    });
+    // Start live feed
+    startLifeosFeed();
+}
+
+const LIFEOS_EVENTS = [
+    { icon: '🛒', text: '<strong>Auto-purchase:</strong> Coffee beans from Create Roasters', time: '2m ago' },
+    { icon: '📈', text: '<strong>Portfolio:</strong> BTC position rebalanced — target met', time: '8m ago' },
+    { icon: '💬', text: '<strong>WhatsApp:</strong> AI responded to client inquiry in 1.2s', time: '12m ago' },
+    { icon: '🍳', text: '<strong>Meal plan:</strong> Generated weekly menu + shopping list', time: '15m ago' },
+    { icon: '📅', text: '<strong>Calendar:</strong> Synced 4 events from Google Calendar', time: '18m ago' },
+    { icon: '🏠', text: '<strong>Smart home:</strong> Espresso machine pre-heated for morning', time: '22m ago' },
+    { icon: '📰', text: '<strong>News agent:</strong> 3 new AI signals scored and surfaced', time: '25m ago' },
+    { icon: '🤖', text: '<strong>Security agent:</strong> Scan complete — no anomalies', time: '30m ago' },
+    { icon: '💰', text: '<strong>Stripe:</strong> Payment €5,000 received — task auto-created', time: '35m ago' },
+    { icon: '📱', text: '<strong>Telegram:</strong> Market alert — ETH above €3,200', time: '41m ago' },
+    { icon: '🧹', text: '<strong>Smart home:</strong> Vacuum scheduled — child pickup at 15:30', time: '45m ago' },
+    { icon: '📧', text: '<strong>Email:</strong> AI triaged 12 emails — 2 flagged as important', time: '50m ago' },
+];
+
+function startLifeosFeed() {
+    const feed = document.getElementById('lifeosFeed');
+    feed.innerHTML = LIFEOS_EVENTS.map(e =>
+        `<div class="lifeos-feed-item"><div class="lifeos-feed-icon">${e.icon}</div><div class="lifeos-feed-text">${e.text}</div><div class="lifeos-feed-time">${e.time}</div></div>`
+    ).join('');
+}
+
+// ── ORIGINAL LIVE FEED (hero section) ──
 const AI_KEYWORDS = /\bai\b|artificial intelligence|llm|gpt|claude|openai|anthropic|gemini|machine learning|neural|transformer|deep learning|automation|chatbot|agent|model|diffusion|robot/i;
 
 async function fetchFeed() {
@@ -733,59 +1348,44 @@ async function fetchFeed() {
         const meta = document.getElementById('feedMeta');
         const grid = document.getElementById('feedGrid');
         meta.textContent = 'Fetching...';
-
         const topRes = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json');
         const topIds = await topRes.json();
-
-        // Fetch top 80 stories, filter for AI
         const storyPromises = topIds.slice(0, 80).map(id =>
             fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then(r => r.json())
         );
         const stories = await Promise.all(storyPromises);
         const aiStories = stories.filter(s => s && s.title && AI_KEYWORDS.test(s.title)).slice(0, 9);
-
-        if (aiStories.length === 0) {
-            // Fallback: show top tech stories
-            const fallback = stories.filter(s => s && s.title).slice(0, 6);
-            renderFeed(fallback, grid, meta);
-        } else {
-            renderFeed(aiStories, grid, meta);
-        }
-    } catch (e) {
-        document.getElementById('feedMeta').textContent = 'Feed temporarily unavailable';
-    }
+        const toShow = aiStories.length ? aiStories : stories.filter(s => s && s.title).slice(0, 6);
+        const now = Date.now() / 1000;
+        grid.innerHTML = toShow.map(s => {
+            const age = now - s.time;
+            const ageStr = age < 3600 ? Math.floor(age/60)+'m' : Math.floor(age/3600)+'h';
+            return `<a href="${s.url || `https://news.ycombinator.com/item?id=${s.id}`}" target="_blank" rel="noopener" class="feed-item${age<7200?' fresh':''}">
+                <div class="feed-item-title">${s.title}</div>
+                <div class="feed-item-meta"><span class="score">${s.score} pts</span><span>${ageStr} ago</span><span>${s.descendants||0} comments</span></div>
+            </a>`;
+        }).join('');
+        const time = new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+        meta.textContent = `${toShow.length} signals · last scan ${time} · refreshes every 5 min`;
+    } catch(e) { document.getElementById('feedMeta').textContent = 'Feed temporarily unavailable'; }
 }
-
-function renderFeed(stories, grid, meta) {
-    const now = Date.now() / 1000;
-    grid.innerHTML = stories.map(s => {
-        const age = now - s.time;
-        const ageStr = age < 3600 ? Math.floor(age / 60) + 'm' : Math.floor(age / 3600) + 'h';
-        const fresh = age < 7200; // < 2 hours
-        return `<a href="${s.url || `https://news.ycombinator.com/item?id=${s.id}`}" target="_blank" rel="noopener" class="feed-item${fresh ? ' fresh' : ''}">
-            <div class="feed-item-title">${s.title}</div>
-            <div class="feed-item-meta">
-                <span class="score">${s.score} pts</span>
-                <span>${ageStr} ago</span>
-                <span>${s.descendants || 0} comments</span>
-            </div>
-        </a>`;
-    }).join('');
-    const time = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-    meta.textContent = `${stories.length} signals · last scan ${time} · refreshes every 5 min`;
-}
-
 fetchFeed();
 setInterval(fetchFeed, 5 * 60 * 1000);
 
 // ── SCROLL REVEAL ──
 const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            // Trigger counter animation when LifeOS panel is visible
+            if (e.target.closest('#demo-lifeos')) animateCounters();
+        }
+    });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
 // ── SPOTLIGHT ──
-document.querySelectorAll('.ex-card, .tier').forEach(card => {
+document.querySelectorAll('.tier').forEach(card => {
     card.addEventListener('mousemove', e => {
         const r = card.getBoundingClientRect();
         card.style.setProperty('--mx', `${e.clientX - r.left}px`);
