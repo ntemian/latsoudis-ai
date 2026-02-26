@@ -1078,6 +1078,87 @@
             color: var(--text-dim);
         }
 
+        /* ══════════════ EXAMPLES GRID ══════════════ */
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .example-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .example-card .spotlight {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                400px circle at var(--mx, 50%) var(--my, 50%),
+                var(--accent-glow),
+                transparent 60%
+            );
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .example-card:hover .spotlight { opacity: 1; }
+
+        .example-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .example-featured {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.06) 0%, var(--bg-card) 60%);
+            border-color: var(--border-accent);
+        }
+
+        .example-label {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-light);
+            background: var(--accent-glow);
+            border: 1px solid var(--border-accent);
+            padding: 3px 10px;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+        }
+
+        .example-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .example-featured h3 {
+            font-size: 1.4rem;
+        }
+
+        .example-card p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            position: relative;
+        }
+
+        .example-card .bento-tags {
+            position: relative;
+        }
+
         /* ══════════════ TRUST STRIP ══════════════ */
         .trust-strip {
             padding: 5rem 2rem;
@@ -1142,6 +1223,7 @@
 
         /* ══════════════ RESPONSIVE ══════════════ */
         @media (max-width: 1024px) {
+            .examples-grid { grid-template-columns: 1fr 1fr; }
             .bento {
                 grid-template-columns: 1fr 1fr;
                 grid-template-areas:
@@ -1183,6 +1265,7 @@
             .tier-card.featured { transform: none; }
             .tier-card.featured:hover { transform: translateY(-4px); }
 
+            .examples-grid { grid-template-columns: 1fr; }
             .trust-grid { grid-template-columns: 1fr 1fr; }
             .about-layout { grid-template-columns: 1fr; }
 
@@ -1202,8 +1285,8 @@
     <div class="logo">Latsoudis<span>.AI</span></div>
     <div class="nav-links" id="navLinks">
         <a href="#what">What We Do</a>
-        <a href="#tiers">Services</a>
-        <a href="#process">Process</a>
+        <a href="#examples">Examples</a>
+        <a href="#tiers">Pricing</a>
         <a href="#about">About</a>
         <a href="#contact" class="nav-cta">Get Started</a>
     </div>
@@ -1331,6 +1414,85 @@
                     <span>Monitoring</span>
                     <span>Retraining</span>
                     <span>Scaling</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ WHAT YOU COULD BUILD ═══ -->
+<section id="examples">
+    <div class="container">
+        <div class="section-label">Already built &amp; running</div>
+        <h2 class="section-title">Systems like these — in 48 hours</h2>
+        <p class="section-sub">Real examples of what we build. Every one of these is in production, serving businesses and individuals right now.</p>
+
+        <div class="examples-grid">
+            <div class="example-card example-featured reveal">
+                <div class="spotlight"></div>
+                <div class="example-label">Flagship Build</div>
+                <h3>Life Operating System</h3>
+                <p>A full personal intelligence platform that manages calendar, communications, finances, knowledge base, health data, family logistics, and 20+ connected devices — all through natural language. Runs 24/7 autonomously with AI agents handling monitoring, analysis, and proactive suggestions.</p>
+                <div class="bento-tags">
+                    <span>Personal AI</span>
+                    <span>30+ Integrations</span>
+                    <span>Autonomous Agents</span>
+                    <span>Knowledge Base</span>
+                </div>
+            </div>
+
+            <div class="example-card reveal">
+                <div class="spotlight"></div>
+                <h3>Smart Home Orchestration</h3>
+                <p>One AI layer that controls every device — TV, fridge, espresso machine, vacuum, lighting — through conversation. No app-per-device. One interface that knows your schedule, preferences, and habits.</p>
+                <div class="bento-tags">
+                    <span>IoT</span>
+                    <span>Voice Control</span>
+                    <span>Automation</span>
+                </div>
+            </div>
+
+            <div class="example-card reveal">
+                <div class="spotlight"></div>
+                <h3>Business Workflow Engine</h3>
+                <p>Automated CRM pipeline, AI-powered customer support on WhatsApp (24/7), invoice processing, lead scoring, and reporting dashboards — replacing 3 full-time employees worth of manual work.</p>
+                <div class="bento-tags">
+                    <span>CRM</span>
+                    <span>WhatsApp Bot</span>
+                    <span>Invoicing</span>
+                </div>
+            </div>
+
+            <div class="example-card reveal">
+                <div class="spotlight"></div>
+                <h3>Investment Intelligence</h3>
+                <p>Real-time portfolio tracking, market signal monitoring, news curation with AI analysis, automated alerts, and decision-support tools. Tracks crypto, stocks, real estate, and macro indicators.</p>
+                <div class="bento-tags">
+                    <span>Portfolio</span>
+                    <span>Market Signals</span>
+                    <span>Alerts</span>
+                </div>
+            </div>
+
+            <div class="example-card reveal">
+                <div class="spotlight"></div>
+                <h3>AI Knowledge Base</h3>
+                <p>A searchable, interconnected knowledge system that ingests documents, emails, conversations, and web content — then answers questions, finds connections, and surfaces insights you'd never find manually.</p>
+                <div class="bento-tags">
+                    <span>Search</span>
+                    <span>Documents</span>
+                    <span>Insights</span>
+                </div>
+            </div>
+
+            <div class="example-card reveal">
+                <div class="spotlight"></div>
+                <h3>Multi-Channel Comms Hub</h3>
+                <p>Unified inbox across WhatsApp, Viber, SMS, Telegram, email, and Discord — with AI triage, auto-responses, and priority routing. Never miss a message, never drown in notifications.</p>
+                <div class="bento-tags">
+                    <span>Messaging</span>
+                    <span>AI Triage</span>
+                    <span>Unified Inbox</span>
                 </div>
             </div>
         </div>
@@ -1590,7 +1752,7 @@
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
     // ── Spotlight follow (bento + tier cards) ──
-    document.querySelectorAll('.bento-item, .tier-card').forEach(card => {
+    document.querySelectorAll('.bento-item, .tier-card, .example-card').forEach(card => {
         card.addEventListener('mousemove', e => {
             const rect = card.getBoundingClientRect();
             card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
