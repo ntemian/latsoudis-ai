@@ -1345,7 +1345,11 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     const avatarSrcs = {
         you:'avatars/you.png', maria:'avatars/maria.png', nikos:'avatars/nikos.png',
         elena:'avatars/elena.png', giorgos:'avatars/giorgos.png', anna:'avatars/anna.png',
-        dimitris:'avatars/dimitris.png', sofia:'avatars/sofia.png'
+        dimitris:'avatars/dimitris.png', sofia:'avatars/sofia.png',
+        techco:'avatars/techco.png', oliveoil:'avatars/oliveoil.png',
+        shipco:'avatars/shipco.png', cafe:'avatars/cafe.png', lawfirm:'avatars/lawfirm.png',
+        deal1:'avatars/deal1.png', deal2:'avatars/deal2.png',
+        deal3:'avatars/deal3.png', deal4:'avatars/deal4.png'
     };
     let imgsLoaded = 0;
     Object.entries(avatarSrcs).forEach(([id, src]) => {
@@ -1513,14 +1517,17 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
             // Avatar: photo image or gradient fallback
             if (img) {
-                // Clip to circle and draw photo
+                // Clip to circle and draw photo (center-crop like object-fit:cover)
                 ctx.save();
                 ctx.beginPath();
                 ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
                 ctx.clip();
-                // Draw image centered and covering the circle
+                const iw = img.naturalWidth, ih = img.naturalHeight;
                 const sz = n.r * 2;
-                ctx.drawImage(img, n.x - n.r, n.y - n.r, sz, sz);
+                // Crop from center of source image (square region)
+                const side = Math.min(iw, ih);
+                const sx = (iw - side) / 2, sy = (ih - side) / 2;
+                ctx.drawImage(img, sx, sy, side, side, n.x - n.r, n.y - n.r, sz, sz);
                 ctx.restore();
                 // Border ring
                 ctx.beginPath();
