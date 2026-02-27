@@ -1322,7 +1322,7 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// ── KNOWLEDGE GRAPH (force-directed) ──
+// ── KNOWLEDGE GRAPH (force-directed with avatars) ──
 (function() {
     const canvas = document.getElementById('graphCanvas');
     if (!canvas) return;
@@ -1332,62 +1332,58 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     function resize() {
         const r = canvas.parentElement.getBoundingClientRect();
         W = canvas.width = r.width * 2; H = canvas.height = r.height * 2;
-        ctx.scale(2, 2); // retina
+        ctx.scale(2, 2);
     }
     resize();
     window.addEventListener('resize', () => { ctx.setTransform(1,0,0,1,0,0); resize(); });
 
+    // Gradient pairs for avatars [from, to]
+    const GRADS = {
+        you: ['#6366f1','#a78bfa'],
+        person: ['#059669','#34d399'],
+        company: ['#d97706','#fbbf24'],
+        deal: ['#db2777','#f472b6'],
+    };
     const COLORS = { you: '#6366f1', person: '#22c55e', company: '#f59e0b', deal: '#e1306c' };
 
     const nodes = [
-        // You (center)
-        { id: 'you', label: 'You', type: 'you', r: 22, x: 0, y: 0, vx: 0, vy: 0 },
-        // People
-        { id: 'maria', label: 'Maria K.', type: 'person', r: 14, x: 0, y: 0, vx: 0, vy: 0 },
-        { id: 'nikos', label: 'Nikos P.', type: 'person', r: 14, x: 0, y: 0, vx: 0, vy: 0 },
-        { id: 'elena', label: 'Elena D.', type: 'person', r: 12, x: 0, y: 0, vx: 0, vy: 0 },
-        { id: 'giorgos', label: 'Giorgos T.', type: 'person', r: 13, x: 0, y: 0, vx: 0, vy: 0 },
-        { id: 'anna', label: 'Anna M.', type: 'person', r: 11, x: 0, y: 0, vx: 0, vy: 0 },
-        { id: 'dimitris', label: 'Dimitris R.', type: 'person', r: 12, x: 0, y: 0, vx: 0, vy: 0 },
-        { id: 'sofia', label: 'Sofia L.', type: 'person', r: 10, x: 0, y: 0, vx: 0, vy: 0 },
-        // Companies
-        { id: 'techco', label: 'TechCo SA', type: 'company', r: 16, x: 0, y: 0, vx: 0, vy: 0 },
-        { id: 'oliveoil', label: 'Olive Gold', type: 'company', r: 14, x: 0, y: 0, vx: 0, vy: 0 },
-        { id: 'shipco', label: 'AegeanShip', type: 'company', r: 13, x: 0, y: 0, vx: 0, vy: 0 },
-        { id: 'cafe', label: 'Cafe Thema', type: 'company', r: 11, x: 0, y: 0, vx: 0, vy: 0 },
-        { id: 'lawfirm', label: 'Lexis Legal', type: 'company', r: 12, x: 0, y: 0, vx: 0, vy: 0 },
-        // Deals
-        { id: 'deal1', label: '€12k Project', type: 'deal', r: 10, x: 0, y: 0, vx: 0, vy: 0 },
-        { id: 'deal2', label: '€5k Retainer', type: 'deal', r: 9, x: 0, y: 0, vx: 0, vy: 0 },
-        { id: 'deal3', label: '€28k Contract', type: 'deal', r: 12, x: 0, y: 0, vx: 0, vy: 0 },
-        { id: 'deal4', label: '€3.5k Order', type: 'deal', r: 8, x: 0, y: 0, vx: 0, vy: 0 },
+        { id: 'you', label: 'You', initials: '👤', emoji: true, type: 'you', r: 24, x: 0, y: 0, vx: 0, vy: 0, pulse: 0 },
+        { id: 'maria', label: 'Maria K.', initials: 'MK', type: 'person', r: 15, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
+        { id: 'nikos', label: 'Nikos P.', initials: 'NP', type: 'person', r: 15, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
+        { id: 'elena', label: 'Elena D.', initials: 'ED', type: 'person', r: 13, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
+        { id: 'giorgos', label: 'Giorgos T.', initials: 'GT', type: 'person', r: 14, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
+        { id: 'anna', label: 'Anna M.', initials: 'AM', type: 'person', r: 12, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
+        { id: 'dimitris', label: 'Dimitris R.', initials: 'DR', type: 'person', r: 13, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
+        { id: 'sofia', label: 'Sofia L.', initials: 'SL', type: 'person', r: 11, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
+        { id: 'techco', label: 'TechCo SA', initials: '🏢', emoji: true, type: 'company', r: 17, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
+        { id: 'oliveoil', label: 'Olive Gold', initials: '🫒', emoji: true, type: 'company', r: 15, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
+        { id: 'shipco', label: 'AegeanShip', initials: '🚢', emoji: true, type: 'company', r: 14, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
+        { id: 'cafe', label: 'Cafe Thema', initials: '☕', emoji: true, type: 'company', r: 12, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
+        { id: 'lawfirm', label: 'Lexis Legal', initials: '⚖️', emoji: true, type: 'company', r: 13, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
+        { id: 'deal1', label: '€12k Project', initials: '💰', emoji: true, type: 'deal', r: 11, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
+        { id: 'deal2', label: '€5k Retainer', initials: '💳', emoji: true, type: 'deal', r: 10, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
+        { id: 'deal3', label: '€28k Contract', initials: '📄', emoji: true, type: 'deal', r: 13, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
+        { id: 'deal4', label: '€3.5k Order', initials: '🛒', emoji: true, type: 'deal', r: 9, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
     ];
 
-    // Place nodes in a rough circle
     const cw = W/4, ch = H/4;
     nodes.forEach((n, i) => {
         if (i === 0) { n.x = cw; n.y = ch; return; }
         const angle = (i / (nodes.length - 1)) * Math.PI * 2 + Math.random() * 0.5;
-        const dist = 80 + Math.random() * 60;
+        const dist = 85 + Math.random() * 55;
         n.x = cw + Math.cos(angle) * dist;
         n.y = ch + Math.sin(angle) * dist;
     });
 
     const edges = [
-        // You → People
         ['you','maria'], ['you','nikos'], ['you','elena'], ['you','giorgos'], ['you','anna'], ['you','dimitris'],
-        // You → Companies
         ['you','techco'], ['you','oliveoil'], ['you','shipco'],
-        // People → Companies
         ['maria','techco'], ['nikos','oliveoil'], ['elena','shipco'], ['giorgos','techco'],
         ['anna','cafe'], ['dimitris','lawfirm'], ['sofia','oliveoil'],
-        // People → People
         ['maria','nikos'], ['elena','giorgos'], ['anna','sofia'],
-        // Deals
         ['deal1','techco'], ['deal1','maria'], ['deal2','oliveoil'], ['deal2','nikos'],
         ['deal3','shipco'], ['deal3','elena'], ['deal3','giorgos'],
         ['deal4','cafe'], ['deal4','anna'],
-        // Cross connections
         ['lawfirm','deal3'], ['sofia','cafe'], ['dimitris','deal1'],
     ];
 
@@ -1395,7 +1391,6 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     nodes.forEach((n, i) => idxMap[n.id] = i);
     const edgeIdx = edges.map(([a,b]) => [idxMap[a], idxMap[b]]);
 
-    // Mouse interaction
     let mouse = { x: -1000, y: -1000 };
     canvas.parentElement.addEventListener('mousemove', e => {
         const r = canvas.getBoundingClientRect();
@@ -1405,103 +1400,178 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     canvas.parentElement.addEventListener('mouseleave', () => { mouse.x = -1000; mouse.y = -1000; });
 
     let hovered = -1;
+    const t0 = Date.now();
 
     function simulate() {
         const w2 = W/4, h2 = H/4;
-        // Center gravity
-        nodes.forEach(n => {
-            n.vx += (w2 - n.x) * 0.001;
-            n.vy += (h2 - n.y) * 0.001;
-        });
-        // Repulsion
+        nodes.forEach(n => { n.vx += (w2 - n.x) * 0.001; n.vy += (h2 - n.y) * 0.001; });
         for (let i = 0; i < nodes.length; i++) {
             for (let j = i + 1; j < nodes.length; j++) {
                 const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
                 const dist = Math.sqrt(dx*dx + dy*dy) || 1;
                 const force = 800 / (dist * dist);
-                const fx = (dx/dist) * force, fy = (dy/dist) * force;
-                nodes[i].vx += fx; nodes[i].vy += fy;
-                nodes[j].vx -= fx; nodes[j].vy -= fy;
+                nodes[i].vx += (dx/dist)*force; nodes[i].vy += (dy/dist)*force;
+                nodes[j].vx -= (dx/dist)*force; nodes[j].vy -= (dy/dist)*force;
             }
         }
-        // Edge attraction
         edgeIdx.forEach(([a,b]) => {
             const dx = nodes[b].x - nodes[a].x, dy = nodes[b].y - nodes[a].y;
             const dist = Math.sqrt(dx*dx + dy*dy) || 1;
             const force = (dist - 90) * 0.003;
-            const fx = (dx/dist) * force, fy = (dy/dist) * force;
-            nodes[a].vx += fx; nodes[a].vy += fy;
-            nodes[b].vx -= fx; nodes[b].vy -= fy;
+            nodes[a].vx += (dx/dist)*force; nodes[a].vy += (dy/dist)*force;
+            nodes[b].vx -= (dx/dist)*force; nodes[b].vy -= (dy/dist)*force;
         });
-        // Mouse hover attraction
         hovered = -1;
         nodes.forEach((n, i) => {
             const dx = mouse.x - n.x, dy = mouse.y - n.y;
             const dist = Math.sqrt(dx*dx + dy*dy);
-            if (dist < n.r + 10 && (hovered === -1 || dist < Math.sqrt((mouse.x-nodes[hovered].x)**2+(mouse.y-nodes[hovered].y)**2))) {
-                hovered = i;
-            }
+            if (dist < n.r + 14 && (hovered === -1 || dist < Math.sqrt((mouse.x-nodes[hovered].x)**2+(mouse.y-nodes[hovered].y)**2))) hovered = i;
         });
-        // Apply velocity
         nodes.forEach((n, i) => {
-            if (i === 0) { // pin "You" near center with slight drift
-                n.x = w2 + Math.sin(Date.now() * 0.0005) * 8;
-                n.y = h2 + Math.cos(Date.now() * 0.0007) * 6;
-                n.vx = 0; n.vy = 0;
-                return;
-            }
+            if (i === 0) { n.x = w2 + Math.sin(Date.now()*0.0005)*8; n.y = h2 + Math.cos(Date.now()*0.0007)*6; n.vx=0; n.vy=0; return; }
             n.vx *= 0.85; n.vy *= 0.85;
             n.x += n.vx; n.y += n.vy;
-            // Bounds
-            n.x = Math.max(n.r + 5, Math.min(w2 * 2 - n.r - 5, n.x));
-            n.y = Math.max(n.r + 5, Math.min(h2 * 2 - n.r - 5, n.y));
+            n.x = Math.max(n.r+15, Math.min(w2*2-n.r-15, n.x));
+            n.y = Math.max(n.r+15, Math.min(h2*2-n.r-15, n.y));
         });
     }
 
     function draw() {
+        const now = (Date.now() - t0) / 1000;
         ctx.clearRect(0, 0, W/2, H/2);
 
-        // Draw edges
-        edgeIdx.forEach(([a, b]) => {
+        // Emanating pulse rings from "You" node
+        const youN = nodes[0];
+        for (let ring = 0; ring < 3; ring++) {
+            const phase = (now * 0.4 + ring * 1.2) % 3.6;
+            const rr = youN.r + phase * 40;
+            const alpha = Math.max(0, 0.15 - phase * 0.04);
+            ctx.beginPath();
+            ctx.arc(youN.x, youN.y, rr, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(99,102,241,${alpha})`;
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+        }
+
+        // Draw edges with animated data flow
+        edgeIdx.forEach(([a, b], ei) => {
             const na = nodes[a], nb = nodes[b];
-            const isHovered = hovered === a || hovered === b;
+            const isH = hovered === a || hovered === b;
+            // Edge line
             ctx.beginPath();
             ctx.moveTo(na.x, na.y); ctx.lineTo(nb.x, nb.y);
-            ctx.strokeStyle = isHovered ? 'rgba(129,140,248,0.4)' : 'rgba(99,102,241,0.12)';
-            ctx.lineWidth = isHovered ? 1.5 : 0.7;
+            ctx.strokeStyle = isH ? 'rgba(129,140,248,0.5)' : 'rgba(99,102,241,0.1)';
+            ctx.lineWidth = isH ? 1.8 : 0.6;
             ctx.stroke();
+
+            // Animated dot traveling along edge (data flow)
+            if (isH || a === 0 || b === 0) {
+                const speed = 0.3 + (ei % 5) * 0.08;
+                const t = ((now * speed + ei * 0.7) % 2) / 2;
+                const dx = nb.x - na.x, dy = nb.y - na.y;
+                const px = na.x + dx * t, py = na.y + dy * t;
+                ctx.beginPath();
+                ctx.arc(px, py, 2, 0, Math.PI * 2);
+                ctx.fillStyle = isH ? 'rgba(129,140,248,0.8)' : 'rgba(99,102,241,0.35)';
+                ctx.fill();
+            }
         });
 
         // Draw nodes
         nodes.forEach((n, i) => {
             const isH = hovered === i;
             const color = COLORS[n.type];
+            const [g0, g1] = GRADS[n.type];
 
-            // Glow
+            // Pulse ring per node (subtle heartbeat)
+            const pulse = Math.sin(now * 1.5 + n.pulse) * 0.5 + 0.5;
+            const pulseR = n.r + 4 + pulse * 5;
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, pulseR, 0, Math.PI * 2);
+            ctx.strokeStyle = color + (isH ? '40' : '18');
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            // Outer glow
             if (isH || n.type === 'you') {
-                ctx.beginPath();
-                ctx.arc(n.x, n.y, n.r + (isH ? 12 : 6), 0, Math.PI * 2);
-                const grad = ctx.createRadialGradient(n.x, n.y, n.r, n.x, n.y, n.r + (isH ? 12 : 6));
-                grad.addColorStop(0, color + '30');
+                const glowR = n.r + (isH ? 18 : 10);
+                const grad = ctx.createRadialGradient(n.x, n.y, n.r * 0.5, n.x, n.y, glowR);
+                grad.addColorStop(0, color + '25');
+                grad.addColorStop(0.6, color + '10');
                 grad.addColorStop(1, 'transparent');
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, glowR, 0, Math.PI * 2);
                 ctx.fillStyle = grad;
                 ctx.fill();
             }
 
-            // Circle
+            // Avatar circle with gradient
+            const avatarGrad = ctx.createLinearGradient(n.x - n.r, n.y - n.r, n.x + n.r, n.y + n.r);
+            avatarGrad.addColorStop(0, g0);
+            avatarGrad.addColorStop(1, g1);
             ctx.beginPath();
             ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-            ctx.fillStyle = isH ? color : color + '90';
+            ctx.fillStyle = avatarGrad;
             ctx.fill();
-            ctx.strokeStyle = color;
-            ctx.lineWidth = isH ? 2 : 1;
+
+            // Avatar ring
+            ctx.strokeStyle = isH ? '#fff' : color;
+            ctx.lineWidth = isH ? 2.5 : 1.5;
             ctx.stroke();
 
-            // Label
+            // Online indicator for people (small green dot)
+            if (n.type === 'person') {
+                const ox = n.x + n.r * 0.65, oy = n.y + n.r * 0.65;
+                ctx.beginPath();
+                ctx.arc(ox, oy, 3.5, 0, Math.PI * 2);
+                ctx.fillStyle = '#111318';
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(ox, oy, 2.5, 0, Math.PI * 2);
+                ctx.fillStyle = '#22c55e';
+                ctx.fill();
+            }
+
+            // Initials / emoji inside circle
+            if (n.emoji) {
+                ctx.font = `${n.r * 0.9}px sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(n.initials, n.x, n.y + 1);
+            } else {
+                ctx.font = `700 ${n.r * 0.7}px Inter, sans-serif`;
+                ctx.fillStyle = '#fff';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(n.initials, n.x, n.y + 0.5);
+            }
+
+            // Label below
+            ctx.textBaseline = 'alphabetic';
             ctx.font = `${isH ? '600' : '500'} ${n.type === 'you' ? 10 : 8}px Inter, sans-serif`;
-            ctx.fillStyle = isH ? '#f0f6fc' : '#c9d1d9';
+            ctx.fillStyle = isH ? '#f0f6fc' : '#8b949e';
             ctx.textAlign = 'center';
-            ctx.fillText(n.label, n.x, n.y + n.r + 13);
+            ctx.fillText(n.label, n.x, n.y + n.r + 14);
+
+            // Hover tooltip with extra info
+            if (isH && n.type !== 'you') {
+                const info = n.type === 'person' ? 'Last contact: 2 days ago'
+                    : n.type === 'company' ? '3 active projects'
+                    : 'Status: In progress';
+                const tw = ctx.measureText(info).width + 16;
+                const tx = n.x - tw/2, ty = n.y - n.r - 22;
+                ctx.fillStyle = 'rgba(17,19,24,0.92)';
+                ctx.beginPath();
+                ctx.roundRect(tx, ty, tw, 18, 4);
+                ctx.fill();
+                ctx.strokeStyle = color + '50';
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+                ctx.font = '500 7px Inter, sans-serif';
+                ctx.fillStyle = '#c9d1d9';
+                ctx.textAlign = 'center';
+                ctx.fillText(info, n.x, ty + 12.5);
+            }
         });
 
         simulate();
