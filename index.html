@@ -1322,7 +1322,7 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// ── KNOWLEDGE GRAPH (force-directed with avatars) ──
+// ── KNOWLEDGE GRAPH (force-directed with photo avatars) ──
 (function() {
     const canvas = document.getElementById('graphCanvas');
     if (!canvas) return;
@@ -1337,33 +1337,41 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     resize();
     window.addEventListener('resize', () => { ctx.setTransform(1,0,0,1,0,0); resize(); });
 
-    // Gradient pairs for avatars [from, to]
-    const GRADS = {
-        you: ['#6366f1','#a78bfa'],
-        person: ['#059669','#34d399'],
-        company: ['#d97706','#fbbf24'],
-        deal: ['#db2777','#f472b6'],
+    const GRADS = { you:['#6366f1','#a78bfa'], person:['#059669','#34d399'], company:['#d97706','#fbbf24'], deal:['#db2777','#f472b6'] };
+    const COLORS = { you:'#6366f1', person:'#22c55e', company:'#f59e0b', deal:'#e1306c' };
+
+    // Preload avatar images
+    const avatarImgs = {};
+    const avatarSrcs = {
+        you:'avatars/you.png', maria:'avatars/maria.png', nikos:'avatars/nikos.png',
+        elena:'avatars/elena.png', giorgos:'avatars/giorgos.png', anna:'avatars/anna.png',
+        dimitris:'avatars/dimitris.png', sofia:'avatars/sofia.png'
     };
-    const COLORS = { you: '#6366f1', person: '#22c55e', company: '#f59e0b', deal: '#e1306c' };
+    let imgsLoaded = 0;
+    Object.entries(avatarSrcs).forEach(([id, src]) => {
+        const img = new Image();
+        img.onload = () => { avatarImgs[id] = img; imgsLoaded++; };
+        img.src = src;
+    });
 
     const nodes = [
-        { id: 'you', label: 'You', initials: '👤', emoji: true, type: 'you', r: 24, x: 0, y: 0, vx: 0, vy: 0, pulse: 0 },
-        { id: 'maria', label: 'Maria K.', initials: 'MK', type: 'person', r: 15, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
-        { id: 'nikos', label: 'Nikos P.', initials: 'NP', type: 'person', r: 15, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
-        { id: 'elena', label: 'Elena D.', initials: 'ED', type: 'person', r: 13, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
-        { id: 'giorgos', label: 'Giorgos T.', initials: 'GT', type: 'person', r: 14, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
-        { id: 'anna', label: 'Anna M.', initials: 'AM', type: 'person', r: 12, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
-        { id: 'dimitris', label: 'Dimitris R.', initials: 'DR', type: 'person', r: 13, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
-        { id: 'sofia', label: 'Sofia L.', initials: 'SL', type: 'person', r: 11, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
-        { id: 'techco', label: 'TechCo SA', initials: '🏢', emoji: true, type: 'company', r: 17, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
-        { id: 'oliveoil', label: 'Olive Gold', initials: '🫒', emoji: true, type: 'company', r: 15, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
-        { id: 'shipco', label: 'AegeanShip', initials: '🚢', emoji: true, type: 'company', r: 14, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
-        { id: 'cafe', label: 'Cafe Thema', initials: '☕', emoji: true, type: 'company', r: 12, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
-        { id: 'lawfirm', label: 'Lexis Legal', initials: '⚖️', emoji: true, type: 'company', r: 13, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
-        { id: 'deal1', label: '€12k Project', initials: '💰', emoji: true, type: 'deal', r: 11, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
-        { id: 'deal2', label: '€5k Retainer', initials: '💳', emoji: true, type: 'deal', r: 10, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
-        { id: 'deal3', label: '€28k Contract', initials: '📄', emoji: true, type: 'deal', r: 13, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
-        { id: 'deal4', label: '€3.5k Order', initials: '🛒', emoji: true, type: 'deal', r: 9, x: 0, y: 0, vx: 0, vy: 0, pulse: Math.random()*6 },
+        { id:'you', label:'You', initials:'👤', emoji:true, type:'you', r:26, x:0, y:0, vx:0, vy:0, pulse:0 },
+        { id:'maria', label:'Maria K.', initials:'MK', type:'person', r:16, x:0, y:0, vx:0, vy:0, pulse:Math.random()*6 },
+        { id:'nikos', label:'Nikos P.', initials:'NP', type:'person', r:16, x:0, y:0, vx:0, vy:0, pulse:Math.random()*6 },
+        { id:'elena', label:'Elena D.', initials:'ED', type:'person', r:14, x:0, y:0, vx:0, vy:0, pulse:Math.random()*6 },
+        { id:'giorgos', label:'Giorgos T.', initials:'GT', type:'person', r:15, x:0, y:0, vx:0, vy:0, pulse:Math.random()*6 },
+        { id:'anna', label:'Anna M.', initials:'AM', type:'person', r:13, x:0, y:0, vx:0, vy:0, pulse:Math.random()*6 },
+        { id:'dimitris', label:'Dimitris R.', initials:'DR', type:'person', r:14, x:0, y:0, vx:0, vy:0, pulse:Math.random()*6 },
+        { id:'sofia', label:'Sofia L.', initials:'SL', type:'person', r:12, x:0, y:0, vx:0, vy:0, pulse:Math.random()*6 },
+        { id:'techco', label:'TechCo SA', initials:'🏢', emoji:true, type:'company', r:17, x:0, y:0, vx:0, vy:0, pulse:Math.random()*6 },
+        { id:'oliveoil', label:'Olive Gold', initials:'🫒', emoji:true, type:'company', r:15, x:0, y:0, vx:0, vy:0, pulse:Math.random()*6 },
+        { id:'shipco', label:'AegeanShip', initials:'🚢', emoji:true, type:'company', r:14, x:0, y:0, vx:0, vy:0, pulse:Math.random()*6 },
+        { id:'cafe', label:'Cafe Thema', initials:'☕', emoji:true, type:'company', r:12, x:0, y:0, vx:0, vy:0, pulse:Math.random()*6 },
+        { id:'lawfirm', label:'Lexis Legal', initials:'⚖️', emoji:true, type:'company', r:13, x:0, y:0, vx:0, vy:0, pulse:Math.random()*6 },
+        { id:'deal1', label:'€12k Project', initials:'💰', emoji:true, type:'deal', r:11, x:0, y:0, vx:0, vy:0, pulse:Math.random()*6 },
+        { id:'deal2', label:'€5k Retainer', initials:'💳', emoji:true, type:'deal', r:10, x:0, y:0, vx:0, vy:0, pulse:Math.random()*6 },
+        { id:'deal3', label:'€28k Contract', initials:'📄', emoji:true, type:'deal', r:13, x:0, y:0, vx:0, vy:0, pulse:Math.random()*6 },
+        { id:'deal4', label:'€3.5k Order', initials:'🛒', emoji:true, type:'deal', r:9, x:0, y:0, vx:0, vy:0, pulse:Math.random()*6 },
     ];
 
     const cw = W/4, ch = H/4;
@@ -1376,15 +1384,15 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     });
 
     const edges = [
-        ['you','maria'], ['you','nikos'], ['you','elena'], ['you','giorgos'], ['you','anna'], ['you','dimitris'],
-        ['you','techco'], ['you','oliveoil'], ['you','shipco'],
-        ['maria','techco'], ['nikos','oliveoil'], ['elena','shipco'], ['giorgos','techco'],
-        ['anna','cafe'], ['dimitris','lawfirm'], ['sofia','oliveoil'],
-        ['maria','nikos'], ['elena','giorgos'], ['anna','sofia'],
-        ['deal1','techco'], ['deal1','maria'], ['deal2','oliveoil'], ['deal2','nikos'],
-        ['deal3','shipco'], ['deal3','elena'], ['deal3','giorgos'],
-        ['deal4','cafe'], ['deal4','anna'],
-        ['lawfirm','deal3'], ['sofia','cafe'], ['dimitris','deal1'],
+        ['you','maria'],['you','nikos'],['you','elena'],['you','giorgos'],['you','anna'],['you','dimitris'],
+        ['you','techco'],['you','oliveoil'],['you','shipco'],
+        ['maria','techco'],['nikos','oliveoil'],['elena','shipco'],['giorgos','techco'],
+        ['anna','cafe'],['dimitris','lawfirm'],['sofia','oliveoil'],
+        ['maria','nikos'],['elena','giorgos'],['anna','sofia'],
+        ['deal1','techco'],['deal1','maria'],['deal2','oliveoil'],['deal2','nikos'],
+        ['deal3','shipco'],['deal3','elena'],['deal3','giorgos'],
+        ['deal4','cafe'],['deal4','anna'],
+        ['lawfirm','deal3'],['sofia','cafe'],['dimitris','deal1'],
     ];
 
     const idxMap = {};
@@ -1457,21 +1465,18 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
         edgeIdx.forEach(([a, b], ei) => {
             const na = nodes[a], nb = nodes[b];
             const isH = hovered === a || hovered === b;
-            // Edge line
             ctx.beginPath();
             ctx.moveTo(na.x, na.y); ctx.lineTo(nb.x, nb.y);
             ctx.strokeStyle = isH ? 'rgba(129,140,248,0.5)' : 'rgba(99,102,241,0.1)';
             ctx.lineWidth = isH ? 1.8 : 0.6;
             ctx.stroke();
-
-            // Animated dot traveling along edge (data flow)
+            // Data flow dots
             if (isH || a === 0 || b === 0) {
                 const speed = 0.3 + (ei % 5) * 0.08;
                 const t = ((now * speed + ei * 0.7) % 2) / 2;
                 const dx = nb.x - na.x, dy = nb.y - na.y;
-                const px = na.x + dx * t, py = na.y + dy * t;
                 ctx.beginPath();
-                ctx.arc(px, py, 2, 0, Math.PI * 2);
+                ctx.arc(na.x + dx * t, na.y + dy * t, 2, 0, Math.PI * 2);
                 ctx.fillStyle = isH ? 'rgba(129,140,248,0.8)' : 'rgba(99,102,241,0.35)';
                 ctx.fill();
             }
@@ -1482,8 +1487,9 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
             const isH = hovered === i;
             const color = COLORS[n.type];
             const [g0, g1] = GRADS[n.type];
+            const img = avatarImgs[n.id];
 
-            // Pulse ring per node (subtle heartbeat)
+            // Heartbeat pulse ring
             const pulse = Math.sin(now * 1.5 + n.pulse) * 0.5 + 0.5;
             const pulseR = n.r + 4 + pulse * 5;
             ctx.beginPath();
@@ -1494,10 +1500,10 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
             // Outer glow
             if (isH || n.type === 'you') {
-                const glowR = n.r + (isH ? 18 : 10);
+                const glowR = n.r + (isH ? 20 : 12);
                 const grad = ctx.createRadialGradient(n.x, n.y, n.r * 0.5, n.x, n.y, glowR);
-                grad.addColorStop(0, color + '25');
-                grad.addColorStop(0.6, color + '10');
+                grad.addColorStop(0, color + '30');
+                grad.addColorStop(0.6, color + '12');
                 grad.addColorStop(1, 'transparent');
                 ctx.beginPath();
                 ctx.arc(n.x, n.y, glowR, 0, Math.PI * 2);
@@ -1505,45 +1511,58 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
                 ctx.fill();
             }
 
-            // Avatar circle with gradient
-            const avatarGrad = ctx.createLinearGradient(n.x - n.r, n.y - n.r, n.x + n.r, n.y + n.r);
-            avatarGrad.addColorStop(0, g0);
-            avatarGrad.addColorStop(1, g1);
-            ctx.beginPath();
-            ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-            ctx.fillStyle = avatarGrad;
-            ctx.fill();
+            // Avatar: photo image or gradient fallback
+            if (img) {
+                // Clip to circle and draw photo
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+                ctx.clip();
+                // Draw image centered and covering the circle
+                const sz = n.r * 2;
+                ctx.drawImage(img, n.x - n.r, n.y - n.r, sz, sz);
+                ctx.restore();
+                // Border ring
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+                ctx.strokeStyle = isH ? '#fff' : color;
+                ctx.lineWidth = isH ? 3 : 2;
+                ctx.stroke();
+            } else {
+                // Gradient circle fallback
+                const avatarGrad = ctx.createLinearGradient(n.x - n.r, n.y - n.r, n.x + n.r, n.y + n.r);
+                avatarGrad.addColorStop(0, g0); avatarGrad.addColorStop(1, g1);
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+                ctx.fillStyle = avatarGrad;
+                ctx.fill();
+                ctx.strokeStyle = isH ? '#fff' : color;
+                ctx.lineWidth = isH ? 2.5 : 1.5;
+                ctx.stroke();
+                // Emoji or initials
+                if (n.emoji) {
+                    ctx.font = `${n.r * 0.9}px sans-serif`;
+                    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                    ctx.fillText(n.initials, n.x, n.y + 1);
+                } else {
+                    ctx.font = `700 ${n.r * 0.7}px Inter, sans-serif`;
+                    ctx.fillStyle = '#fff';
+                    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                    ctx.fillText(n.initials, n.x, n.y + 0.5);
+                }
+            }
 
-            // Avatar ring
-            ctx.strokeStyle = isH ? '#fff' : color;
-            ctx.lineWidth = isH ? 2.5 : 1.5;
-            ctx.stroke();
-
-            // Online indicator for people (small green dot)
-            if (n.type === 'person') {
+            // Online indicator dot for people
+            if (n.type === 'person' || n.type === 'you') {
                 const ox = n.x + n.r * 0.65, oy = n.y + n.r * 0.65;
                 ctx.beginPath();
-                ctx.arc(ox, oy, 3.5, 0, Math.PI * 2);
+                ctx.arc(ox, oy, 4, 0, Math.PI * 2);
                 ctx.fillStyle = '#111318';
                 ctx.fill();
                 ctx.beginPath();
-                ctx.arc(ox, oy, 2.5, 0, Math.PI * 2);
+                ctx.arc(ox, oy, 2.8, 0, Math.PI * 2);
                 ctx.fillStyle = '#22c55e';
                 ctx.fill();
-            }
-
-            // Initials / emoji inside circle
-            if (n.emoji) {
-                ctx.font = `${n.r * 0.9}px sans-serif`;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(n.initials, n.x, n.y + 1);
-            } else {
-                ctx.font = `700 ${n.r * 0.7}px Inter, sans-serif`;
-                ctx.fillStyle = '#fff';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(n.initials, n.x, n.y + 0.5);
             }
 
             // Label below
@@ -1553,13 +1572,13 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
             ctx.textAlign = 'center';
             ctx.fillText(n.label, n.x, n.y + n.r + 14);
 
-            // Hover tooltip with extra info
+            // Hover tooltip
             if (isH && n.type !== 'you') {
                 const info = n.type === 'person' ? 'Last contact: 2 days ago'
                     : n.type === 'company' ? '3 active projects'
                     : 'Status: In progress';
                 const tw = ctx.measureText(info).width + 16;
-                const tx = n.x - tw/2, ty = n.y - n.r - 22;
+                const tx = n.x - tw/2, ty = n.y - n.r - 24;
                 ctx.fillStyle = 'rgba(17,19,24,0.92)';
                 ctx.beginPath();
                 ctx.roundRect(tx, ty, tw, 18, 4);
