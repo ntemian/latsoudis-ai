@@ -297,74 +297,104 @@
         }
         .section-sub { font-size: 0.95rem; color: var(--text-muted); max-width: 520px; line-height: 1.6; }
 
-        /* ── DEMO SECTION ── */
-        .demo-label {
-            display: inline-flex; align-items: center; gap: 6px;
-            font-family: var(--mono); font-size: 0.6rem; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 0.1em; color: var(--green);
-            background: var(--green-dim); padding: 3px 10px; border-radius: 4px; margin-bottom: 1rem;
+        /* ── WHATSAPP DEMO ── */
+        .wa-demo-grid {
+            display: flex; flex-direction: column; align-items: center;
+            gap: 1.5rem; margin-top: 2rem;
         }
-        .demo-label .dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: blink 2s infinite; }
-
-        /* ── COMMS HUB ── */
-        .comms-grid {
-            display: grid; grid-template-columns: 280px 1fr; gap: 1rem; margin-top: 1rem;
+        .wa-demo-tabs {
+            display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;
         }
-        .comms-channels {
-            display: flex; flex-direction: column; gap: 0.5rem;
+        .wa-demo-tab {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 100px;
+            padding: 8px 16px; font-size: 0.8rem; font-weight: 600; color: var(--text-muted);
+            cursor: pointer; font-family: inherit; transition: all 0.2s;
         }
-        .comms-ch {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
-            padding: 10px 14px; display: flex; align-items: center; gap: 10px;
-            transition: all 0.2s; cursor: pointer;
+        .wa-demo-tab:hover { border-color: var(--border-hover); color: var(--text-bright); }
+        .wa-demo-tab.active {
+            background: #005c4b; border-color: #25d366; color: #e9edef;
         }
-        .comms-ch:hover, .comms-ch.active { border-color: var(--border-accent); background: var(--bg-hover); }
-        .comms-ch-icon {
-            width: 32px; height: 32px; border-radius: 8px; display: flex;
-            align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0;
+        .wa-demo-phone {
+            width: 100%; max-width: 420px; border-radius: 20px; overflow: hidden;
+            border: 1px solid #2a3942; box-shadow: 0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(37,211,102,0.08);
+            background: #0b141a;
         }
-        .comms-ch-info { flex: 1; min-width: 0; }
-        .comms-ch-name { font-size: 0.8rem; font-weight: 600; color: var(--text-bright); }
-        .comms-ch-preview { font-size: 0.7rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .comms-ch-badge {
-            min-width: 18px; height: 18px; border-radius: 9px; font-size: 0.6rem;
-            font-weight: 700; display: flex; align-items: center; justify-content: center;
-            padding: 0 5px;
+        .wa-demo-topbar {
+            background: #1f2c34; padding: 10px 12px;
+            display: flex; align-items: center; gap: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
         }
-        .comms-thread {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
-            display: flex; flex-direction: column; overflow: hidden;
-            transition: transform 0.15s ease-out, box-shadow 0.3s;
+        .wa-demo-back { color: #25d366; font-size: 1.3rem; font-weight: 300; }
+        .wa-demo-contact { display: flex; align-items: center; gap: 8px; flex: 1; }
+        .wa-demo-avatar {
+            width: 34px; height: 34px; border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #25d366);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem;
         }
-        .comms-thread:hover {
-            box-shadow: 0 20px 60px rgba(99,102,241,0.08), 0 0 0 1px rgba(99,102,241,0.15);
+        .wa-demo-contact-name { font-size: 0.85rem; font-weight: 600; color: #e9edef; }
+        .wa-demo-contact-status { font-size: 0.65rem; color: #25d366; }
+        .wa-demo-icons { color: #aebac1; font-size: 0.9rem; letter-spacing: 8px; }
+        .wa-demo-chat {
+            min-height: 340px; max-height: 400px; padding: 12px 10px;
+            display: flex; flex-direction: column; gap: 4px;
+            overflow-y: auto; background: #0b141a;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M0 0h80v80H0z' fill='none'/%3E%3Cpath d='M20 20h2v2h-2zM58 58h2v2h-2zM40 10h1v1h-1zM10 50h1v1h-1zM60 30h1v1h-1z' fill='%23ffffff' fill-opacity='.02'/%3E%3C/svg%3E");
         }
-        .comms-thread-header {
-            padding: 10px 14px; border-bottom: 1px solid var(--border);
+        .wa-demo-msg {
+            max-width: 85%; padding: 6px 10px 2px; border-radius: 8px;
+            font-size: 0.82rem; line-height: 1.5; position: relative;
+            animation: waMsgIn 0.3s ease-out;
+        }
+        @keyframes waMsgIn {
+            from { opacity: 0; transform: translateY(8px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .wa-demo-msg-in {
+            background: #1f2c34; color: #e9edef; align-self: flex-start;
+            border-top-left-radius: 0;
+        }
+        .wa-demo-msg-out {
+            background: #005c4b; color: #e9edef; align-self: flex-end;
+            border-top-right-radius: 0;
+        }
+        .wa-demo-msg-time {
+            font-size: 0.6rem; color: rgba(255,255,255,0.4); text-align: right;
+            margin-top: 2px; padding-bottom: 2px;
+            display: flex; align-items: center; justify-content: flex-end; gap: 4px;
+        }
+        .wa-demo-msg-time .ticks { color: #53bdeb; font-size: 0.7rem; }
+        .wa-demo-msg-day {
+            align-self: center; background: #182229; color: #8696a0;
+            font-size: 0.65rem; padding: 4px 12px; border-radius: 6px;
+            margin: 4px 0;
+        }
+        .wa-demo-inputbar {
+            background: #1f2c34; padding: 6px 8px;
             display: flex; align-items: center; gap: 8px;
+            border-top: 1px solid rgba(255,255,255,0.04);
         }
-        .comms-thread-name { font-size: 0.8rem; font-weight: 600; color: var(--text-bright); }
-        .comms-thread-ai {
-            font-family: var(--mono); font-size: 0.55rem; padding: 2px 6px;
-            background: var(--green-dim); color: var(--green); border-radius: 3px; font-weight: 700;
+        .wa-demo-emoji { font-size: 1.1rem; opacity: 0.5; }
+        .wa-demo-input {
+            flex: 1; background: #2a3942; border-radius: 18px;
+            padding: 8px 14px; color: #8696a0; font-size: 0.8rem;
         }
-        .comms-msgs {
-            flex: 1; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px;
-            min-height: 240px; max-height: 320px; overflow-y: auto;
+        .wa-demo-mic { font-size: 1rem; opacity: 0.5; }
+        .wa-demo-typing {
+            align-self: flex-start; background: #1f2c34;
+            padding: 10px 14px; border-radius: 8px; border-top-left-radius: 0;
+            display: flex; gap: 4px; align-items: center;
         }
-        .comms-msg {
-            max-width: 80%; padding: 8px 12px; border-radius: 10px; font-size: 0.78rem; line-height: 1.45;
+        .wa-demo-typing span {
+            width: 6px; height: 6px; background: #8696a0; border-radius: 50%;
+            animation: typingBounce 1.4s infinite;
         }
-        .comms-msg-in { background: rgba(99,102,241,0.08); color: var(--text); align-self: flex-start; border-bottom-left-radius: 2px; }
-        .comms-msg-out { background: rgba(34,197,94,0.1); color: var(--text); align-self: flex-end; border-bottom-right-radius: 2px; }
-        .comms-msg-ai { background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.2); }
-        .comms-msg-label { font-family: var(--mono); font-size: 0.55rem; font-weight: 700; margin-bottom: 3px; }
-        .comms-status-bar {
-            padding: 8px 14px; border-top: 1px solid var(--border);
-            font-family: var(--mono); font-size: 0.6rem; color: var(--text-muted);
-            display: flex; align-items: center; gap: 6px;
+        .wa-demo-typing span:nth-child(2) { animation-delay: 0.2s; }
+        .wa-demo-typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typingBounce {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+            30% { transform: translateY(-4px); opacity: 1; }
         }
-        .comms-status-bar .dot { width: 5px; height: 5px; background: var(--green); border-radius: 50%; animation: blink 2s infinite; }
 
         /* ── STATS STRIP ── */
         .stats-strip {
@@ -388,11 +418,11 @@
         }
 
         @media (max-width: 1024px) {
-            .comms-grid { grid-template-columns: 1fr; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
         }
         @media (max-width: 768px) {
             .stats-grid { grid-template-columns: 1fr 1fr; }
+            .wa-demo-tab { font-size: 0.7rem; padding: 6px 12px; }
         }
 
         /* ── KNOWLEDGE GRAPH ── */
@@ -737,69 +767,37 @@
 <!-- LIVE DEMO -->
 <section id="examples">
     <div class="container">
-        <div class="section-label">This is running. Right now.</div>
-        <h2 class="section-title">Pick a scenario. Watch the AI handle it.</h2>
-        <div class="demo-label"><span class="dot"></span> Click any channel to see a real workflow</div>
+        <div class="section-label">Run your business from WhatsApp</div>
+        <h2 class="section-title">One chat. Your entire operation.</h2>
+        <p class="section-sub">Your AI assistant lives in WhatsApp. Tell it what you need — it handles the rest. Tap a scenario.</p>
 
-        <div class="comms-grid">
-            <div class="comms-channels" id="commsChannels">
-                <div class="comms-ch active" onclick="switchCommsChannel(0)">
-                    <div class="comms-ch-icon" style="background:rgba(37,211,102,0.15);">💬</div>
-                    <div class="comms-ch-info">
-                        <div class="comms-ch-name">Customer Booking</div>
-                        <div class="comms-ch-preview">WhatsApp: "Table for 4 Saturday..."</div>
-                    </div>
-                    <div class="comms-ch-badge" style="background:rgba(37,211,102,0.2);color:#25d366;">3</div>
-                </div>
-                <div class="comms-ch" onclick="switchCommsChannel(1)">
-                    <div class="comms-ch-icon" style="background:rgba(99,91,255,0.15);">💳</div>
-                    <div class="comms-ch-info">
-                        <div class="comms-ch-name">Invoice &amp; Payment</div>
-                        <div class="comms-ch-preview">€2,400 auto-invoiced and collected</div>
-                    </div>
-                    <div class="comms-ch-badge" style="background:rgba(99,91,255,0.2);color:#635bff;">2</div>
-                </div>
-                <div class="comms-ch" onclick="switchCommsChannel(2)">
-                    <div class="comms-ch-icon" style="background:rgba(225,48,108,0.15);">📸</div>
-                    <div class="comms-ch-info">
-                        <div class="comms-ch-name">Lead from Instagram</div>
-                        <div class="comms-ch-preview">DM: "Do you take custom orders?"</div>
-                    </div>
-                    <div class="comms-ch-badge" style="background:rgba(225,48,108,0.2);color:#e1306c;">1</div>
-                </div>
-                <div class="comms-ch" onclick="switchCommsChannel(3)">
-                    <div class="comms-ch-icon" style="background:rgba(245,158,11,0.15);">📦</div>
-                    <div class="comms-ch-info">
-                        <div class="comms-ch-name">Auto-Restock</div>
-                        <div class="comms-ch-preview">Stock low → ordered → paid → tracked</div>
-                    </div>
-                    <div class="comms-ch-badge" style="background:rgba(245,158,11,0.2);color:#f59e0b;">1</div>
-                </div>
-                <div class="comms-ch" onclick="switchCommsChannel(4)">
-                    <div class="comms-ch-icon" style="background:rgba(99,102,241,0.15);">📞</div>
-                    <div class="comms-ch-info">
-                        <div class="comms-ch-name">Missed Call Recovery</div>
-                        <div class="comms-ch-preview">AI answered, lead saved</div>
-                    </div>
-                    <div class="comms-ch-badge" style="background:rgba(99,102,241,0.2);color:#6366f1;">1</div>
-                </div>
-                <div class="comms-ch" onclick="switchCommsChannel(5)">
-                    <div class="comms-ch-icon" style="background:rgba(34,197,94,0.15);">📊</div>
-                    <div class="comms-ch-info">
-                        <div class="comms-ch-name">End-of-Day Report</div>
-                        <div class="comms-ch-preview">Revenue, leads, actions — auto</div>
-                    </div>
-                    <div class="comms-ch-badge" style="background:rgba(34,197,94,0.2);color:#22c55e;">1</div>
-                </div>
+        <div class="wa-demo-grid">
+            <div class="wa-demo-tabs" id="waDemoTabs">
+                <button class="wa-demo-tab active" onclick="switchDemo(0)">☀️ Morning Brief</button>
+                <button class="wa-demo-tab" onclick="switchDemo(1)">📅 Book a Table</button>
+                <button class="wa-demo-tab" onclick="switchDemo(2)">🧾 Send Invoice</button>
+                <button class="wa-demo-tab" onclick="switchDemo(3)">📦 Order Supplies</button>
+                <button class="wa-demo-tab" onclick="switchDemo(4)">📞 Missed Call</button>
+                <button class="wa-demo-tab" onclick="switchDemo(5)">📊 Close the Day</button>
             </div>
-            <div class="comms-thread" id="commsThread">
-                <div class="comms-thread-header">
-                    <span>💬</span>
-                    <span class="comms-thread-name">Customer Booking</span>
-                    <span class="comms-thread-ai">AI HANDLING</span>
+            <div class="wa-demo-phone">
+                <div class="wa-demo-topbar">
+                    <span class="wa-demo-back">‹</span>
+                    <div class="wa-demo-contact">
+                        <div class="wa-demo-avatar">🤖</div>
+                        <div>
+                            <div class="wa-demo-contact-name">My AI Assistant</div>
+                            <div class="wa-demo-contact-status">online</div>
+                        </div>
+                    </div>
+                    <span class="wa-demo-icons">📞 ⋮</span>
                 </div>
-                <div class="comms-msgs" id="commsMsgs"></div>
-                <div class="comms-status-bar"><span class="dot"></span> AI handles it. You step in only when it matters.</div>
+                <div class="wa-demo-chat" id="waDemoChat"></div>
+                <div class="wa-demo-inputbar">
+                    <span class="wa-demo-emoji">😊</span>
+                    <div class="wa-demo-input">Type a message</div>
+                    <span class="wa-demo-mic">🎤</span>
+                </div>
             </div>
         </div>
     </div>
@@ -1162,59 +1160,94 @@ document.querySelectorAll('.btn-primary, .wa-direct-btn, .tier-pay').forEach(btn
     });
 });
 
-// ── COMMS DEMO ──
-const COMMS_DATA = [
-    { icon: '💬', name: 'WhatsApp — Customer Orders', msgs: [
-        { type: 'in', label: 'Customer', text: 'Hi, I want to book a table for 4 this Saturday at 8pm.' },
-        { type: 'ai', label: 'AI', text: 'Checking availability... Saturday 8pm is open. Booking confirmed for 4 guests. Sent confirmation to customer.' },
-        { type: 'in', label: 'Customer', text: 'Can we also pre-order the seafood platter?' },
-        { type: 'ai', label: 'AI', text: 'Pre-order logged. Kitchen notified. Ingredients auto-checked against inventory — all in stock.' },
-        { type: 'out', label: 'Owner', text: 'Perfect, I see it in the system. No action needed from me.' },
-    ]},
-    { icon: '📧', name: 'Email — Invoicing', msgs: [
-        { type: 'ai', label: 'AI', text: 'Invoice #312 auto-generated for Papadopoulos & Co — €2,400. Payment terms: 30 days.' },
-        { type: 'ai', label: 'AI', text: 'Sent to client. Stripe payment link included. Bookkeeper notified.' },
-        { type: 'in', label: 'Stripe', text: 'Payment received: €2,400. Invoice #312 marked as paid.' },
-        { type: 'ai', label: 'AI', text: 'Payment matched. Bank reconciled. Tax report updated. No action needed.' },
-    ]},
-    { icon: '📸', name: 'Instagram — Lead Capture', msgs: [
-        { type: 'in', label: 'DM', text: 'Love your work! Do you take custom orders?' },
-        { type: 'ai', label: 'AI', text: 'Lead detected. Score: HIGH (repeat visitor, engaged). Auto-responding with catalog link.' },
-        { type: 'ai', label: 'Auto-reply', text: 'Thank you! Here\'s our catalog with pricing: [link]. Want to chat on WhatsApp for a custom quote?' },
-        { type: 'out', label: 'Owner', text: 'Great lead. I\'ll follow up personally on WhatsApp.' },
-    ]},
-    { icon: '✈️', name: 'Telegram — Supplier Alerts', msgs: [
-        { type: 'ai', label: 'Inventory Bot', text: 'Olive oil stock below threshold (2L remaining). Auto-ordering 20L from preferred supplier.' },
-        { type: 'in', label: 'Supplier', text: 'Order confirmed. Delivery tomorrow before 10am.' },
-        { type: 'ai', label: 'AI', text: 'Delivery logged. Updated inventory forecast. Next reorder in ~18 days.' },
-    ]},
-    { icon: '📞', name: 'Phone — Missed Call Recovery', msgs: [
-        { type: 'ai', label: 'AI Phone', text: 'Missed call from +30 694 xxx xxxx. AI answered and transcribed:' },
-        { type: 'ai', label: 'Caller', text: '"I\'m looking for catering for 50 people next month. Can someone call me back?"' },
-        { type: 'ai', label: 'AI', text: 'Lead scored: HIGH (€3,000+ potential). Auto-sent SMS: "We\'ll call you within the hour."' },
-        { type: 'out', label: 'Owner', text: 'Calling them now. The AI saved this lead — I was in the kitchen.' },
-    ]},
-    { icon: '📊', name: 'Daily Report — Auto-generated', msgs: [
-        { type: 'ai', label: 'AI', text: 'Today: 12 bookings, 3 invoices paid (€4,800), 2 new leads scored, inventory reorder placed.' },
-        { type: 'ai', label: 'AI', text: 'Revenue this week: €18,200 (+12% vs last week). Top channel: WhatsApp (67% of leads).' },
-        { type: 'ai', label: 'AI', text: 'Suggestion: Saturday capacity is 90% full. Consider opening 2 extra tables or extending hours.' },
-        { type: 'out', label: 'Owner', text: 'Open the extra tables. Update the booking system.' },
-        { type: 'ai', label: 'AI', text: 'Done. Capacity updated. WhatsApp auto-replies now show Saturday availability until 10:30pm.' },
-    ]},
+// ── WHATSAPP DEMO ──
+const DEMO_CHATS = [
+    // 0: Morning Brief
+    [
+        { s: 'in', text: '☀️ <b>Good morning!</b> Here\'s your day:', t: '07:30' },
+        { s: 'in', text: '📅 <b>3 bookings</b> today (12:00, 14:30, 21:00)\n👥 Maria on shift, Nikos off\n📦 Olive oil delivery arriving ~10am\n💰 Yesterday: <b>€2,840</b> revenue\n📈 +18% vs same day last week', t: '07:30' },
+        { s: 'in', text: '⚠️ Heads up: Feta stock at 2kg — enough for today but need to reorder.\n\nShall I order from Papadopoulos?', t: '07:30' },
+        { s: 'out', text: 'Yes order feta. And remind Maria about the VIP at 21:00', t: '07:32' },
+        { s: 'in', text: '✅ Feta ordered — 10kg from Papadopoulos, arriving tomorrow before 9am\n✅ Reminder sent to Maria about the VIP booking at 21:00 🍷', t: '07:32' },
+    ],
+    // 1: Book a Table
+    [
+        { s: 'in', text: '📱 <b>New booking request</b> via your website:\n\n👤 Konstantinos Dimitriou\n📅 Saturday, 21:00\n👥 6 people\n💬 "Birthday dinner, need a nice table"', t: '14:15' },
+        { s: 'in', text: 'Table 8 (window, fits 6) is available. Shall I confirm?', t: '14:15' },
+        { s: 'out', text: '👍', t: '14:16' },
+        { s: 'in', text: '✅ Confirmed! Here\'s what I did:\n\n📩 Sent confirmation to Konstantinos\n🎂 Added birthday flag — kitchen will prepare complimentary dessert\n📋 Reserved Table 8\n🔔 Maria notified for Saturday night', t: '14:16' },
+        { s: 'out', text: 'Perfect 🙏', t: '14:17' },
+    ],
+    // 2: Send Invoice
+    [
+        { s: 'out', text: 'Send invoice to Stavros at TechCo, €2,400 for the consulting this month', t: '11:20' },
+        { s: 'in', text: '🧾 <b>Invoice #347 created</b>\n\n📤 To: Stavros Karagiannis — TechCo SA\n💶 Amount: €2,400.00\n📝 Description: Consulting services — February 2026\n⏳ Due: 30 days\n💳 Stripe payment link included\n\nSending now...', t: '11:20' },
+        { s: 'in', text: '✅ Sent! Stavros received it via email.\n\nI\'ll notify you when he pays. Last time he paid in 3 days 👌', t: '11:20' },
+        { s: 'in', text: '💰 <b>Payment received!</b>\n\nStavros paid Invoice #347 — €2,400\nBank reconciled ✓\nAccounting updated ✓\n\nThat was fast — 2 days this time 🎉', t: '13:45', day: '2 days later' },
+    ],
+    // 3: Order Supplies
+    [
+        { s: 'out', text: 'Order from Makro: 5 cases of napkins, 20L olive oil, 3 boxes of wine glasses', t: '09:45' },
+        { s: 'in', text: '📦 <b>Order prepared:</b>\n\n• Napkins x5 cases — €47.50\n• Olive oil 20L — €89.00\n• Wine glasses x3 boxes — €126.00\n\n💶 Total: <b>€262.50</b>\n🚚 Delivery: Tomorrow 8-11am\n\nPay with card ending 4821?', t: '09:45' },
+        { s: 'out', text: 'Yes', t: '09:46' },
+        { s: 'in', text: '✅ Paid and confirmed!\n\n📧 Confirmation email saved\n📋 Added to inventory forecast\n🔔 I\'ll remind you tomorrow morning about the delivery\n\nAnything else?', t: '09:46' },
+        { s: 'out', text: 'That\'s all thanks 👍', t: '09:47' },
+    ],
+    // 4: Missed Call
+    [
+        { s: 'in', text: '📞 <b>Missed call handled</b>\n\n👤 +30 694 *** **82\n🕐 12:34 — you were busy\n\n🤖 AI answered and had a conversation:', t: '12:35' },
+        { s: 'in', text: '💬 Caller said:\n"Looking for catering for 50 people, company event on March 15th. Need full menu with vegetarian options."\n\n📊 Lead score: <b>🔥 HIGH</b>\n💶 Estimated value: €3,000+\n\nI sent them an SMS:\n"Thanks for calling! We\'d love to help with your event. Our team will call you back within the hour."', t: '12:35' },
+        { s: 'out', text: 'Great, what\'s their name?', t: '12:40' },
+        { s: 'in', text: '👤 Elena Panagiotou — works at Deloitte Greece\n📱 +30 694 812 3482\n\nShall I schedule a callback or will you call now?', t: '12:40' },
+        { s: 'out', text: 'I\'ll call now', t: '12:41' },
+    ],
+    // 5: Close the Day
+    [
+        { s: 'in', text: '📊 <b>End of day report — Thursday</b>\n\n💰 Revenue: <b>€3,240</b>\n📈 +22% vs last Thursday\n\n👥 Covers: 48\n⭐ Avg spend: €67.50/person\n🍽️ Most ordered: Grilled octopus (14x)', t: '23:30' },
+        { s: 'in', text: '📋 <b>Operations:</b>\n✅ 4 bookings handled automatically\n✅ 2 invoices sent (€4,800 pending)\n✅ 1 supplier order placed\n📞 1 missed call recovered (€3k lead)\n💬 23 WhatsApp messages handled\n\n⚠️ <b>Tomorrow:</b>\n• Feta delivery at 9am\n• VIP birthday dinner at 21:00\n• Maria + Nikos on shift', t: '23:30' },
+        { s: 'out', text: 'Good day. Goodnight 🌙', t: '23:32' },
+        { s: 'in', text: 'Goodnight! 🌙\n\nAlarm set. I\'ll have your morning briefing ready at 7:30.\n\nRevenue this week so far: <b>€14,820</b> 💪', t: '23:32' },
+    ],
 ];
 
-function switchCommsChannel(idx) {
-    document.querySelectorAll('.comms-ch').forEach((ch, i) => ch.classList.toggle('active', i === idx));
-    const d = COMMS_DATA[idx];
-    document.querySelector('.comms-thread-header').innerHTML = `<span>${d.icon}</span><span class="comms-thread-name">${d.name}</span><span class="comms-thread-ai">AI TRIAGE</span>`;
-    const msgsEl = document.getElementById('commsMsgs');
-    msgsEl.innerHTML = '';
-    d.msgs.forEach((m, i) => {
+function switchDemo(idx) {
+    document.querySelectorAll('.wa-demo-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+    const chat = document.getElementById('waDemoChat');
+    const msgs = DEMO_CHATS[idx];
+    chat.innerHTML = '';
+    let delay = 0;
+    msgs.forEach((m, i) => {
+        if (m.day) {
+            delay += 300;
+            const d = m.day;
+            setTimeout(() => {
+                chat.innerHTML += `<div class="wa-demo-msg-day">${d}</div>`;
+            }, delay);
+            delay += 200;
+        }
+        // Show typing indicator before AI messages
+        if (m.s === 'in' && i > 0) {
+            const typingDelay = delay;
+            setTimeout(() => {
+                const typing = document.createElement('div');
+                typing.className = 'wa-demo-typing';
+                typing.innerHTML = '<span></span><span></span><span></span>';
+                chat.appendChild(typing);
+                chat.scrollTop = chat.scrollHeight;
+            }, typingDelay);
+            delay += 600;
+        }
+        const msgDelay = delay;
         setTimeout(() => {
-            const cls = m.type === 'in' ? 'comms-msg-in' : m.type === 'ai' ? 'comms-msg-in comms-msg-ai' : 'comms-msg-out';
-            msgsEl.innerHTML += `<div class="comms-msg ${cls}" style="animation:feedSlide 0.3s ease-out"><div class="comms-msg-label" style="color:${m.type==='ai'?'var(--accent-light)':m.type==='in'?'var(--text-muted)':'var(--green)'}">${m.label}</div>${m.text}</div>`;
-            msgsEl.scrollTop = msgsEl.scrollHeight;
-        }, i * 400);
+            // Remove typing indicator
+            const typing = chat.querySelector('.wa-demo-typing');
+            if (typing) typing.remove();
+            const cls = m.s === 'out' ? 'wa-demo-msg-out' : 'wa-demo-msg-in';
+            const ticks = m.s === 'out' ? '<span class="ticks">✓✓</span>' : '';
+            chat.innerHTML += `<div class="wa-demo-msg ${cls}">${m.text}<div class="wa-demo-msg-time">${m.t} ${ticks}</div></div>`;
+            chat.scrollTop = chat.scrollHeight;
+        }, msgDelay);
+        delay += m.s === 'out' ? 500 : 800;
     });
 }
 
@@ -1244,7 +1277,7 @@ function animateCounters() {
 }
 
 // Auto-init first scenario
-setTimeout(() => switchCommsChannel(0), 500);
+setTimeout(() => switchDemo(0), 500);
 
 // ── LIVE FEED (hero section) ──
 const AI_KEYWORDS = /\bai\b|artificial intelligence|llm|gpt|claude|openai|anthropic|gemini|machine learning|neural|transformer|deep learning|automation|chatbot|agent|model|diffusion|robot/i;
@@ -1477,17 +1510,17 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     draw();
 })();
 
-// ── 3D TILT on comms thread ──
-const commsThread = document.getElementById('commsThread');
-if (commsThread) {
-    commsThread.addEventListener('mousemove', e => {
-        const r = commsThread.getBoundingClientRect();
+// ── 3D TILT on demo phone ──
+const demoPhone = document.querySelector('.wa-demo-phone');
+if (demoPhone) {
+    demoPhone.addEventListener('mousemove', e => {
+        const r = demoPhone.getBoundingClientRect();
         const x = (e.clientX - r.left) / r.width - 0.5;
         const y = (e.clientY - r.top) / r.height - 0.5;
-        commsThread.style.transform = `perspective(800px) rotateY(${x * 4}deg) rotateX(${-y * 4}deg)`;
+        demoPhone.style.transform = `perspective(800px) rotateY(${x * 3}deg) rotateX(${-y * 3}deg)`;
     });
-    commsThread.addEventListener('mouseleave', () => {
-        commsThread.style.transform = '';
+    demoPhone.addEventListener('mouseleave', () => {
+        demoPhone.style.transform = '';
     });
 }
 
